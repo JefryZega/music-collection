@@ -20,9 +20,7 @@ public class AuthController {
     private RegisterService registerService;
 
     @Autowired
-    private LoginService loginService; // Inject Service baru
-
-    // ... method registerView dan register yang lama biarkan ...
+    private LoginService loginService;
 
     @GetMapping("/")
     public String registerView(Model model) {
@@ -68,13 +66,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, 
-                        @RequestParam String password, 
-                        Model model, 
-                        HttpSession session) {
-        
+    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
         User user = loginService.login(username, password);
-
         if (user == null) {
             model.addAttribute("error", "Invalid username or password");
             return "auth/login";
