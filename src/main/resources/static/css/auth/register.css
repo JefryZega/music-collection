@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #ececeb;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#register-container {
+    background: #31393C;
+    width: 360px;
+    padding: 40px 40px 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.music-icon {
+    width: 70px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: white;
+    margin: 10px 0 25px;
+    font-size: 26px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    color: white;
+    margin-bottom: 6px;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+    background: white;
+    border-radius: 4px;
+    font-size: 14px;
+    display: block;
+    margin: 0;
+}
+
+#register {
+    width: 120px;
+    padding: 8px;
+    margin-top: 20px;
+    background: #3E96F4;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+p {
+    margin-top: 12px;
+    font-size: 14px;
+    color: white;
+}
+
+p a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
