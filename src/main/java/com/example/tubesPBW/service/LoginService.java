@@ -19,21 +19,19 @@ public class LoginService {
     }
 
     public User login(String username, String rawPassword) {
-        // 1. Cari user di database
         Optional<User> userOptional = userRepository.findByUsername(username);
-
-        // 2. Kalau user tidak ketemu, return null
         if (userOptional.isEmpty()) {
             return null;
         }
 
         User user = userOptional.get();
 
-        // 3. Cek apakah password cocok menggunakan BCrypt
+        // match password yang udah di BCrypt, kalo bener return user
         if (passwordEncoder.matches(rawPassword, user.getPassword())) {
-            return user; // Password benar
+            return user;
         }
 
-        return null; // Password salah
+        // kalo ga match, return null
+        return null;
     }
 }
