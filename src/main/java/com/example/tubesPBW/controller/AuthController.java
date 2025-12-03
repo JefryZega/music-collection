@@ -22,6 +22,10 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(RegisterForm form, Model model) {
+        if (form.getName() == null || form.getName().trim().isEmpty()) {
+            model.addAttribute("error", "Name is required");
+            return "auth/register";
+        }
         if (form.getUsername() == null || form.getUsername().trim().isEmpty()) {
             model.addAttribute("error", "Username is required");
             return "auth/register";
