@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/auth/register.css}">
+</head>
+<body>
+    <main>
+        <section id="register-container">
+            <img th:src="@{/assets/music.svg}" alt="music icon">
+            
+            <h1>Register</h1>
+
+            <div th:if="${error}" class="error-message" style="color: red; margin-bottom: 10px;" th:text="${error}"></div>
+
+            <form id="registrationForm" th:action="@{/register}" th:object="${registerForm}" method="post">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" th:field="*{name}" placeholder="Enter your Name">
+
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" th:field="*{username}" placeholder="Enter Username">
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" th:field="*{email}" placeholder="Enter Email">
+
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" th:field="*{password}" placeholder="Enter Password">
+
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirm-password" th:field="*{confirmPassword}" placeholder="Confirm your Password">
+
+                <input type="submit" id="register" value="Register">
+
+                <p>Already have an account? <a th:href="@{/login}">Login</a></p>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
