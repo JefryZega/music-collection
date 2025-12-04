@@ -35,7 +35,7 @@ public class AuthController {
 
     @GetMapping("/home")
     public String homepage(Model model) {
-        return "homepage-all";
+        return "layout/homepage-all";
     }
 
     @GetMapping("/register") 

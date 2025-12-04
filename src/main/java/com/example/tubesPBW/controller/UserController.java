@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
     @GetMapping("/home")
     public String registerView(Model model) {
-        return "homepage-all";
+        return "layout/homepage-all";
     }
 }

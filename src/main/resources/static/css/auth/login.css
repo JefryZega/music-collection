@@ -83,7 +83,14 @@ main {
 }
 
 #loginForm p a {
-    color: var(--primary-color);
     text-decoration: none;
-    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+/* kayaknya yg sebelumnya ada ini buat <a> nya */
+p a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
 }
