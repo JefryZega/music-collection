@@ -4,6 +4,7 @@ import com.example.tubesPBW.model.RegisterForm;
 import com.example.tubesPBW.model.User; 
 import com.example.tubesPBW.service.LoginService; 
 import com.example.tubesPBW.service.RegisterService;
+import com.example.tubesPBW.service.UserService;
 
 import jakarta.servlet.http.HttpSession; 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AuthController {
@@ -22,10 +24,24 @@ public class AuthController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/")
     public String registerView(Model model) {
         model.addAttribute("registerForm", new RegisterForm());
-        return "auth/register";
+        return "redirect:/home";
+    }
+
+    @GetMapping("/home")
+    public String homepage(Model model) {
+        return "homepage-all";
+    }
+
+    @GetMapping("/register") 
+    public String showRegisterForm(Model model) {
+        model.addAttribute("registerForm", new RegisterForm()); 
+        return "auth/register"; 
     }
 
     @PostMapping("/register")
@@ -76,6 +92,27 @@ public class AuthController {
         // simpen user ke session
         session.setAttribute("user", user);
         return "redirect:/home";
+    }
+
+    @GetMapping("/reset-password")
+    public String resetPasswordView() {
+        return "auth/resetPassword";
+    }
+
+    @PostMapping("/reset-password")
+    public String resetPassword(@RequestParam("email") String email, 
+                                @RequestParam("oldPassword") String oldPassword,
+                                @RequestParam("newPassword") String newPassword, 
+                                RedirectAttributes redirectAttributes) {
+        boolean isSuccess = userService.resetPassword(email, oldPassword, newPassword);
+        if (isSuccess) {
+            redirectAttributes.addFlashAttribute("success", "Password berhasil diubah! Silakan login.");
+            return "redirect:/login";
+        } else {
+            // Bisa karena email salah atau password lama salah
+            redirectAttributes.addFlashAttribute("error", "Email tidak ditemukan atau Password Lama salah!");
+            return "redirect:/reset-password"; 
+        }
     }
 
     @GetMapping("/logout")
