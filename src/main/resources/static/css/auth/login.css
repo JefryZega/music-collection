@@ -28,7 +28,7 @@ main {
 }
 
 #login-container {
-    padding: 1em;
+    padding: 2em;
     width: 30%;
     height: 90%;
     display: flex;
@@ -38,7 +38,11 @@ main {
     border-radius: 0.5em;
     border: 1px solid var(--third-color);
     background-color: var(--secondary-color);
-    gap: 1em;
+    gap: 0.5em;
+}
+
+#login-container img {
+    width: 20%;
 }
 
 #loginForm {
@@ -56,12 +60,11 @@ main {
 #loginForm input {
     padding: 0.8em;
     border-radius: 0.3em;
-    border: 1px solid var(--third-color);
 }
 
 [type="submit"] {
     width: 40%;
-    margin-top: 1em;
+    margin: 2em 0;
     font-size: 0.8em;
     font-weight: bold;
     color: var(--text-color);
@@ -73,16 +76,16 @@ main {
 [type="submit"]:hover {
     cursor: pointer;
     transition: 0.5s;
-    border: 5px solid var(--text-color);
+    background-color: #6faff4;
 }
 
-#loginForm p {
-    color: var(--primary-color);
-    margin-top: 1em;
+#login-container p {
+    color: #cecece;
     text-align: center;
 }
 
-#loginForm p a {
+#login-container p a {
+    color: #cecece;
     text-decoration: none;
     color: white;
     font-weight: bold;
