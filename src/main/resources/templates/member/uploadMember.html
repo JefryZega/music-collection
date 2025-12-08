@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Collection</title>
-    <link rel="stylesheet" href="uploadMember.css">
+    <link rel="stylesheet" th:href="@{/css/member/uploadMember.css}">
 </head>
 <body>
     <header>
@@ -18,12 +18,12 @@
 
                 <div id="search-container">
                     <input type="text" name="search" id="search" placeholder="Search">
-                    <img src="search.svg" alt="search button">
+                    <img th:src="@{/assets/icon/search.svg}" alt="search button">
                 </div>
 
                 <div id="nav-right">
-                    <li><img src="user.svg" alt="profile icon"></li>
-                    <li><img src="logout.svg" alt="logout icon"></li>
+                    <li><img th:src="@{/assets/icon/user.svg}" alt="profile icon"></li>
+                    <li><img th:src="@{/assets/icon/logout.svg}" alt="logout icon"></li>
                 </div>
             </ul>
         </nav>

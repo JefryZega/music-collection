@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song List</title>
-    <link rel="stylesheet" href="profile-member-song-list.css">
+    <link rel="stylesheet" th:href="@{/css/member/profile-member-song-list.css}">
 </head>
 <body>
     <header>
@@ -18,12 +18,12 @@
 
             <div id="search-container">
                 <input type="text" name="search" id="search" placeholder="Search">
-                <img src="/src/main/resources/static/assets/search.svg" alt="search button">
+                <img th:src="@{/assets/icon/search.svg}" alt="search button">
             </div>
 
             <div id="nav-right">
-                <li><img src="/src/main/resources/static/assets/user.svg" alt="profile icon"></li>
-                <li><img src="/src/main/resources/static/assets/logout.svg" alt="logout icon"></li>
+                <li><img th:src="@{/assets/icon/user.svg}" alt="profile icon"></li>
+                <li><img th:src="@{/assets/icon/logout.svg}" alt="logout icon"></li>
             </div>
         </ul>
     </nav>
@@ -64,8 +64,8 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img src="/src/main/resources/static/assets/heart.svg">
-                            <img src="/src/main/resources/static/assets/trash.svg">
+                            <img th:src="@{/assets/icon/heart.svg}">
+                            <img th:src="@{/assets/icon/trash.svg}">
                         </td>
                     </tr>
 
@@ -74,8 +74,8 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img src="/src/main/resources/static/assets/heart.svg">
-                            <img src="/src/main/resources/static/assets/trash.svg">
+                            <img th:src="@{/assets/icon/heart.svg}">
+                            <img th:src="@{/assets/icon/trash.svg}">
                         </td>
                     </tr>
 
@@ -84,8 +84,8 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img src="/src/main/resources/static/assets/heart.svg">
-                            <img src="/src/main/resources/static/assets/trash.svg">
+                            <img th:src="@{/assets/icon/heart.svg}">
+                            <img th:src="@{/assets/icon/trash.svg}">
                         </td>
                     </tr>
 
@@ -94,8 +94,8 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img src="/src/main/resources/static/assets/heart.svg">
-                            <img src="/src/main/resources/static/assets/trash.svg">
+                            <img th:src="@{/assets/icon/heart.svg}">
+                            <img th:src="@{/assets/icon/trash.svg}">
                         </td>
                     </tr>
 
@@ -104,8 +104,8 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img src="/src/main/resources/static/assets/heart.svg">
-                            <img src="/src/main/resources/static/assets/trash.svg">
+                            <img th:src="@{/assets/icon/heart.svg}">
+                            <img th:src="@{/assets/icon/trash.svg}">
                         </td>
                     </tr>
                     
@@ -114,8 +114,8 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img src="/src/main/resources/static/assets/heart.svg">
-                            <img src="/src/main/resources/static/assets/trash.svg">
+                            <img th:src="@{/assets/icon/heart.svg}">
+                            <img th:src="@{/assets/icon/trash.svg}">
                         </td>
                     </tr>
 
@@ -124,8 +124,8 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img src="/src/main/resources/static/assets/heart.svg">
-                            <img src="/src/main/resources/static/assets/trash.svg">
+                            <img th:src="@{/assets/icon/heart.svg}">
+                            <img th:src="@{/assets/icon/trash.svg}">
                         </td>
                     </tr>
 
@@ -134,28 +134,8 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img src="/src/main/resources/static/assets/heart.svg">
-                            <img src="/src/main/resources/static/assets/trash.svg">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Mawar Merah</td>
-                        <td>Slank</td>
-                        <td>Kampungan</td>
-                        <td class="actions">
-                            <img src="/src/main/resources/static/assets/heart.svg">
-                            <img src="/src/main/resources/static/assets/trash.svg">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Mawar Merah</td>
-                        <td>Slank</td>
-                        <td>Kampungan</td>
-                        <td class="actions">
-                            <img src="/src/main/resources/static/assets/heart.svg">
-                            <img src="/src/main/resources/static/assets/trash.svg">
+                            <img th:src="@{/assets/icon/heart.svg}">
+                            <img th:src="@{/assets/icon/trash.svg}">
                         </td>
                     </tr>
                 </tbody>

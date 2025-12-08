@@ -161,6 +161,7 @@ main {
 #drop-area:hover {
     border: 2px dashed var(--button-color);
     transition: 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 #plus {
