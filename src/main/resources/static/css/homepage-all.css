@@ -130,11 +130,12 @@ main {
     color: #000;
 }
 
+/* INI CONTAINER SECTION PERTAMA */
 #hero-container {
     padding: 2em;
     position: relative;
     width: 90%;
-    height: 70%; 
+    height: 60vh; 
     overflow: hidden;
 }
 
@@ -142,10 +143,12 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 1em;
+    border-radius: 0.5em;
     display: block;
 }
 
+
+/* TOMBOL SIGN IN DAN CREATE ACOOUNT*/
 #hero-header {
     position: absolute;
     top: 3em;
@@ -171,13 +174,15 @@ main {
     background-color: var(--secondary-color);
 }
 
+
+/* TEXT DI ATAS GAMBAR */
 #hero-text {
+    width: 40%;
     position: absolute;
     top: 50%;         
     left: 5em;       
     transform: translateY(-50%);
     color: white;
-    max-width: 500px;
     z-index: 2;
 }
 
@@ -192,59 +197,73 @@ main {
 }
 
 
+/* CONTAINER UTAMA GRAFIK DAN TOP 10 SONGS */
 #hero-info {
-    padding: 1em;
+    padding: 0 2em;
     width: 90%;
-    height: 60%;
+    height: 70vh;
     display: flex;
     gap: 1em;
+    margin-bottom: 2em;
 }
 
-/* GRAFIK */
+/* CONTAINER GRAFIK */
 #hero-grafik {
-    width: 70%;
+    width: 90%;
     height: 100%;
     display: flex;
-    justify-content: space-evenly;
-    align-items: end;
-    border-radius: 1em;
+    
+    border-radius: 0.5em;
     background-color: var(--third-color);
+    padding: 1em;
 }
 
-#hero-grafik div {
-    width: 5%;
-    height: 70%;
-    background-color: #3E96F4;
+/* Canvas otomatis menyesuaikan ukuran */
+#top10Chart {
+    width: 100% !important;
+    height: 100% !important;
+    cursor: pointer;
 }
 
+
+/* CONTAINER WEEKLY SONGS*/
 #weekly-songs {
     width: 50%;
     height: 100%;
-    border-radius: 1em;
+    border-radius: 0.5em;
 }
 
 #weekly-header {
-    height: 30%;
-    text-align: center;
-    border-radius: 1em;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5em;
     background-color: var(--third-color);
+    text-align: center;
 }
 
+
+/* CONTAINER SONGS */
 #songs-container {
-    padding: 1em;
-    height: 65%;
     margin-top: 1.5em;
+    padding: 1em;
+    height: 52.5vh;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 0.5em;
-    border-radius: 1em;
+    border-radius: 0.5em;
     background-color: var(--third-color);
 }
 
-#songs-card {
+.songs-card {
     width: 40%;
-    height: 15%;
-    border-radius: 0.5em;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.1em;
     background-color: var(--primary-color);
 }
