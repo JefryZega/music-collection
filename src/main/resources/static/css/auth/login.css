@@ -28,16 +28,16 @@ main {
 }
 
 #login-container {
-    padding: 2em;
-    width: 30%;
-    height: 90%;
+    padding: 1.5em;
+    width: 25%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 0.5em;
-    border: 1px solid var(--third-color);
     background-color: var(--secondary-color);
+    box-shadow: 3px 5px 5px var(--secondary-color);
     gap: 0.5em;
 }
 
@@ -45,27 +45,31 @@ main {
     width: 20%;
 }
 
+#login-container h1 {
+    padding: 0.5em;
+}
+
 #loginForm {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
 }
 
 #loginForm label {
-    font-size: 1.3em;
+    font-size: 1.1em;
     font-weight: 500;
 }
 
 #loginForm input {
-    padding: 0.8em;
+    padding: 0.5em;
     border-radius: 0.3em;
+    margin-bottom: 1em;
 }
 
 [type="submit"] {
-    width: 40%;
+    padding: 0.5em;
+    width: 100%;
     margin: 2em 0;
-    font-size: 0.8em;
     font-weight: bold;
     color: var(--text-color);
     border: none;
@@ -88,5 +92,5 @@ main {
     color: #cecece;
     text-decoration: none;
     color: white;
-    font-weight: bold;
+    font-weight: 500;
 }
