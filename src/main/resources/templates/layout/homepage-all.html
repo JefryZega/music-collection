@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Collection</title>
-    <link rel="stylesheet" th:href="@{/css/homepage-all.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/homepage-all.css}">
 
     <!-- PAKAI LIBRARY CHART.JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
@@ -17,8 +17,8 @@
         <section id="hero-container">
            <img th:src="@{/assets/img/homepage-img.png}" alt="homepage img">
            <div id="hero-header">
-                <button>Sign in</button>
-                <button>Create Account</button>
+                <button><a th:href="@{/login}">Sign in</a></button>
+                <button><a th:href="@{/register}">Create Account</a></button>
            </div>
            <div id="hero-text">
                 <h1>Welcome</h1>
