@@ -19,6 +19,10 @@ body {
     font-family: Arial, sans-serif;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 /* ================= HEADER ================= */
 header {
     background-color: var(--secondary-color);
@@ -103,11 +107,12 @@ nav ul {
 
 /* ================= MAIN ================= */
 main {
-    padding: 2em;
+    padding: 0 2em;
 }
 
 /* SECTION WRAPPER */
 .section-block {
+    padding: 0 2em;
     margin-top: 40px;
 }
 
@@ -117,13 +122,14 @@ main {
     margin-right: 1em;
 }
 
-.section-header h2 {
-    font-size: 1.4em;
+.section-block h1 {
+    padding-bottom: 0.5em;
 }
 
 /* ================= GRID TOP 10 ================= */
 .grid-four {
     display: grid;
+    justify-content: space-between;
     grid-template-columns: repeat(4, 1fr);
     gap: 25px;
 }
@@ -144,6 +150,7 @@ main {
     font-size: 1.1em;
 }
 
+
 /* ================= HORIZONTAL SCROLL ================= */
 .horizontal-scroll {
     display: flex;
@@ -151,7 +158,6 @@ main {
     overflow-x: auto;
     overflow-y: hidden;
     padding-bottom: 10px;
-
     width: 100%;
     max-width: 100%;
     white-space: nowrap;

@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MemberController {
     
+    @GetMapping("/member/home")
+    public String memberHome() {
+        return "/layout/home-admin-member";
+    }
 
     @GetMapping("/member/profile/collection")
     public String memberProfileCollection() {
