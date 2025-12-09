@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Admin Member</title>
+    <link rel="stylesheet" href="@{/css/member/home-admin-member.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <div id="nav-left">
+                <li id="logo">Music <br>Collection</li>
+                <li>Home</li>
+                <li>Library</li>
+            </div>
+
+            <div id="search-container">
+                <input type="text" name="search" id="search" placeholder="Search">
+                <div id="search-suggestions" class="hidden">
+                    <p class="suggest-item">search for "mawar merah"</p>
+                    <p class="suggest-item">mawar hitam tipex</p>
+                    <p class="suggest-item">mawar merah</p>
+                    <p class="suggest-item">mawar merah slank</p>
+                </div>
+                <img th:src="@{/assets/icon/search.svg}" alt="search button">
+            </div>
+
+            <div id="nav-right">
+                <li><img src="/src/main/resources/static/assets/user.svg" alt="profile icon"></li>
+                <li><img src="/src/main/resources/static/assets/logout.svg" alt="logout icon"></li>
+            </div>
+        </ul>
+    </nav>
+</header>
+<main>
+
+    <!-- TOP 10 WEEKLY -->
+    <section class="section-block">
+        <div class="section-header">
+            <h2>Top 10 Weekly</h2>
+            <a href="#" class="see-all">See All ></a>
+        </div>
+
+        <div class="grid-four">
+            <!-- contoh item -->
+            <div class="item">
+                <img src="/src/main/resources/static/assets/img/slank.png">
+                <p>Slank</p>
+            </div>
+
+            <div class="item">
+                <img src="/src/main/resources/static/assets/img/bruno-mars.png">
+                <p>Bruno Mars</p>
+            </div>
+
+            <div class="item">
+                <img src="/src/main/resources/static/assets/img/ed-sheeran.png">
+                <p>Ed Sheeran</p>
+            </div>
+
+            <div class="item">
+                <img src="/src/main/resources/static/assets/img/queen.png">
+                <p>Queen</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOP ARTIST -->
+    <section class="section-block">
+        <h2>Top Artist</h2>
+
+        <div class="horizontal-scroll">
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/slank.png">
+                <p>Slank</p>
+            </div>
+
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/bruno-mars.png">
+                <p>Bruno Mars</p>
+            </div>
+
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/ed-sheeran.png">
+                <p>Ed Sheeran</p>
+            </div>
+
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/queen.png">
+                <p>Queen</p>
+            </div>
+
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/black-pink.png">
+                <p>Black Pink</p>
+            </div>
+
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/travis-scott.png">
+                <p>Travis Scott</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOP ALBUM (Scrollable) -->
+    <section class="section-block">
+        <h2>Top Album</h2>
+
+        <div class="horizontal-scroll">
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/slank.png">
+                <p>Slank</p>
+            </div>
+
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/bruno-mars.png">
+                <p>Bruno Mars</p>
+            </div>
+
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/ed-sheeran.png">
+                <p>Ed Sheeran</p>
+            </div>
+
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/queen.png">
+                <p>Queen</p>
+            </div>
+
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/black-pink.png">
+                <p>Black Pink</p>
+            </div>
+
+            <div class="item big">
+                <img src="/src/main/resources/static/assets/img/travis-scott.png">
+                <p>Travis Scott</p>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

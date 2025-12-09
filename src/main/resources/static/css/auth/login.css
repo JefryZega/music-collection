@@ -28,41 +28,48 @@ main {
 }
 
 #login-container {
-    padding: 1em;
-    width: 30%;
+    padding: 1.5em;
+    width: 25%;
     height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 0.5em;
-    border: 1px solid var(--third-color);
     background-color: var(--secondary-color);
-    gap: 1em;
+    box-shadow: 3px 5px 5px var(--secondary-color);
+    gap: 0.5em;
+}
+
+#login-container img {
+    width: 20%;
+}
+
+#login-container h1 {
+    padding: 0.5em;
 }
 
 #loginForm {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
 }
 
 #loginForm label {
-    font-size: 1.3em;
+    font-size: 1.1em;
     font-weight: 500;
 }
 
 #loginForm input {
-    padding: 0.8em;
+    padding: 0.5em;
     border-radius: 0.3em;
-    border: 1px solid var(--third-color);
+    margin-bottom: 1em;
 }
 
 [type="submit"] {
-    width: 40%;
-    margin-top: 1em;
-    font-size: 0.8em;
+    padding: 0.5em;
+    width: 100%;
+    margin: 2em 0;
     font-weight: bold;
     color: var(--text-color);
     border: none;
@@ -73,17 +80,17 @@ main {
 [type="submit"]:hover {
     cursor: pointer;
     transition: 0.5s;
-    border: 5px solid var(--text-color);
+    background-color: #6faff4;
 }
 
-#loginForm p {
-    color: var(--primary-color);
-    margin-top: 1em;
+#login-container p {
+    color: #cecece;
     text-align: center;
 }
 
-#loginForm p a {
-    color: var(--primary-color);
+#login-container p a {
+    color: #cecece;
     text-decoration: none;
-    cursor: pointer;
+    color: white;
+    font-weight: 500;
 }

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song List</title>
+    <link rel="stylesheet" th:href="@{/css/member/profile-member-song-list.css}">
+</head>
+<body>
+    <header>
+    <nav>
+        <ul>
+            <div id="nav-left">
+                <li id="logo">Music <br>Collection</li>
+                <li>Home</li>
+                <li>Library</li>
+            </div>
+
+            <div id="search-container">
+                <input type="text" name="search" id="search" placeholder="Search">
+                <div id="search-suggestions" class="hidden">
+                    <p class="suggest-item">search for "mawar merah"</p>
+                    <p class="suggest-item">mawar hitam tipex</p>
+                    <p class="suggest-item">mawar merah</p>
+                    <p class="suggest-item">mawar merah slank</p>
+                </div>
+                <img th:src="@{/assets/icon/search.svg}" alt="search button">
+            </div>
+
+            <div id="nav-right">
+                <li><img th:src="@{/assets/icon/user.svg}" alt="profile icon"></li>
+                <li><img th:src="@{/assets/icon/logout.svg}" alt="logout icon"></li>
+            </div>
+        </ul>
+    </nav>
+    </header>
+    <main>
+        <section id="profile-card">
+            <div id="avatar"></div>
+
+            <div id="profile-info">
+                <h2>Member Name</h2>
+                <p>Role</p>
+            </div>
+        </section>
+
+        <section id="profile-tabs" class="tab-group">
+            <button class="tab">Collection</button>
+            <button class="tab active">Favorite</button>
+        </section>
+
+        <button id="upload-btn">Upload Now</button>
+
+        <section id="song-list">
+            <h1>Song List</h1>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Album</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Mawar Merah</td>
+                        <td>Slank</td>
+                        <td>Kampungan</td>
+                        <td class="actions">
+                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
+                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mawar Merah</td>
+                        <td>Slank</td>
+                        <td>Kampungan</td>
+                        <td class="actions">
+                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
+                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mawar Merah</td>
+                        <td>Slank</td>
+                        <td>Kampungan</td>
+                        <td class="actions">
+                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
+                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mawar Merah</td>
+                        <td>Slank</td>
+                        <td>Kampungan</td>
+                        <td class="actions">
+                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
+                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mawar Merah</td>
+                        <td>Slank</td>
+                        <td>Kampungan</td>
+                        <td class="actions">
+                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
+                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Mawar Merah</td>
+                        <td>Slank</td>
+                        <td>Kampungan</td>
+                        <td class="actions">
+                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
+                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mawar Merah</td>
+                        <td>Slank</td>
+                        <td>Kampungan</td>
+                        <td class="actions">
+                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
+                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mawar Merah</td>
+                        <td>Slank</td>
+                        <td>Kampungan</td>
+                        <td class="actions">
+                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
+                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- POPUP -->
+     <div id="popup-overlay" class="hidden">
+        <div id="popup-box">
+            <p id="popup-message">Songs successfully deleted!</p>
+            <button id="popup-close">Close</button>
+        </div>
+     </div>
+</body>
+</html>

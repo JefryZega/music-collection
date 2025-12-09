@@ -1,27 +1,44 @@
-body {
-    margin: 0;
+:root {
+    --primary-color : #EDEEEB;
+    --secondary-color: #31393C;
+    --third-color: #CCC7BF;
+    --text-color: #FFFFFF;
+    --button-color: #3E96F4;
+}
+
+* {
     padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
     background: #ececeb;
     font-family: Arial, sans-serif;
+    width: 100vw;
     height: 100vh;
+}
+
+main {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #register-container {
-    background: #31393C;
-    width: 360px;
-    padding: 40px 40px 30px;
-    border-radius: 10px;
+    padding: 1.5em;
+    width: 25%;
+    height: 85%;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5em;
+    background: var(--secondary-color);
+    box-shadow: 3px 3px 5px var(--secondary-color);
 }
 
-.music-icon {
-    width: 70px;
-    margin-top: -10px;
-    margin-bottom: 10px;
+#music-icon {
+    width: 20%;
 }
 
 h1 {
@@ -30,43 +47,50 @@ h1 {
     font-size: 26px;
 }
 
+#registrationForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
 label {
     display: block;
     text-align: left;
-    font-size: 13px;
+    font-size: 1.1em;
+    font-weight: 500;
     color: white;
-    margin-bottom: 6px;
-    margin-top: 10px;
-
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
 }
 
-input[type="text"],
-input[type="password"] {
-    width: 80%;
-    padding: 8px;
+input {
+    width: 100%;
+    padding: 0.5em;
     border: none;
+    border-radius: 0.3em;
     outline: none;
     background: white;
-    border-radius: 4px;
-    font-size: 14px;
     display: block;
     margin: 0 auto;
     text-align: left;
 }
 
 #register {
-    width: 120px;
-    padding: 8px;
+    width: 100%;
+    padding: 0.5em;
     margin-top: 20px;
     background: #3E96F4;
     border: none;
     color: white;
     font-size: 14px;
+    text-align: center;
     border-radius: 4px;
     cursor: pointer;
+}
+
+#register:hover {
+    transition: 0.5s;
+    background-color: #6faff4;
 }
 
 p {

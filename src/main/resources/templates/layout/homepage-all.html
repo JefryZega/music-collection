@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Collection</title>
+    <link rel="stylesheet" th:href="@{/css/homepage-all.css}">
+
+    <!-- PAKAI LIBRARY CHART.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script th:src="@{/js/homepage-chart.js}" defer></script>
+
+</head>
+<body>
+    <main>
+        <!-- INI COVER PALING ATAS -->
+        <section id="hero-container">
+           <img th:src="@{/assets/img/homepage-img.png}" alt="homepage img">
+           <div id="hero-header">
+                <button>Sign in</button>
+                <button>Create Account</button>
+           </div>
+           <div id="hero-text">
+                <h1>Welcome</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus accusantium dolor deserunt reiciendis architecto ad, itaque temporibus voluptas porro, laboriosam facere in dolores obcaecati nam quas cupiditate voluptates vero perspiciatis?</p>
+           </div>
+        </section>
+
+        <!-- CONTAINER GRAFIK DAN DAFTAR TOP 10 LAGU -->
+        <section id="hero-info">
+
+            <!-- INI GRAFIK DI KIRI -->
+            <div id="hero-grafik">
+                <!-- CUKUP 1 CANVAS -->
+                <canvas id="top10Chart"></canvas>
+            </div>
+
+            <!-- INI DAFTAR LAGUNYA -->
+            <div id="weekly-songs">
+                <div id="weekly-header">
+                    <h1>Weekly Top 10 Songs</h1>
+                </div>
+
+                <div id="songs-container">
+                    <!-- LAGU KE-1 -->
+                    <div class="songs-card">
+                        <img src="" alt="">
+                        <p>Mawar Merah</p>
+                    </div>
+
+                    <!-- LAGU KE-2 DST... -->
+                    <div class="songs-card">
+                        <img src="" alt="">
+                        <p>Let It Be</p>
+                    </div>
+
+                    <div class="songs-card">
+                        <img src="" alt="">
+                        <p>Never Say Goodbye</p>
+                    </div>
+
+                    <div class="songs-card">
+                        <img src="" alt="">
+                        <p>Bohemian Rhapsody</p>
+                    </div>
+
+                    <div class="songs-card">
+                        <img src="" alt="">
+                        <p>Mawar Merah</p>
+                    </div>
+
+                    <div class="songs-card">
+                        <img src="" alt="">
+                        <p>Mawar Merah</p>
+                    </div>
+
+                    <div class="songs-card">
+                        <img src="" alt="">
+                        <p>Mawar Merah</p>
+                    </div>
+
+                    <div class="songs-card">
+                        <img src="" alt="">
+                        <p>Mawar Merah</p>
+                    </div>
+
+                    <div class="songs-card">
+                        <img src="" alt="">
+                        <p>Mawar Merah</p>
+                    </div>
+
+                    <div class="songs-card">
+                        <img src="" alt="">
+                        <p>Mawar Merah</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+</body>
+</html>

@@ -1,3 +1,4 @@
+
 -- drop table favourites
 -- drop table users
 -- drop table song
@@ -65,19 +66,19 @@ INSERT INTO users ("name", username, email, password_hash, "role") VALUES
 ('Michael Audric', 'mike', 'mike@gmail.com', 'hashedpass', 'admin'),
 ('Arnold Ronan', 'arnold', 'arnold@gmail.com', 'hashedpass', 'admin'),
 ('Azriel Adrien', 'azriel', 'azriel@gmail.com', 'hashedpass', 'admin'),
-('Jefry Krisman', 'jefry', 'jefry@gmail.com', 'hashedpass', 'admin')
+('Jefry Krisman', 'jefry', 'jefry@gmail.com', 'hashedpass', 'admin');
 
 INSERT INTO artist (artistName) VALUES
-('Travis Scott'), ('Billie Eilish'), ('Metallica'), ('Shawn Mendes'), ('Ed Sheeran')
+('Travis Scott'), ('Billie Eilish'), ('Metallica'), ('Shawn Mendes'), ('Ed Sheeran');
 
 INSERT INTO album (albumTitle, artistID) VALUES
-('ASTROWORLD', '1'), ('Happier Then Ever', '2'), ('Master Of Puppets', '3'), ('Deluxe', '4')
+('ASTROWORLD', '1'), ('Happier Then Ever', '2'), ('Master Of Puppets', '3'), ('Deluxe', '4');
 
 INSERT INTO song (title, albumID) VALUES
 ('STARGAZING', '1'), ('SICKO MODE', '1'), ('NO BYSTANDERS', '1'), ('SKELETONS', '1'),
 ('Getting Older', '2'), ('my future', '2'), ('Oxytocin', '2'), ('GOLDWING', '2'),
 ('Battery', '3'), ('Welcome Home', '3'), ('Lepper Messiah', '3'), ('Orion', '3'),
-('Castle on the Hill', '4'), ('Shape of You', '4'), ('Perfect', '4'), ('Happier', '4')
+('Castle on the Hill', '4'), ('Shape of You', '4'), ('Perfect', '4'), ('Happier', '4');
 
 INSERT INTO favourites (userID, songID) VALUES 
 ('1', '1'), ('1', '2'), ('1', '3'), 
@@ -86,4 +87,4 @@ INSERT INTO favourites (userID, songID) VALUES
 ('4', '12'), ('4', '13'), ('4', '14'), ('4', '5'), ('4', '4'), ('4', '3'),
 ('6', '10'), ('6', '1'), ('6', '2'), ('6', '3'),
 ('7', '9'), ('7', '11'),
-('8', '9'), ('8', '10'), ('8', '12'), ('8', '13')
+('8', '9'), ('8', '10'), ('8', '12'), ('8', '13');
