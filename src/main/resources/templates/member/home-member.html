@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Admin Member</title>
+    <link rel="stylesheet" th:href="@{/css/member/home-member.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <div id="nav-left">
+                    <li id="logo">Music <br>Collection</li>
+                    <li>Home</li>
+                    <li>Library</li>
+                </div>
+
+                <div id="search-container">
+                    <input type="text" name="search" id="search" placeholder="Search">
+                    <img th:src="@{/assets/icon/search.svg}" alt="search button">
+                </div>
+
+                <div id="nav-right">
+                    <li><img th:src="@{/assets/icon/user.svg}" alt="profile icon"></li>
+                    <li><img th:src="@{/assets/icon/logout.svg}" alt="logout icon"></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- TOP 10 WEEKLY -->
+        <section class="section-block">
+            <div class="section-header">
+                <h1>Top 10 Weekly</h1>
+                <a href="#" class="see-all">See All ></a>
+            </div>
+
+            <div class="grid-four">
+                <!-- contoh item -->
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-acdc.png}">
+                    <p>AC/DC</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-bon-jovi.jpg}">
+                    <p>Bon Jovi</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-eagles.jpg}">
+                    <p>Eagles</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-ed-sheeran.jpeg}">
+                    <p>Ed Sheeran</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOP ARTIST -->
+        <section class="section-block">
+            <h1>Top Artist</h1>
+
+            <div class="horizontal-scroll">
+                <div class="item big">
+                    <img th:src="@{/assets/img/artist-profile/artist-acdc.jpeg}">
+                    <p>AC/DC</p>
+                </div>
+
+                <div class="item big">
+                    <img th:src="@{/assets/img/artist-profile/artist-bonjovi.jpg}">
+                    <p>Bon Jovi</p>
+                </div>
+
+                <div class="item big">
+                    <img th:src="@{/assets/img/artist-profile/artist-eagles.jpg}">
+                    <p>Eagles</p>
+                </div>
+
+                <div class="item big">
+                    <img th:src="@{/assets/img/artist-profile/artist-ed-sheeran.jpg}">
+                    <p>Ed Sheeran</p>
+                </div>
+
+                <div class="item big">
+                    <img th:src="@{/assets/img/artist-profile/artist-michael-jackson.jpg}">
+                    <p>Michael Jackson</p>
+                </div>
+
+                <div class="item big">
+                    <img th:src="@{/assets/img/artist-profile/artist-nirvana.jpeg}">
+                    <p>Nirvana</p>
+                </div>
+
+                <div class="item big">
+                    <img th:src="@{/assets/img/artist-profile/artist-pink-floyd.jpeg}">
+                    <p>Pink Floyd</p>
+                </div>
+
+                <div class="item big">
+                    <img th:src="@{/assets/img/artist-profile/artist-queen.jpg}">
+                    <p>Queen</p>
+                </div>
+
+                <div class="item big">
+                    <img th:src="@{/assets/img/artist-profile/artist-slank.jpeg}">
+                    <p>Slank</p>
+                </div>
+
+                <div class="item big">
+                    <img th:src="@{/assets/img/artist-profile/artist-the-beatles.jpg}">
+                    <p>The Beatles</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOP ALBUM (Scrollable) -->
+        <section class="section-block">
+            <h1>Top Album</h1>
+
+            <div class="horizontal-scroll">
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-acdc.png}">
+                    <p>AC/DC</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-bon-jovi.jpg}">
+                    <p>Bon Jovi</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-eagles.jpg}">
+                    <p>Eagles</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-ed-sheeran.jpeg}">
+                    <p>Ed Sheeran</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-the-beatles.jpeg}">
+                    <p>Let It Be</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-michael-jackson.png}">
+                    <p>Michael Jackson</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-nirvana.jpg}">
+                    <p>Nirvana</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-pink-floyd.jpeg}">
+                    <p>Pink Floyd</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-queen.jpg}">
+                    <p>Queen</p>
+                </div>
+
+                <div class="item">
+                    <img th:src="@{/assets/img/album-art/album-slank.jpeg}">
+                    <p>Slank</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

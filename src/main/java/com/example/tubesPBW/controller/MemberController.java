@@ -8,7 +8,7 @@ public class MemberController {
     
     @GetMapping("/member/home")
     public String memberHome() {
-        return "/layout/home-admin-member";
+        return "/member/home-member";
     }
 
     @GetMapping("/member/profile/collection")

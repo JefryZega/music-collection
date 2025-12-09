@@ -1,0 +1,254 @@
+:root {
+    --primary-color : #EDEEEB;
+    --secondary-color: #31393C;
+    --third-color: #C2C2C2;
+    --text-color: #FFFFFF;
+    --button-color: #3E96F4;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-areas: 
+        "header"
+        "main";
+    grid-template-rows: auto 1fr;
+    background-color: var(--primary-color);
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* HEADER */
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    grid-area: header;
+    background-color: var(--secondary-color);
+}
+
+nav {
+    padding: 0.5em;
+    height: 100%;
+}
+
+nav ul {
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+nav ul li {
+    font-size: large;
+    list-style: none;    
+}
+
+#nav-left {
+    margin-left: 2em;
+    width: 30%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 5em;
+}
+
+#logo {
+    font-size: 1.5em;
+    font-weight: bolder;
+}
+
+#nav-left li:nth-child(2),
+#nav-left li:nth-child(3) {
+    padding: 0.5em 0.8em;
+}
+
+#nav-left li:nth-child(2):hover,
+#nav-left li:nth-child(3):hover {
+    color: var(--secondary-color);
+    border-radius: 0.2em;
+    background-color: var(--third-color);
+}
+
+
+/* SEARCH CONTAINER*/
+#search-container {
+    align-self: center;
+    width: 40%;
+    display: flex;
+    border: 1px solid var(--text-color);
+    border-radius: 0.2em;
+    color: var(--secondary-color);
+    background-color: var(--secondary-color);
+}
+
+#search-container input {
+    padding: 0.5em;
+    width: 100%;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+}
+
+#search-container img {
+    background-color: var(--primary-color);
+}
+
+
+/* NAVBAR RIGHT */
+#nav-right {
+    margin-right: 2em;
+    padding: 0 0.5em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+#nav-right img {
+    width: 80%;
+    height: 3em;
+}
+
+
+/* MAIN */
+main {
+    padding-top: 5em;
+    grid-area: main;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000;
+    gap: 2em;
+}
+
+
+/* SECTION ALBUM HEADER */
+#album-header {
+    margin-top: 2em;
+    padding: 2em 3em;
+    width: 90%;
+    height: 30vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.5em;
+    box-shadow: 3px 2px 7px var(--secondary-color);
+    background-image: linear-gradient(
+        to right, #FFFFFF 0%, 
+        #494E5A 100%, 
+        #777E92 100%);
+}
+
+#album-header h1 {
+    font-size: 5em;
+}
+
+#album-header img {
+    width: 10em;
+    height: 10em;
+    border-radius: 0.5em;
+    box-shadow: 3px 4px 7px var(--text-color);
+}
+
+/* SECTION ALBUM CONTAINER */
+#album-container {
+    padding: 2em;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    border-radius: 0.5em;
+    background-color: var(--text-color);
+    box-shadow: 3px 3px 7px var(--secondary-color);
+}
+
+
+/* ARTIST PROFILE */
+#artist-profile {
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+
+#artist-profile img {
+    width: 100%;
+    height: 10em;
+    border-radius: 0.5em;
+}
+
+#artist-profile button {
+    padding: 0.5em;
+    width: 100%;
+    border: none;
+    border-radius: 0.5em;
+    color: var(--text-color);
+    background-color: var(--button-color);
+    cursor: pointer;
+}
+
+/* ALBUM WRAPPER */
+#album-wrapper {
+    display: flex;
+    gap: 2em;
+}
+
+
+/* ALBUM DESCRIPTION */
+#album-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+#album-songs {
+    margin-top: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.music-card {
+    padding: 0.5em;
+    width: 100%;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: var(--primary-color);
+    gap: 1em;
+}
+
+.music-card:hover {
+    border: 1px solid var(--secondary-color);
+}
+
+.music-card img {
+    cursor: pointer;
+    width: 3em;
+}
+
+.music-card img:last-of-type {
+    margin-left: auto;
+}
+
+.music-card p {
+    font-size: 1.5em;
+}
