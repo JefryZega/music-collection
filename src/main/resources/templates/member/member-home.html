@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Admin Member</title>
-    <link rel="stylesheet" th:href="@{/css/member/home-member.css}">
+    <title>Music Collection</title>
+    <link rel="stylesheet" th:href="@{/css/member/member-home.css}">
 </head>
 <body>
     <header>
@@ -12,7 +12,7 @@
             <ul>
                 <div id="nav-left">
                     <li id="logo">Music <br>Collection</li>
-                    <li>Home</li>
+                    <li><a th:href="@{/member/home}">Home</a></li>
                     <li>Library</li>
                 </div>
 
@@ -22,8 +22,16 @@
                 </div>
 
                 <div id="nav-right">
-                    <li><img th:src="@{/assets/icon/user.svg}" alt="profile icon"></li>
-                    <li><img th:src="@{/assets/icon/logout.svg}" alt="logout icon"></li>
+                    <li>
+                        <a th:href="@{/member/profile}">
+                            <img th:src="@{/assets/icon/user.svg}" alt="profile icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/login}">
+                            <img th:src="@{/assets/icon/logout.svg}" alt="logout icon">
+                        </a>
+                    </li>
                 </div>
             </ul>
         </nav>

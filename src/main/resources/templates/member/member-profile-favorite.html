@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Songs</title>
+    <link rel="stylesheet" th:href="@{/css/member/member-profile-favorite.css}">
+</head>
+<body>
+    <header>
+    <nav>
+        <ul>
+            <div id="nav-left">
+                <li id="logo">Music <br>Collection</li>
+                <li><a th:href="@{/member/home}">Home</a></li>
+                <li><a th:href="@{/}">Library</a></li>
+            </div>
+
+            <div id="search-container">
+                <input type="text" name="search" id="search" placeholder="Search">
+                <img th:src="@{/assets/icon/search.svg}" alt="search button">
+            </div>
+
+            <div id="nav-right">
+                <li>
+                    <a th:href="@{/member/profile}">
+                        <img th:src="@{/assets/icon/user.svg}" alt="profile icon">
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/login}">
+                        <img th:src="@{/assets/icon/logout.svg}" alt="logout icon">
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </nav>
+    </header>
+    <main>
+        <section id="profile-card">
+            <div id="avatar"></div>
+
+            <div id="profile-info">
+                <h2>Member Name</h2>
+                <p>Role</p>
+            </div>
+        </section>
+
+        <section id="profile-tabs" class="tab-group">
+            <button class="tab"><a th:href="@{/member/profile}">All</a></button>
+            <button class="tab active"><a th:href="@{/member/profile/favorite}">Favorite</a></button>
+        </section>
+
+        <section id="favorite-song">
+            <h1>Favorite</h1>
+
+            <div id="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Artist</th>
+                            <th>Album</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION SONG RECOMMENDATION -->
+        <section id="song-list">
+            <h1>Recommendation</h1>
+            <div id="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Artist</th>
+                            <th>Album</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Back In Black</td>
+                            <td>AC/DC</td>
+                            <td>Back In Black</td>
+                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
+                        </tr>
+                        <tr>
+                            <td>Back In Black</td>
+                            <td>AC/DC</td>
+                            <td>Back In Black</td>
+                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
+                        </tr>
+                        <tr>
+                            <td>Back In Black</td>
+                            <td>AC/DC</td>
+                            <td>Back In Black</td>
+                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
+                        </tr>
+                        <tr>
+                            <td>Back In Black</td>
+                            <td>AC/DC</td>
+                            <td>Back In Black</td>
+                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
+                        </tr>
+                        <tr>
+                            <td>Back In Black</td>
+                            <td>AC/DC</td>
+                            <td>Back In Black</td>
+                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
+                        </tr>
+                        <tr>
+                            <td>Back In Black</td>
+                            <td>AC/DC</td>
+                            <td>Back In Black</td>
+                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
