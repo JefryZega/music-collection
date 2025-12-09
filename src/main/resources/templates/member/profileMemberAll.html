@@ -17,9 +17,15 @@
                 </div>
 
                 <div id="search-container">
-                    <input type="text" name="search" id="search" placeholder="Search">
-                    <img src="/src/main/resources/static/assets/search.svg" alt="search button">
+                <input type="text" name="search" id="search" placeholder="Search">
+                <div id="search-suggestions" class="hidden">
+                    <p class="suggest-item">search for "mawar merah"</p>
+                    <p class="suggest-item">mawar hitam tipex</p>
+                    <p class="suggest-item">mawar merah</p>
+                    <p class="suggest-item">mawar merah slank</p>
                 </div>
+                <img th:src="@{/assets/icon/search.svg}" alt="search button">
+            </div>
 
                 <div id="nav-right">
                     <li><img src="/src/main/resources/static/assets/user.svg" alt="profile icon"></li>
