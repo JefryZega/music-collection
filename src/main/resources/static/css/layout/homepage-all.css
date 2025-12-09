@@ -165,6 +165,10 @@ main {
     cursor: pointer;
 }
 
+#hero-header button a {
+    text-decoration: none;
+}
+
 #hero-header button:first-of-type {
     background-color: var(--text-color);
 }
@@ -172,6 +176,10 @@ main {
 #hero-header button:last-of-type {
     color: var(--text-color);
     background-color: var(--secondary-color);
+}
+
+#hero-header button:last-of-type a {
+    color: var(--text-color);
 }
 
 
