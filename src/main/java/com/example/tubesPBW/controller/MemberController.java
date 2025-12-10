@@ -6,20 +6,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MemberController {
     
-
-    @GetMapping("/member/profile/collection")
-    public String memberProfileCollection() {
-        return "/member/profile-member-collection";
+    // TAMPILAN HOME MEMBER
+    @GetMapping("/member/home")
+    public String memberHome() {
+        return "/member/member-home";
     }
 
-    @GetMapping("/member/profile/collection/song")
-    public String memberProfileCollectionSong() {
-        return "/member/profile-member-song-list";
+    // TAMPILAN SAAT PROFILE DI KLIK
+    @GetMapping("/member/profile")
+    public String memberProfile() {
+        return "/member/member-profile";
     }
-    
+
+    // TAMPILAN TAB FAVORITE
     @GetMapping("/member/profile/favorite")
     public String memberProfileFavorite() {
-        return "/member/profile-member-favorite";
+        return "/member/member-profile-favorite";
     }
 
     @GetMapping("/member/profile/favorite/song")

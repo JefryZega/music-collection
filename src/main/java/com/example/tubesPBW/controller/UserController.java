@@ -8,4 +8,10 @@ public class UserController {
     public String registerView(Model model) {
         return "layout/homepage-all";
     }
+
+    @GetMapping("/album")
+    public String homeAlbum() {
+        return "layout/album";
+    }
+
 }

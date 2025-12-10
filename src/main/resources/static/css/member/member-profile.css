@@ -42,6 +42,11 @@ nav {
     height: 100%;
 }
 
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
 nav ul {
     color: var(--text-color);
     display: flex;
@@ -123,20 +128,24 @@ nav ul li {
 main {
     padding: 1em;
     grid-area: main;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 2em;
     color: #000;
 }
 
+
+/* SECTION PERTAMA PROFILE */
 #profile-card {
-    width: 95%;
-    margin: 2em auto;
+    width: 90%;
+    height: 35vh;
     padding: 2em;
+    margin-top: 1em;
     background-color: var(--secondary-color);
     border-radius: 0.4em;
-
     display: flex;
     align-items: center;
     gap: 2em;
@@ -160,15 +169,21 @@ main {
     font-size: 0.9em;
 }
 
-#profile-tabs {
-    width: fit-content;          /* ukuran tidak melebar penuh */
-    margin-left: 2.5%;           /* sama seperti posisi sebelumnya (95% width center → kira-kira kiri) */
+
+/* SECTION TABS */
+#profile-tabs { 
+    width: fit-content;
+    margin-left: 4.5em;
+    margin-right: auto;
     display: flex;
-    background-color: #D0D0D0;   /* warna dasar tabel */
-    border: 1px solid #BEBEBE;
     border-radius: 0.4em;
-    overflow: hidden;
-    gap: 0;
+    border: 1px solid #BEBEBE;
+    background-color: var(--secondary-color);
+}
+
+#profile-tabs a {
+    text-decoration: none;
+    color: unset;
 }
 
 #profile-tabs .tab {
@@ -197,37 +212,48 @@ main {
 }
 
 
-#empty-state {
-    margin-top: 5em;
+/* SECTION ALL CONTAINER */
+#song-list {
+    width: 90%;
+    height: 60vh;
+    padding: 2em;
+    padding-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border-radius: 0.5em;
+    background-color: var(--text-color);
+}
+
+/* SECTION ALL TABLE CONTAINER */
+#table-container {
+    width: 100%;
+    max-height: 100%;       
+    overflow-y: scroll;     
+    border: 1px solid #ddd;
+    border-radius: 0 0 1em 1em;
+    margin-bottom: 2em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
     text-align: center;
 }
 
-#empty-state p {
-    color: gray;
-    font-size: 2.2em;
-    margin-bottom: 1em;
+table thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 0;
 }
 
-#upload-btn {
-    background-color: var(--button-color);
-    padding: 1em 2.3em;
-    border: none;
-    border-radius: 0.4em;
-    cursor: pointer;
+table th, table td {
+    padding: 0.7em;
+    border-bottom: 1px solid #eee;
 }
 
-#upload-txt {
-    text-decoration: none;
-    color: white;
-    font-size: 1.2em;
-    font-weight: 600;
-}
-
-#favorite-txt {
-    text-decoration: none;
-    color: black;
-}
-
-#upload-btn:hover {
-    opacity: 0.9;
+th {
+    font-size: 1.5em;
+    font-weight: 700;
 }
