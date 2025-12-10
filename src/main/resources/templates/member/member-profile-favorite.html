@@ -17,8 +17,12 @@
             </div>
 
             <div id="search-container">
-                <input type="text" name="search" id="search" placeholder="Search">
-                <img th:src="@{/assets/icon/search.svg}" alt="search button">
+                <form th:action="@{/member/profile/favorite}" method="get" style="display: inline;">
+                    <input type="text" name="search" id="search" placeholder="Search favorites">
+                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                        <img th:src="@{/assets/icon/search.svg}" alt="search button">
+                    </button>
+                </form>
             </div>
 
             <div id="nav-right">
@@ -39,98 +43,123 @@
     <main>
         <section id="profile-card">
             <div id="avatar"></div>
-
             <div id="profile-info">
-                <h2>Member Name</h2>
-                <p>Role</p>
+                <h2 th:text="${userName}">Member Name</h2>
+                <p th:text="${userRole}">Role</p>
             </div>
         </section>
 
         <section id="profile-tabs" class="tab-group">
-            <button class="tab"><a th:href="@{/member/profile}">All</a></button>
-            <button class="tab active"><a th:href="@{/member/profile/favorite}">Favorite</a></button>
+            <button class="tab"><a th:href="@{/member/profile}">All Songs</a></button>
+            <button class="tab active"><a th:href="@{/member/profile/favorite}">My Favorites</a></button>
         </section>
 
         <section id="favorite-song">
-            <h1>Favorite</h1>
+            <h1>My Favorites <span th:if="${totalFavorites}">(<span th:text="${totalFavorites}"></span> songs)</span></h1>
 
-            <div id="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Artist</th>
-                            <th>Album</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
+            <div th:if="${searchQuery}">
+                <p>Search results for "<span th:text="${searchQuery}"></span>"</p>
             </div>
-        </section>
 
-        <!-- SECTION SONG RECOMMENDATION -->
-        <section id="song-list">
-            <h1>Recommendation</h1>
-            <div id="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Artist</th>
-                            <th>Album</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
-                        </tr>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
-                        </tr>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
-                        </tr>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
-                        </tr>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
-                        </tr>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img th:src="@{/assets/icon/heart.svg}" alt="add to favorite"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+            <div th:if="${favoriteSongs != null && !favoriteSongs.isEmpty()}">
+                <div id="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Artist</th>
+                                <th>Album</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="song : ${favoriteSongs}">
+                                <td th:text="${song.title}"></td>
+                                <td th:text="${song.artistName}"></td>
+                                <td th:text="${song.albumTitle}"></td>
+                                <td>
+                                    <form th:action="@{/member/profile/favorite/remove}" method="post" style="display: inline;">
+                                        <input type="hidden" name="songId" th:value="${song.songID}">
+                                        <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                            <img th:src="@{/assets/icon/heartred.svg}" 
+                                                         alt="Remove from favorites"
+                                                         style="width: 24px; height: 24px;"
+                                                         title="Remove from favorites">
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:if="${favoriteSongs == null || favoriteSongs.isEmpty()}">
+                    <p style="text-align: center; padding: 40px; color: #666;">
+                        You haven't added any songs to favorites yet.
+                        <br>
+                        <a th:href="@{/member/profile}" style="color: #007bff; text-decoration: none;">
+                            Browse songs and add some favorites →
+                        </a>
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION SONG RECOMMENDATION -->
+            <section id="song-list">
+                <h1>Recommendation</h1>
+                <div th:if="${recommendations != null && !recommendations.isEmpty()}">
+                    <div id="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Artist</th>
+                                    <th>Album</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="song : ${recommendations}">
+                                    <td th:text="${song.title}"></td>
+                                    <td th:text="${song.artistName}"></td>
+                                    <td th:text="${song.albumTitle}"></td>
+                                    <td>
+                                        <div th:if="${song.favorite}">
+                                            <form th:action="@{/member/profile/favorite/remove}" method="post" style="display: inline;">
+                                                <input type="hidden" name="songId" th:value="${song.songID}">
+                                                <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                                    <img th:src="@{/assets/icon/heartred.svg}" 
+                                                         alt="Remove from favorites"
+                                                         style="width: 24px; height: 24px;"
+                                                         title="Remove from favorites">
+                                                </button>
+                                            </form>
+                                        </div>
+                                        
+                                        <div th:unless="${song.favorite}">
+                                            <form th:action="@{/member/profile/favorite/add}" method="post" style="display: inline;">
+                                                <input type="hidden" name="songId" th:value="${song.songID}">
+                                                <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                                    <img th:src="@{/assets/icon/heart.svg}" 
+                                                         alt="Add to favorites"
+                                                         style="width: 24px; height: 24px;"
+                                                         title="Add to favorites">
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div th:if="${recommendations == null || recommendations.isEmpty()}">
+                    <p style="text-align: center; padding: 20px; color: #666;">
+                        No recommendations available.
+                    </p>
+                </div>
+            </section>
     </main>
 </body>
 </html>
