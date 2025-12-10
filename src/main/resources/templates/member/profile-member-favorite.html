@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Member</title>
-    <link rel="stylesheet" th:href="@{/css/member/profile-member-collection.css}">
+    <link rel="stylesheet" th:href="@{/css/member/profile-member-favorite.css}">
 </head>
 <body>
     <header>
@@ -39,7 +39,7 @@
         </section>
 
         <section id="profile-tabs" class="tab-group">
-            <button class="tab">Collection</button>
+            <button class="tab"><a id="collection-txt" th:href="@{/member/profile/collection}">Collection</a></button>
             <button class="tab active">Favorite</button>
         </section>
 

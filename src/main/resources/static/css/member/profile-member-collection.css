@@ -210,13 +210,22 @@ main {
 
 #upload-btn {
     background-color: var(--button-color);
-    color: white;
     padding: 1em 2.3em;
     border: none;
     border-radius: 0.4em;
     cursor: pointer;
+}
+
+#upload-txt {
+    text-decoration: none;
+    color: white;
     font-size: 1.2em;
     font-weight: 600;
+}
+
+#favorite-txt {
+    text-decoration: none;
+    color: black;
 }
 
 #upload-btn:hover {

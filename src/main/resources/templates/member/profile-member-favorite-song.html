@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Favorite Songs</title>
-    <link rel="stylesheet" th:href="@{/css/member/profile-member-song-list.css}">
+    <link rel="stylesheet" th:href="@{/css/member/profile-member-favorite-song.css}">
 </head>
 <body>
     <header>
@@ -43,7 +43,7 @@
             <button class="tab active">Favorite</button>
         </section>
 
-        <button id="upload-btn">Upload Now</button>
+        <button id="upload-btn"> <a id="upload-txt" th:href="@{/member/profile/collection/song}">Upload Now</button>
 
         <section id="song-list">
             <h1>Favorite Songs</h1>
