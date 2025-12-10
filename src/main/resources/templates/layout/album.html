@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Collection</title>
-    <link rel="stylesheet" th:href="@{/css/layout/album.css}">
+    <link rel="stylesheet" href="../../static/css/layout/album.css">
 </head>
 <body>
     <header>
@@ -33,81 +33,62 @@
         <!-- ALBUM HEADER -->
         <section id="album-header">
             <h1>Album<br><span id="albumTitle">Kampungan</span></h1>
-            <img th:src="@{/assets/img/artist-profile/slank-profile.jpg}" alt="artist profile">
+            <img th:src="@{/assets/img/artist-profile/slank-profile.jpg}" alt="album art">
         </section>
 
+        <!-- ALBUM CONTAINER -->
         <section id="album-container">
-            <!-- ALBUM KE-1 -->
-            <div id="album-wrapper">
-                <div id="artist-profile">
-                    <img src="../assets/img/artist-profile/slank-profile.jpg" alt="">
-                    <h2>Slank</h2>
-                    <button>Follow</button>
-                </div>
-
-                <div id="album-card">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi voluptate quis cumque, debitis sed dicta tempore necessitatibus doloremque deserunt nihil odio esse eaque quibusdam voluptatum commodi distinctio ex, iusto repudiandae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore quod veritatis sapiente quibusdam nihil iusto ducimus a temporibus accusantium tempore exercitationem, tenetur corrupti natus eveniet odio facilis? Voluptatem, molestias molestiae.</p>
-                    <h1>Album Songs</h1>
-
-                    <div id="album-songs">
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Kampungan</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Mawar Merah</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Terlalu Manis</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-                    </div>
-                </div>
+            <!-- ARTIST PROFILE -->
+            <div id="artist-profile">
+                <img src="../assets/img/artist-profile/slank-profile.jpg" alt="artist photo">
+                <h2 id="artistName">Slank</h2>
+                <button>Follow</button>
             </div>
 
-            <!-- ALBUM KE-2 DST.. -->
-            <div id="album-wrapper">
-                <div id="artist-profile">
-                    <h2>Slank</h2>
-                    <button>Follow</button>
+            <!--CONTAINER LAGU -->
+            <div id="album-songs">
+                <h1>Album Songs</h1>
+
+                <!-- DAFTAR LAGU -->
+                <div class="music-card">
+                    <img src="../assets/icon/play-music.svg" alt="play music icon">
+                    <p class="music-title">Kampungan</p>
+                    <img src="../assets/icon/add.svg" alt="add music icon">
                 </div>
-
-                <div id="album-card">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi voluptate quis cumque, debitis sed dicta tempore necessitatibus doloremque deserunt nihil odio esse eaque quibusdam voluptatum commodi distinctio ex, iusto repudiandae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore quod veritatis sapiente quibusdam nihil iusto ducimus a temporibus accusantium tempore exercitationem, tenetur corrupti natus eveniet odio facilis? Voluptatem, molestias molestiae.</p>
-                    <h1>Album Songs</h1>
-
-                    <div id="album-songs">
-                        <!-- LAGU KE-1 -->
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Kampungan</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-
-                        <!-- LAGU KE-2 -->
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Mawar Merah</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-
-                        <!-- LAGU KE-1=3 DST ... -->
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Terlalu Manis</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-                    </div>
+                <div class="music-card">
+                    <img src="../assets/icon/play-music.svg" alt="play music icon">
+                    <p class="music-title">Mawar Merah</p>
+                    <img src="../assets/icon/add.svg" alt="add music icon">
+                </div>
+                <div class="music-card">
+                    <img src="../assets/icon/play-music.svg" alt="play music icon">
+                    <p class="music-title">Terlalu Manis</p>
+                    <img src="../assets/icon/add.svg" alt="add music icon">
+                </div>
+                <div class="music-card">
+                    <img src="../assets/icon/play-music.svg" alt="play music icon">
+                    <p class="music-title">Mawar Merah</p>
+                    <img src="../assets/icon/add.svg" alt="add music icon">
+                </div>
+                <div class="music-card">
+                    <img src="../assets/icon/play-music.svg" alt="play music icon">
+                    <p class="music-title">Terlalu Manis</p>
+                    <img src="../assets/icon/add.svg" alt="add music icon">
+                </div>
+                <div class="music-card">
+                    <img src="../assets/icon/play-music.svg" alt="play music icon">
+                    <p class="music-title">Mawar Merah</p>
+                    <img src="../assets/icon/add.svg" alt="add music icon">
+                </div>
+                <div class="music-card">
+                    <img src="../assets/icon/play-music.svg" alt="play music icon">
+                    <p class="music-title">Terlalu Manis</p>
+                    <img src="../assets/icon/add.svg" alt="add music icon">
                 </div>
             </div>
-
-            
         </section>
-    </main>
 
+
+    </main>
 </body>
 </html>

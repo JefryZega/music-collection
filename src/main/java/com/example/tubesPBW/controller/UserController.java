@@ -9,9 +9,23 @@ public class UserController {
         return "layout/homepage-all";
     }
 
+    // TAMPILAN PROFILE ARTIST
+    @GetMapping("/artist")
+    public String artist() {
+        return "layout/artist";
+    }
+
+    // TAMPILAN ALBUM
     @GetMapping("/album")
     public String homeAlbum() {
         return "layout/album";
     }
+
+    // TAMPILAN DAFTAR ALBUM YANG DIMILIK ARTIST TERTENTU
+    @GetMapping("/artist/album")
+    public String homeArtistAlbum() {
+        return "layout/artist-album";
+    }
+
 
 }
