@@ -131,6 +131,11 @@ main {
     padding: 0 2em;
 }
 
+main a {
+    color: unset;
+    text-decoration: none;
+}
+
 /* SECTION WRAPPER */
 .section-block {
     padding: 0 2em;

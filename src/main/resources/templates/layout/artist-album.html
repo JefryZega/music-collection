@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Collection</title>
+    <link rel="stylesheet" th:href="@{/css/layout/artist-album.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <div id="nav-left">
+                    <li id="logo">Music <br>Collection</li>
+                    <li><a th:href="@{/member/home}">Home</a></li>
+                    <li>Library</li>
+                </div>
+
+                <div id="search-container">
+                    <input type="text" name="search" id="search" placeholder="Search">
+                    <img th:src="@{/assets/icon/search.svg}" alt="search button">
+                </div>
+
+                <div id="nav-right">
+                    <li>
+                        <a th:href="@{/member/profile}">
+                            <img th:src="@{/assets/icon/user.svg}" alt="profile icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/login}">
+                            <img th:src="@{/assets/icon/logout.svg}" alt="logout icon">
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+       <!-- SECTION PROFILE -->
+        <section id="profile-card">
+            <div id="avatar">
+                <img th:src="@{/assets/img/artist-profile/artist-acdc.jpeg}" alt="artist photo">
+            </div>
+            <div id="profile-info">
+                <h2 id="artistName">AC/DC</h2>
+                <p>Artist</p>
+            </div>
+        </section>
+
+        <!-- PROFLE TABS -->
+        <section id="profile-tabs" class="tab-group">
+            <button class="tab active"><a th:href="@{/artist}">Song</a></button>
+            <button class="tab"><a th:href="@{/member/profile/favorite}">Album</a></button>
+        </section>
+
+        <section id="albumSongList">
+            <h1>Album List</h1>
+            <div id="album-list-container">
+                <div class="album-card">
+                    <a th:href="@{/album}">
+                        <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
+                        <p id="album-title">Mawar Merah</p>
+                    </a>
+                </div>
+                <div class="album-card">
+                    <a th:href="@{/album}">
+                        <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
+                        <p id="album-title">Mawar Merah</p>
+                    </a>
+                </div>
+                <div class="album-card">
+                    <a th:href="@{/album}">
+                        <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
+                        <p id="album-title">Mawar Merah</p>
+                    </a>
+                </div>
+                <div class="album-card">
+                    <a th:href="@{/album}">
+                        <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
+                        <p id="album-title">Mawar Merah</p>
+                    </a>
+                </div>
+                <div class="album-card">
+                    <a th:href="@{/album}">
+                        <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
+                        <p id="album-title">Mawar Merah</p>
+                    </a>
+                </div>
+            </div>
+            
+        </section>
+        
+        
+    </main>
+</body>
+</html>

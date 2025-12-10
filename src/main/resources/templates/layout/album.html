@@ -12,8 +12,8 @@
             <ul>
                 <div id="nav-left">
                     <li id="logo">Music <br>Collection</li>
-                    <li>Home</li>
-                    <li>Library</li>
+                    <li><a th:href="@{/member/home}">Home</a></li>
+                    <li><a th:href="@{/}">Library</a></li>
                 </div>
 
                 <div id="search-container">
@@ -32,82 +32,54 @@
     <main>
         <!-- ALBUM HEADER -->
         <section id="album-header">
-            <h1>Album<br><span id="albumTitle">Kampungan</span></h1>
-            <img th:src="@{/assets/img/artist-profile/slank-profile.jpg}" alt="artist profile">
+            <h1>Album<br><span id="albumTitle">Back In Black</span></h1>
+            <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
         </section>
 
+        <!-- ALBUM CONTAINER -->
         <section id="album-container">
-            <!-- ALBUM KE-1 -->
-            <div id="album-wrapper">
-                <div id="artist-profile">
-                    <img src="../assets/img/artist-profile/slank-profile.jpg" alt="">
-                    <h2>Slank</h2>
-                    <button>Follow</button>
-                </div>
-
-                <div id="album-card">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi voluptate quis cumque, debitis sed dicta tempore necessitatibus doloremque deserunt nihil odio esse eaque quibusdam voluptatum commodi distinctio ex, iusto repudiandae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore quod veritatis sapiente quibusdam nihil iusto ducimus a temporibus accusantium tempore exercitationem, tenetur corrupti natus eveniet odio facilis? Voluptatem, molestias molestiae.</p>
-                    <h1>Album Songs</h1>
-
-                    <div id="album-songs">
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Kampungan</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Mawar Merah</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Terlalu Manis</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-                    </div>
-                </div>
+            <!-- ARTIST PROFILE -->
+            <div id="artist-profile">
+                <img th:src="@{/assets/img/artist-profile/artist-acdc.jpeg}" alt="artist photo">
+                <h2 id="artistName">AC/DC</h2>
+                <button>Follow</button>
             </div>
 
-            <!-- ALBUM KE-2 DST.. -->
-            <div id="album-wrapper">
-                <div id="artist-profile">
-                    <h2>Slank</h2>
-                    <button>Follow</button>
+            <!--CONTAINER LAGU -->
+            <div id="album-songs">
+                <h1>Album Songs</h1>
+
+                <!-- DAFTAR LAGU -->
+                <div class="music-card">
+                    <p class="music-title">Hell Bells</p>
+                    <img th:src="@{/assets/icon/add.svg}" alt="add music icon">
                 </div>
-
-                <div id="album-card">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi voluptate quis cumque, debitis sed dicta tempore necessitatibus doloremque deserunt nihil odio esse eaque quibusdam voluptatum commodi distinctio ex, iusto repudiandae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore quod veritatis sapiente quibusdam nihil iusto ducimus a temporibus accusantium tempore exercitationem, tenetur corrupti natus eveniet odio facilis? Voluptatem, molestias molestiae.</p>
-                    <h1>Album Songs</h1>
-
-                    <div id="album-songs">
-                        <!-- LAGU KE-1 -->
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Kampungan</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-
-                        <!-- LAGU KE-2 -->
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Mawar Merah</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-
-                        <!-- LAGU KE-1=3 DST ... -->
-                        <div class="music-card">
-                            <img src="../assets/icon/play-music.svg" alt="play music icon">
-                            <p class="music-title">Terlalu Manis</p>
-                            <img src="../assets/icon/add.svg" alt="add music icon">
-                        </div>
-                    </div>
+                <div class="music-card">
+                    <p class="music-title">Shot to Thrill</p>
+                    <img th:src="@{/assets/icon/add.svg}" alt="add music icon">
+                </div>
+                <div class="music-card">
+                    <p class="music-title">What Do You Do For Money Honey</p>
+                    <img th:src="@{/assets/icon/add.svg}" alt="add music icon">
+                </div>
+                <div class="music-card">
+                    <p class="music-title">Givin The Dog a Bone</p>
+                    <img th:src="@{/assets/icon/add.svg}" alt="add music icon">
+                </div>
+                <div class="music-card">
+                    <p class="music-title">Let Me Put My Love Into You</p>
+                    <img th:src="@{/assets/icon/add.svg}" alt="add music icon">
+                </div>
+                <div class="music-card">
+                    <p class="music-title">Back In Black</p>
+                    <img th:src="@{/assets/icon/add.svg}" alt="add music icon">
+                </div>
+                <div class="music-card">
+                    <p class="music-title">You Shook Me All Night Long</p>
+                    <img th:src="@{/assets/icon/add.svg}" alt="add music icon">
                 </div>
             </div>
-
-            
         </section>
     </main>
-
 </body>
 </html>
