@@ -1,0 +1,125 @@
+// JdbcSongRepository.java - Implementasi dengan JDBC Template
+package com.example.tubesPBW.repository;
+
+import com.example.tubesPBW.model.Song;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public class JdbcSongRepository implements SongRepository {
+    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    
+    private final RowMapper<Song> songRowMapper = new RowMapper<Song>() {
+        @Override
+        public Song mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Song song = new Song();
+            song.setSongID(rs.getLong("songID"));
+            song.setTitle(rs.getString("title"));
+            song.setArtistName(rs.getString("artistName"));
+            song.setAlbumTitle(rs.getString("albumTitle"));
+            return song;
+        }
+    };
+    
+    @Override
+    public List<Song> findAll() {
+        String sql = "SELECT s.songID, s.title, " +
+                    "a.artistName, al.albumTitle " +
+                    "FROM song s " +
+                    "JOIN album al ON s.albumID = al.albumID " +
+                    "JOIN artist a ON al.artistID = a.artistID " +
+                    "ORDER BY s.title";
+        return jdbcTemplate.query(sql, songRowMapper);
+    }
+    
+    @Override
+    public Optional<Song> findById(Long id) {
+        String sql = "SELECT s.songID, s.title, " +
+                    "a.artistName, al.albumTitle " +
+                    "FROM song s " +
+                    "JOIN album al ON s.albumID = al.albumID " +
+                    "JOIN artist a ON al.artistID = a.artistID " +
+                    "WHERE s.songID = ?";
+        List<Song> results = jdbcTemplate.query(sql, songRowMapper, id);
+        return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
+    }
+    
+    @Override
+    public List<Song> findByTitleContaining(String keyword) {
+        String sql = "SELECT s.songID, s.title, " +
+                    "a.artistName, al.albumTitle " +
+                    "FROM song s " +
+                    "JOIN album al ON s.albumID = al.albumID " +
+                    "JOIN artist a ON al.artistID = a.artistID " +
+                    "WHERE LOWER(s.title) LIKE LOWER(?) " +
+                    "ORDER BY s.title";
+        return jdbcTemplate.query(sql, songRowMapper, "%" + keyword + "%");
+    }
+    
+    @Override
+    public List<Song> findByArtistNameContaining(String keyword) {
+        String sql = "SELECT s.songID, s.title, " +
+                    "a.artistName, al.albumTitle " +
+                    "FROM song s " +
+                    "JOIN album al ON s.albumID = al.albumID " +
+                    "JOIN artist a ON al.artistID = a.artistID " +
+                    "WHERE LOWER(a.artistName) LIKE LOWER(?) " +
+                    "ORDER BY s.title";
+        return jdbcTemplate.query(sql, songRowMapper, "%" + keyword + "%");
+    }
+    
+    @Override
+    public List<Song> findByAlbumTitleContaining(String keyword) {
+        String sql = "SELECT s.songID, s.title, " +
+                    "a.artistName, al.albumTitle " +
+                    "FROM song s " +
+                    "JOIN album al ON s.albumID = al.albumID " +
+                    "JOIN artist a ON al.artistID = a.artistID " +
+                    "WHERE LOWER(al.albumTitle) LIKE LOWER(?) " +
+                    "ORDER BY s.title";
+        return jdbcTemplate.query(sql, songRowMapper, "%" + keyword + "%");
+    }
+    
+    @Override
+    public List<Song> searchByKeyword(String keyword) {
+        String sql = "SELECT s.songID, s.title, " +
+                    "a.artistName, al.albumTitle " +
+                    "FROM song s " +
+                    "JOIN album al ON s.albumID = al.albumID " +
+                    "JOIN artist a ON al.artistID = a.artistID " +
+                    "WHERE LOWER(s.title) LIKE LOWER(?) " +
+                    "OR LOWER(a.artistName) LIKE LOWER(?) " +
+                    "OR LOWER(al.albumTitle) LIKE LOWER(?) " +
+                    "ORDER BY s.title";
+        String searchPattern = "%" + keyword + "%";
+        return jdbcTemplate.query(sql, songRowMapper, 
+            searchPattern, searchPattern, searchPattern);
+    }
+
+    @Override
+    public List<Song> findSongsByIds(List<Long> songIds) {
+        if (songIds == null || songIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        
+        String placeholders = String.join(",", Collections.nCopies(songIds.size(), "?"));
+        String sql = "SELECT s.songID, s.title, " +
+                    "a.artistName, al.albumTitle " +
+                    "FROM song s " +
+                    "JOIN album al ON s.albumID = al.albumID " +
+                    "JOIN artist a ON al.artistID = a.artistID " +
+                    "WHERE s.songID IN (" + placeholders + ") " +
+                    "ORDER BY s.title";
+        return jdbcTemplate.query(sql, songRowMapper, songIds.toArray());
+    }
+}

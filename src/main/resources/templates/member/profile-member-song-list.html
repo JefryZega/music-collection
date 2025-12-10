@@ -31,10 +31,9 @@
     <main>
         <section id="profile-card">
             <div id="avatar"></div>
-
             <div id="profile-info">
-                <h2>Member Name</h2>
-                <p>Role</p>
+                <h2 th:text="${userName}">Member Name</h2>
+                <p th:text="${userRole}">Role</p>
             </div>
         </section>
 

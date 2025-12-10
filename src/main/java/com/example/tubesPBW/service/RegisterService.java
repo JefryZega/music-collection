@@ -1,6 +1,7 @@
 package com.example.tubesPBW.service;
 
 import com.example.tubesPBW.model.RegisterForm;
+import com.example.tubesPBW.model.User;
 import com.example.tubesPBW.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,14 @@ public class RegisterService {
         }
 
         String hashedPassword = passwordEncoder.encode(form.getPassword());
-        userRepository.save(form.getName(), form.getUsername(), form.getEmail(), hashedPassword);
+        User newUser = new User();
+        newUser.setName(form.getName());
+        newUser.setUsername(form.getUsername());
+        newUser.setEmail(form.getEmail());
+        newUser.setPassword(hashedPassword);
+        newUser.setRole("member");
+
+        userRepository.save(newUser);
         return true;
     }
 }
