@@ -137,6 +137,10 @@ main {
     color: #000;
 }
 
+main a {
+    text-decoration: none;
+    color: unset;
+}
 
 /* SECTION PERTAMA PROFILE */
 #profile-card {
@@ -165,7 +169,12 @@ main {
     width: 10em;
     height: 10em;
     border-radius: 0.5em;
-    box-shadow: 3px 4px 7px var(--text-color);
+}
+
+#avatar img:hover {
+    transition: 0.5s;
+    cursor: pointer;
+    border: 1px solid var(--text-color);
 }
 
 #profile-info h2 {
@@ -241,7 +250,7 @@ main {
     flex-wrap: wrap;
 }
 
-.album-card {
+.album-card a {
     width: 15vw;
     height: 30vh;
     padding: 1em;

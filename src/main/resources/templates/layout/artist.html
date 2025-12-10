@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Collection</title>
-    <link rel="stylesheet" href="../../static/css/layout/artist.css">
+    <link rel="stylesheet" th:href="@{/css/layout/artist.css}">
 </head>
 <body>
     <header>
@@ -41,18 +41,18 @@
        <!-- SECTION PROFILE -->
         <section id="profile-card">
             <div id="avatar">
-                <img src="" alt="artist photo">
+                <img th:src="@{/assets/img/artist-profile/artist-acdc.JPEG}" alt="artist photo">
             </div>
             <div id="profile-info">
-                <h2 id="artistName">Artist Name</h2>
+                <h2 id="artistName">AC/DC</h2>
                 <p>Artist</p>
             </div>
         </section>
 
         <!-- PROFLE TABS -->
         <section id="profile-tabs" class="tab-group">
-            <button class="tab active"><a th:href="@{/member/profile}">Song</a></button>
-            <button class="tab"><a th:href="@{/member/profile/favorite}">Album</a></button>
+            <button class="tab active"><a th:href="@{/artist}">Song</a></button>
+            <button class="tab"><a th:href="@{/artist/album}">Album</a></button>
         </section>
 
         <section id="artistSongList">

@@ -1,13 +1,11 @@
 package com.example.tubesPBW.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@Controller
 public class UserController {
-    @GetMapping("/home")
-    public String registerView(Model model) {
-        return "layout/homepage-all";
-    }
 
     // TAMPILAN PROFILE ARTIST
     @GetMapping("/artist")

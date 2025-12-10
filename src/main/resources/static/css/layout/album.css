@@ -151,7 +151,6 @@ main {
     border-radius: 0.4em;
     color: var(--text-color);
     background-color: var(--secondary-color);
-    border: 1px solid var(--text-color);
 }
 
 #album-header h1 {
@@ -162,8 +161,14 @@ main {
     width: 10em;
     height: 10em;
     border-radius: 0.5em;
-    box-shadow: 3px 4px 7px var(--text-color);
 }
+
+#album-header img:hover {
+    transition: 0.5s;
+    cursor: pointer;
+    border: 1px solid var(--text-color);
+}
+
 
 /* SECTION ALBUM CONTAINER */
 #album-container {
@@ -214,7 +219,7 @@ main {
 
 /* DAFTAR LAGU */
 .music-card {
-    padding: 0.5em;
+    padding: 1em;
     width: 100%;
     height: 3em;
     display: flex;
@@ -238,5 +243,5 @@ main {
 }
 
 .music-card p {
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
