@@ -47,6 +47,8 @@ h1 {
     font-size: 26px;
 }
 
+
+/* FORM */
 #registrationForm {
     width: 100%;
     display: flex;
@@ -57,7 +59,7 @@ h1 {
 label {
     display: block;
     text-align: left;
-    font-size: 1.1em;
+    font-size: 0.8em;
     font-weight: 500;
     color: white;
     width: 100%;
@@ -75,22 +77,29 @@ input {
     text-align: left;
 }
 
-#register {
+#register, #guestBtn {
     width: 100%;
     padding: 0.5em;
-    margin-top: 20px;
     background: #3E96F4;
     border: none;
     color: white;
     font-size: 14px;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 0.3em;
     cursor: pointer;
 }
 
-#register:hover {
+#register {
+    margin-top: 1em;
+}
+
+#guestBtn {
+    background-color: #898989;
+}
+
+#register:hover, #guestBtn:hover {
     transition: 0.5s;
-    background-color: #6faff4;
+    border: 1px solid var(--text-color);
 }
 
 p {
@@ -99,7 +108,7 @@ p {
     color: white;
 }
 
-p a {
+#guestBtn a, p a {
     text-decoration: none;
     color: white;
     font-weight: bold;
