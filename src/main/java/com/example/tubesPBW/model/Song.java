@@ -10,4 +10,8 @@ public class Song {
     private Long artistID;
     private String albumTitle;    
     private boolean favorite;
+
+    // tambahan
+    private String albumArt; 
+    private Long weeklyLikes; 
 }

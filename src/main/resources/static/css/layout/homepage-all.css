@@ -258,20 +258,66 @@ main {
     padding: 1em;
     height: 52.5vh;
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 0.5em;
+    flex-direction: column; 
+    gap: 10px;
     border-radius: 0.5em;
     background-color: var(--third-color);
+    overflow-y: auto; 
 }
 
+/* KARTU LAGU */
 .songs-card {
-    width: 40%;
-    height: 10%;
+    width: 100%;
+    padding: 10px 20px; 
+    
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    transition: transform 0.2s;
+}
+
+.songs-card:hover {
+    transform: translateX(5px);
+    background-color: #fff;
+}
+
+.rank-number {
+    font-size: 1.5em; 
+    font-weight: 900;
+    color: var(--secondary-color);
+    margin-right: 20px; 
+    min-width: 30px; 
+    text-align: center;
+}
+
+.song-text-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    border-radius: 0.1em;
-    background-color: var(--primary-color);
+    overflow: hidden; 
+}
+
+/* dibuat jadi baris */
+
+.song-title-data {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-artist-data {
+    margin: 0;
+    font-size: 0.9em; 
+    color: #666;
+    font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

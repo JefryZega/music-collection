@@ -96,4 +96,8 @@ public class SongService {
     public List<Song> getSongsByAlbumId(Long albumId) {
         return songRepository.findSongsByAlbumId(albumId);
     }
+
+    public List<Song> getTop10WeeklySongs() {
+        return songRepository.findTop10Weekly();
+    }
 }

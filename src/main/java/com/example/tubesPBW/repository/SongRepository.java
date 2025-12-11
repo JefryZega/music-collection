@@ -14,4 +14,5 @@ public interface SongRepository {
     List<Song> findSongsByIds(List<Long> songIds);
     List<Song> findSongsByArtistId(Long artistId);
     List<Song> findSongsByAlbumId(Long albumId);
+    List<Song> findTop10Weekly();
 }
