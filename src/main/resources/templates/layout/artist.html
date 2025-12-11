@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${artist.artistName} + ' - Music Collection'">Music Collection</title>
+    <link rel="stylesheet" th:href="@{/css/layout/artist.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <div id="nav-left">
+                    <li id="logo">Music <br>Collection</li>
+                    <li><a th:href="@{/member/home}">Home</a></li>
+                    <li>Library</li>
+                </div>
+
+                <div id="search-container">
+                    <input type="text" name="search" id="search" placeholder="Search">
+                    <img th:src="@{/assets/icon/search.svg}" alt="search button">
+                </div>
+
+                <div id="nav-right">
+                    <li>
+                        <a th:href="@{/member/profile}">
+                            <img th:src="@{/assets/icon/user.svg}" alt="profile icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/login}">
+                            <img th:src="@{/assets/icon/logout.svg}" alt="logout icon">
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+       <!-- SECTION PROFILE -->
+        <section id="profile-card">
+            <div id="avatar">
+                <img th:with="filename=${#strings.replace(#strings.toLowerCase(artist.artistName), '/', '')}" 
+                     th:src="@{'/assets/img/artist-profile/artist-' + ${filename} + '.jpeg'}" 
+                     th:onerror="this.src='/assets/img/artist-profile/default.jpg'"
+                     alt="artist photo">
+            </div>
+            <div id="profile-info">
+                <h2 id="artistName" th:text="${artist.artistName}">AC/DC</h2>
+                <p>Artist</p>
+                <p th:if="${artist.artistProfile}" 
+                   style="margin-top: 10px; font-size: 14px; color: #666;"
+                   th:text="${artist.artistProfile}">
+                    Australian rock band formed in 1973
+                </p>
+            </div>
+        </section>
+
+        <!-- PROFLE TABS -->
+        <section id="profile-tabs" class="tab-group">
+            <button class="tab active">
+                <a th:href="@{'/artist/' + ${artist.artistID}}">Song</a>
+            </button>
+            <button class="tab">
+                <a th:href="@{'/artist/' + ${artist.artistID} + '/album'}">Album</a>
+            </button>
+        </section>
+
+        <section id="artistSongList">
+            <h1>Song List <span th:if="${artistSongs}">(<span th:text="${artistSongs.size()}"></span> songs)</span></h1>
+            
+            <div th:if="${artistSongs != null && !artistSongs.isEmpty()}">
+                <div class="song-card" th:each="song : ${artistSongs}">
+                    <p class="song-title" th:text="${song.title}">Mawar Merah</p>
+                    <div class="song-info">
+                        <span th:text="${song.albumTitle}">Album Name</span>
+                        <button>+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div th:if="${artistSongs == null || artistSongs.isEmpty()}">
+                <p style="text-align: center; padding: 40px; color: #666;">
+                    No songs found for this artist.
+                </p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

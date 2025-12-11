@@ -6,7 +6,12 @@ import com.example.tubesPBW.service.LoginService;
 import com.example.tubesPBW.service.RegisterService;
 import com.example.tubesPBW.service.UserService;
 
-import jakarta.servlet.http.HttpSession; 
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,16 +87,22 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
-        User user = loginService.login(username, password);
+    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session,HttpServletResponse response) throws IOException {
+        User user = userService.authenticate(username, password);
         if (user == null) {
             model.addAttribute("error", "Invalid username or password");
             return "auth/login";
         }
-
-        // simpen user ke session
         session.setAttribute("user", user);
-        return "redirect:/home";
+        session.setAttribute("userId", user.getUserID());
+        session.setAttribute("userRole", user.getRole());
+        if ("admin".equals(user.getRole())) {
+            response.sendRedirect("/admin/dashboard");
+            return null;
+        } else {
+            response.sendRedirect("/member/home");
+            return null;
+        }
     }
 
     @GetMapping("/reset-password")
@@ -100,16 +111,12 @@ public class AuthController {
     }
 
     @PostMapping("/reset-password")
-    public String resetPassword(@RequestParam("email") String email, 
-                                @RequestParam("oldPassword") String oldPassword,
-                                @RequestParam("newPassword") String newPassword, 
-                                RedirectAttributes redirectAttributes) {
+    public String resetPassword(@RequestParam("email") String email, @RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, RedirectAttributes redirectAttributes) {
         boolean isSuccess = userService.resetPassword(email, oldPassword, newPassword);
         if (isSuccess) {
             redirectAttributes.addFlashAttribute("success", "Password berhasil diubah! Silakan login.");
             return "redirect:/login";
         } else {
-            // Bisa karena email salah atau password lama salah
             redirectAttributes.addFlashAttribute("error", "Email tidak ditemukan atau Password Lama salah!");
             return "redirect:/reset-password"; 
         }
