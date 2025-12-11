@@ -17,9 +17,9 @@
                 </div>
 
                 <div id="search-container">
-                    <form th:action="@{/member/profile}" method="get" style="display: inline;">
+                    <form th:action="@{/member/profile}" method="get">
                         <input type="text" name="search" id="search" placeholder="Search" th:value="${searchQuery}">
-                        <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                        <button type="submit">
                             <img th:src="@{/assets/icon/search.svg}" alt="search button">
                         </button>
                     </form>

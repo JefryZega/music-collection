@@ -98,6 +98,11 @@ nav ul li {
     background-color: var(--secondary-color);
 }
 
+#search-container form {
+    display: flex;
+    width: 100%;
+}
+
 #search-container input {
     padding: 0.5em;
     width: 100%;
