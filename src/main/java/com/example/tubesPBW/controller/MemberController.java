@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.example.tubesPBW.service.SongService;
 import com.example.tubesPBW.service.UserService;
 
@@ -172,5 +174,12 @@ public class MemberController {
         }
         model.addAttribute("user", user);
         return "/member/uploadMember";
+    }
+
+    // BARU, buat search bar
+    @GetMapping("/api/search") 
+    @ResponseBody // biar outputnya JSON, bukan HTML
+    public List<Song> searchSongsApi(@RequestParam("q") String query) {
+        return songService.searchSongs("general", query);
     }
 }
