@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poster</title>
+    <link rel="stylesheet" th:href="@{/css/member/poster.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <div id="nav-left">
+                    <li id="logo">Music <br>Collection</li>
+                    <li><a th:href="@{/member/home}">Home</a></li>
+                    <li>Library</li>
+                </div>
+
+                <div id="search-container">
+                    <form th:action="@{/member/profile}" method="get" style="display: inline;">
+                        <input type="text" name="search" id="search" placeholder="Search" th:value="${searchQuery}">
+                        <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                            <img th:src="@{/assets/icon/search.svg}" alt="search button">
+                        </button>
+                    </form>
+                </div>
+
+                <div id="nav-right">
+                    <li>
+                        <a th:href="@{/member/profile}">
+                            <img th:src="@{/assets/icon/user.svg}" alt="profile icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/login}">
+                            <img th:src="@{/assets/icon/logout.svg}" alt="logout icon">
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="weekly-card">
+            <h2>Top Songs Weekly</h2>
+
+            <div class="weekly-grid">
+
+                <div class="weekly-column">
+                    <div class="song-item">
+                        <span class="rank">1</span>
+                        <img th:src="" class="song-cover">
+                        <div class="song-info">
+                            <h3>Mawar Merah</h3>
+                            <p>Kampungan<br>Slank</p>
+                        </div>
+                    </div>
+
+                    <div class="song-item">
+                        <span class="rank">2</span>
+                        <img th:src="" class="song-cover">
+                        <div class="song-info">
+                            <h3>Never Say Goodbye</h3>
+                            <p>Slippery When Wet<br>Bon Jovi</p>
+                        </div>
+                    </div>
+
+                    <div class="song-item">
+                        <span class="rank">3</span>
+                        <img th:src="" class="song-cover">
+                        <div class="song-info">
+                            <h3>Let It Be</h3>
+                            <p>Let It Be<br>The Beatles</p>
+                        </div>
+                    </div>
+
+                    <div class="song-item">
+                        <span class="rank">4</span>
+                        <img th:src="" class="song-cover">
+                        <div class="song-info">
+                            <h3>Bohemian Rhapsody</h3>
+                            <p>Bohemian Rhapsody<br>Queen</p>
+                        </div>
+                    </div>
+
+                    <div class="song-item">
+                        <span class="rank">5</span>
+                        <img th:src="" class="song-cover">
+                        <div class="song-info">
+                            <h3>Mawar Merah</h3>
+                            <p>Kampungan<br>Slank</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weekly-column">
+                    <div class="song-item">
+                        <span class="rank">6</span>
+                        <img th:src="" class="song-cover">
+                        <div class="song-info">
+                            <h3>Mawar Merah</h3>
+                            <p>Kampungan<br>Slank</p>
+                        </div>
+                    </div>
+
+                    <div class="song-item">
+                        <span class="rank">7</span>
+                        <img th:src="" class="song-cover">
+                        <div class="song-info">
+                            <h3>Mawar Merah</h3>
+                            <p>Kampungan<br>Slank</p>
+                        </div>
+                    </div>
+
+                    <div class="song-item">
+                        <span class="rank">8</span>
+                        <img th:src="img8.jpg" class="song-cover">
+                        <div class="song-info">
+                            <h3>Mawar Merah</h3>
+                            <p>Kampungan<br>Slank</p>
+                        </div>
+                    </div>
+
+                    <div class="song-item">
+                        <span class="rank">9</span>
+                        <img th:src="" class="song-cover">
+                        <div class="song-info">
+                            <h3>Mawar Merah</h3>
+                            <p>Kampungan<br>Slank</p>
+                        </div>
+                    </div>
+
+                    <div class="song-item">
+                        <span class="rank">10</span>
+                        <img th:src="" class="song-cover">
+                        <div class="song-info">
+                            <h3>Mawar Merah</h3>
+                            <p>Kampungan<br>Slank</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

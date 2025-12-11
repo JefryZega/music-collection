@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Song List</title>
+    <title>Favorite Songs</title>
     <link rel="stylesheet" th:href="@{/css/member/profile-member-song-list.css}">
 </head>
 <body>
@@ -37,9 +37,10 @@
     <main>
         <section id="profile-card">
             <div id="avatar"></div>
+
             <div id="profile-info">
-                <h2 th:text="${userName}">Member Name</h2>
-                <p th:text="${userRole}">Role</p>
+                <h2>Member Name</h2>
+                <p>Role</p>
             </div>
         </section>
 
@@ -51,7 +52,7 @@
         <button id="upload-btn">Upload Now</button>
 
         <section id="song-list">
-            <h1>Song List</h1>
+            <h1>Favorite Songs</h1>
 
             <table>
                 <thead>
@@ -69,8 +70,7 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
-                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                            <img th:src="@{/assets/icon/heartred.svg}" alt="heart red">
                         </td>
                     </tr>
 
@@ -79,8 +79,7 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
-                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                            <img th:src="@{/assets/icon/heartred.svg}" alt="heart red">
                         </td>
                     </tr>
 
@@ -89,8 +88,7 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
-                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                            <img th:src="@{/assets/icon/heartred.svg}" alt="heart red">
                         </td>
                     </tr>
 
@@ -99,8 +97,7 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
-                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                            <img th:src="@{/assets/icon/heartred.svg}" alt="heart red">
                         </td>
                     </tr>
 
@@ -109,8 +106,7 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
-                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                            <img th:src="@{/assets/icon/heartred.svg}" alt="heart red">
                         </td>
                     </tr>
                     
@@ -119,8 +115,7 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
-                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                            <img th:src="@{/assets/icon/heartred.svg}" alt="heart red">
                         </td>
                     </tr>
 
@@ -129,31 +124,12 @@
                         <td>Slank</td>
                         <td>Kampungan</td>
                         <td class="actions">
-                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
-                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Mawar Merah</td>
-                        <td>Slank</td>
-                        <td>Kampungan</td>
-                        <td class="actions">
-                            <img th:src="@{/assets/icon/heart.svg}" alt="heart">
-                            <img th:src="@{/assets/icon/trash.svg}" alt="trash">
+                            <img th:src="@{/assets/icon/heartred.svg}" alt="heart red">
                         </td>
                     </tr>
                 </tbody>
             </table>
         </section>
     </main>
-
-    <!-- POPUP -->
-     <div id="popup-overlay" class="hidden">
-        <div id="popup-box">
-            <p id="popup-message">Songs successfully deleted!</p>
-            <button id="popup-close">Close</button>
-        </div>
-     </div>
 </body>
 </html>

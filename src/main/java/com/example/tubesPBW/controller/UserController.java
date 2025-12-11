@@ -77,5 +77,17 @@ public class UserController {
         return "layout/artist-album";
     }
 
+    
+    // BIAR BISA LIHAT TAMPILAN SEMENTARA
+    @GetMapping("/album")
+    public String homeAlbum() {
+        return "layout/album";
+    }
+
+    @GetMapping("/artist")
+    public String homeArtist() {
+        return "layout/artist";
+    }
+
 
 }
