@@ -17,9 +17,9 @@
                 </div>
 
                 <div id="search-container">
-                    <form th:action="@{/member/profile}" method="get" style="display: inline;">
+                    <form th:action="@{/member/profile}" method="get">
                         <input type="text" name="search" id="search" placeholder="Search" th:value="${searchQuery}">
-                        <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                        <button type="submit">
                             <img th:src="@{/assets/icon/search.svg}" alt="search button">
                         </button>
                     </form>
@@ -57,17 +57,20 @@
 
         <section id="song-list">
             <h1>Song List</h1>
+
             <div th:if="${searchQuery}">
                 <p>Search results for "<span th:text="${searchQuery}"></span>" 
                    (<span th:text="${totalSongs}"></span> songs found)</p>
             </div>
-            <div th:if="${songs != null && !songs.isEmpty()}">
+
+            <div id="table-container" th:if="${songs != null && !songs.isEmpty()}">
                 <table>
                     <thead>
                         <tr>
                             <th>Title</th>
                             <th>Artist</th>
                             <th>Album</th>
+                            <th>Album Art</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -82,6 +85,7 @@
                                 </a>
                             </td>
                             <td th:text="${song.albumTitle}">Album</td>
+                            <td></td>
                             <td>
                                 <div th:if="${song.favorite}">
                                     <form th:action="@{/member/profile/favorite/remove}" method="post">
@@ -110,6 +114,26 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- PAGINATION -->
+            <div id="paginationButtonGroup">
+                <!-- PREVIOUS -->
+                <a th:href="@{/member/profile(page=${currentPage - 1})}">
+                    <button th:disabled="${currentPage == 1}">Prev</button>
+                </a>
+
+                <!-- FIX: SELALU TAMPIL 1 - 9 -->
+                <a th:each="i : ${#numbers.sequence(1, 9)}"
+                th:href="@{/member/profile(page=${i})}">
+                    <button th:text="${i}"
+                            th:classappend="${i == currentPage} ? 'active-page' : ''"></button>
+                </a>
+
+                <!-- NEXT -->
+                <a th:href="@{/member/profile(page=${currentPage + 1})}">
+                    <button th:disabled="${currentPage == totalPages}">Next</button>
+                </a>
             </div>
         </section>
     </main>

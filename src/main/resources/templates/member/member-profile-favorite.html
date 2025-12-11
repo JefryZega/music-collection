@@ -17,9 +17,9 @@
             </div>
 
             <div id="search-container">
-                <form th:action="@{/member/profile/favorite}" method="get" style="display: inline;">
+                <form th:action="@{/member/profile/favorite}" method="get">
                     <input type="text" name="search" id="search" placeholder="Search favorites">
-                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <button type="submit">
                         <img th:src="@{/assets/icon/search.svg}" alt="search button">
                     </button>
                 </form>
@@ -69,6 +69,7 @@
                                 <th>Title</th>
                                 <th>Artist</th>
                                 <th>Album</th>
+                                <th>Album Art</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -77,6 +78,7 @@
                                 <td th:text="${song.title}"></td>
                                 <td th:text="${song.artistName}"></td>
                                 <td th:text="${song.albumTitle}"></td>
+                                <td></td>
                                 <td>
                                     <form th:action="@{/member/profile/favorite/remove}" method="post" style="display: inline;">
                                         <input type="hidden" name="songId" th:value="${song.songID}">
@@ -91,6 +93,24 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- PAGINATION -->
+                <div id="paginationButtonGroup">
+                    <!-- PREVIOUS -->
+                    <a href="">
+                        <button>Prev</button>
+                    </a>
+
+                    <!-- FIX: SELALU TAMPIL 1 - 9 -->
+                    <a href="">
+                        <button></button>
+                    </a>
+
+                    <!-- NEXT -->
+                    <a href="">
+                        <button>Next</button>
+                    </a>
                 </div>
 
                 <div th:if="${favoriteSongs == null || favoriteSongs.isEmpty()}">
@@ -115,6 +135,7 @@
                                     <th>Title</th>
                                     <th>Artist</th>
                                     <th>Album</th>
+                                    <th>Album Art</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -123,6 +144,7 @@
                                     <td th:text="${song.title}"></td>
                                     <td th:text="${song.artistName}"></td>
                                     <td th:text="${song.albumTitle}"></td>
+                                    <td></td>
                                     <td>
                                         <div th:if="${song.favorite}">
                                             <form th:action="@{/member/profile/favorite/remove}" method="post" style="display: inline;">

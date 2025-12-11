@@ -20,6 +20,29 @@ public class SongService {
     @Autowired
     private FavoriteRepository favoriteRepository;
     
+    // ============================
+    // PAGINATION MANUAL
+    // ============================
+    public List<Song> paginate(List<Song> list, int page, int size) {
+        int start = page * size;
+        int end = Math.min(start + size, list.size());
+        if (start >= list.size()) return new ArrayList<>();
+        return list.subList(start, end);
+    }
+
+    public List<Song> getSongsPaged(int page, int size) {
+        List<Song> all = getAllSongs();
+        return paginate(all, page, size);
+    }
+
+    public List<Song> searchSongsPaged(String searchType, String keyword, int page, int size) {
+        List<Song> result = searchSongs(searchType, keyword);
+        return paginate(result, page, size);
+    }
+
+    // batas
+
+
     public List<Song> getAllSongs() {
         return songRepository.findAll();
     }
@@ -96,4 +119,5 @@ public class SongService {
     public List<Song> getSongsByAlbumId(Long albumId) {
         return songRepository.findSongsByAlbumId(albumId);
     }
+
 }

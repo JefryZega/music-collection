@@ -235,7 +235,7 @@ main {
 
 .music-card img {
     cursor: pointer;
-    width: 3em;
+    width: 2em;
 }
 
 .music-card img:last-of-type {

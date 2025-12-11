@@ -68,14 +68,18 @@
         </section>
 
         <section id="artistSongList">
-            <h1>Song List <span th:if="${artistSongs}">(<span th:text="${artistSongs.size()}"></span> songs)</span></h1>
+            <h1>Song List 
+                <span th:if="${artistSongs}">(
+                    <span th:text="${artistSongs.size()}"></span> songs)
+                </span>
+            </h1>
             
             <div th:if="${artistSongs != null && !artistSongs.isEmpty()}">
                 <div class="song-card" th:each="song : ${artistSongs}">
                     <p class="song-title" th:text="${song.title}">Mawar Merah</p>
                     <div class="song-info">
                         <span th:text="${song.albumTitle}">Album Name</span>
-                        <button>+</button>
+                        <button><img id="add-to-favorite" th:src="@{/assets/icon/heart.svg}" alt="add to favorite icon"></button>
                     </div>
                 </div>
             </div>

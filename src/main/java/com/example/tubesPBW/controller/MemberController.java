@@ -44,41 +44,60 @@ public class MemberController {
         return "/member/member-home";
     }
 
+
+    // yg diubah
     @GetMapping("/profile")
-    public String memberProfile(@RequestParam(name = "search", required = false) String search, @RequestParam(name = "searchType", defaultValue = "all") String searchType, HttpSession session, Model model) {
+    public String memberProfile(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(name = "search", required = false) String search,
+            @RequestParam(name = "searchType", defaultValue = "all") String searchType,
+            HttpSession session, Model model) {
+
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
         }
-        
-        List<Song> songs;
+
+        List<Song> allSongs;
+
+        // Jika search aktif, gunakan hasil search
         if (search != null && !search.trim().isEmpty()) {
-            songs = songService.searchSongs(searchType, search);
+            allSongs = songService.searchSongs(searchType, search);
         } else {
-            songs = songService.getAllSongs();
+            allSongs = songService.getAllSongs();
         }
 
+        // TOTAL PAGE
+        int totalSongs = allSongs.size();
+        int totalPages = (int) Math.ceil((double) totalSongs / size);
+
+        // AMBIL PAGE SEKARANG
+        List<Song> songs = songService.paginate(allSongs, page, size);
+
+        // Tandai favorite
         List<Song> userFavorites = songService.getFavoriteSongs(user.getUserID());
-        List<Long> favoriteSongIds = new ArrayList<>();
-        
-        for (Song favSong : userFavorites) {
-            favoriteSongIds.add(favSong.getSongID());
-        }
+        List<Long> favIds = userFavorites.stream().map(Song::getSongID).toList();
 
-        for (Song song : songs) {
-            song.setFavorite(favoriteSongIds.contains(song.getSongID()));
+        for (Song s : songs) {
+            s.setFavorite(favIds.contains(s.getSongID()));
         }
 
         model.addAttribute("songs", songs);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalSongs", totalSongs);
+
         model.addAttribute("searchQuery", search);
         model.addAttribute("searchType", searchType);
-        model.addAttribute("totalSongs", songs.size());
+
         model.addAttribute("user", user);
         model.addAttribute("userName", user.getName());
         model.addAttribute("userRole", user.getRole());
-        
+
         return "/member/member-profile";
     }
+    // batas yg diubah
 
     @GetMapping("/profile/favorite")
     public String memberProfileFavorite(@RequestParam(name = "search", required = false) String search, HttpSession session, Model model) {
@@ -182,4 +201,5 @@ public class MemberController {
     public List<Song> searchSongsApi(@RequestParam("q") String query) {
         return songService.searchSongs("general", query);
     }
+
 }
