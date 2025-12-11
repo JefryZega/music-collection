@@ -246,6 +246,7 @@ main {
     align-items: center;
     justify-content: space-between;
     background-color: var(--primary-color);
+    margin-bottom: 1em;
 }
 
 .song-card:hover {
@@ -262,4 +263,15 @@ main {
     border: none;
     cursor: pointer;
     font-size: 2em;
+}
+
+.song-info {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+/* ICON ADD TO FAVORITE */
+#add-to-favorite {
+    width: 1em;
 }

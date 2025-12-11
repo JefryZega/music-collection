@@ -187,6 +187,10 @@ main a {
     font-size: 0.9em;
 }
 
+#profile-info p:last-of-type {
+    color: var(--text-color);
+}
+
 
 /* SECTION TABS */
 #profile-tabs { 
@@ -245,7 +249,7 @@ main a {
 #album-list-container {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     gap: 2em;
     flex-wrap: wrap;
 }

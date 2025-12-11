@@ -98,6 +98,11 @@ nav ul li {
     background-color: var(--secondary-color);
 }
 
+#search-container form {
+    display: flex;
+    width: 100%;
+}
+
 #search-container input {
     padding: 0.5em;
     width: 100%;
@@ -107,9 +112,14 @@ nav ul li {
     background-color: var(--primary-color);
 }
 
+#search-container button {
+    border: none;
+}
+
 #search-container img {
     background-color: var(--primary-color);
 }
+
 
 #nav-right {
     margin-right: 2em;
@@ -217,11 +227,11 @@ main {
     color: black;
 }
 
+
 /* SECTION FAVORITE*/
 #favorite-song {
     padding: 2em;
     width: 90%;
-    height: 40vh;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
@@ -232,7 +242,6 @@ main {
 /* SECTION ALL CONTAINER */
 #song-list {
     width: 90%;
-    height: 60vh;
     padding: 2em;
     padding-bottom: 1em;
     display: flex;
@@ -244,9 +253,7 @@ main {
 
 /* SECTION ALL TABLE CONTAINER */
 #table-container {
-    width: 100%;
-    max-height: 100%;       
-    overflow-y: scroll;     
+    width: 100%;       
     border: 1px solid #ddd;
     border-radius: 0 0 1em 1em;
     margin-bottom: 2em;
@@ -262,7 +269,6 @@ table thead th {
     position: sticky;
     top: 0;
     background: white;
-    
 }
 
 table th, table td {
@@ -273,4 +279,35 @@ table th, table td {
 th {
     font-size: 1.5em;
     font-weight: 700;
+}
+
+
+/* PAGINATION BUTTON */
+#paginationButtonGroup {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-bottom: 3em;
+}
+
+#paginationButtonGroup a {
+    width: 5%;
+    padding: 0.5em;
+    border-radius: 0.3em;
+    border: none;
+    color: var(--text-color);
+    background-color: var(--button-color);
+}
+
+#paginationButtonGroup button {
+    width: 100%;
+    text-align: center;
+    border: none;
+    background-color: unset;
+    color: var(--text-color);
+}
+
+#paginationButtonGroup button:hover {
+    cursor: pointer;
+    transition: 0.5s;
 }
