@@ -242,6 +242,45 @@ table {
     text-align: center;
 }
 
+<<<<<<< HEAD:src/main/resources/static/css/member/profile-member-favorite-song.css
+.actions img {
+    width: 22px;
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
+/* SEARCH*/
+#search-container {
+    position: relative; 
+}
+
+#search-suggestions {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 100%;
+    background: #C2C2C2;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 999;
+    display: none;
+    color: black;
+}
+
+.suggest-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggest-item:hover {
+    background: #f4f4f4;
+}
+
+.hidden {
+    display: none;
+}
+=======
 table thead th {
     position: sticky;
     top: 0;
@@ -258,3 +297,4 @@ th {
     font-size: 1.5em;
     font-weight: 700;
 }
+>>>>>>> origin/main:src/main/resources/static/css/member/member-profile.css
