@@ -77,5 +77,10 @@ public class UserController {
         return "layout/artist-album";
     }
 
+    @GetMapping("/album")
+    public String homeAlbum() {
+        return "layout/album";
+    }
+
 
 }
