@@ -149,4 +149,32 @@ public class JdbcSongRepository implements SongRepository {
         
         return jdbcTemplate.query(sql, songRowMapper, albumId);
     }
+
+    @Override
+    public List<Song> findTop10Weekly() {
+        String sql = "SELECT s.songID, s.title, a.artistName, al.albumTitle, al.album_art, " +
+                     "COUNT(f.favouritesID) as total_likes " +
+                     "FROM favourites f " +
+                     "JOIN song s ON f.songID = s.songID " +
+                     "JOIN album al ON s.albumID = al.albumID " +
+                     "JOIN artist a ON al.artistID = a.artistID " +
+                     "WHERE f.added_at >= NOW() - INTERVAL '7 days' " + // Filter 7 hari terakhir
+                     "GROUP BY s.songID, s.title, a.artistName, al.albumTitle, al.album_art " +
+                     "ORDER BY total_likes DESC " +
+                     "LIMIT 10";
+
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Song song = new Song();
+            song.setSongID(rs.getLong("songID"));
+            song.setTitle(rs.getString("title"));
+            song.setArtistName(rs.getString("artistName"));
+            song.setAlbumTitle(rs.getString("albumTitle"));
+            
+            // Mapping kolom baru
+            song.setAlbumArt(rs.getString("album_art")); 
+            song.setWeeklyLikes(rs.getLong("total_likes"));
+            
+            return song;
+        });
+    }
 }

@@ -42,56 +42,21 @@
                 </div>
 
                 <div id="songs-container">
-                    <!-- LAGU KE-1 -->
-                    <div class="songs-card">
-                        <img src="" alt="">
-                        <p>Mawar Merah</p>
+                    <div class="songs-card" th:each="song, iterStat : ${topSongs}">
+    
+                        <span class="rank-number" th:text="${iterStat.count}">1</span>
+                        
+                        <div class="song-text-wrapper">
+                            <p class="song-title-data" th:text="${song.title}">Judul Lagu</p>
+                            
+                            <p class="song-artist-data" th:text="${song.artistName}">Nama Artis</p>
+                        </div>
+                        
+                        <input type="hidden" class="song-likes-data" th:value="${song.weeklyLikes}">
                     </div>
 
-                    <!-- LAGU KE-2 DST... -->
-                    <div class="songs-card">
-                        <img src="" alt="">
-                        <p>Let It Be</p>
-                    </div>
-
-                    <div class="songs-card">
-                        <img src="" alt="">
-                        <p>Never Say Goodbye</p>
-                    </div>
-
-                    <div class="songs-card">
-                        <img src="" alt="">
-                        <p>Bohemian Rhapsody</p>
-                    </div>
-
-                    <div class="songs-card">
-                        <img src="" alt="">
-                        <p>Mawar Merah</p>
-                    </div>
-
-                    <div class="songs-card">
-                        <img src="" alt="">
-                        <p>Mawar Merah</p>
-                    </div>
-
-                    <div class="songs-card">
-                        <img src="" alt="">
-                        <p>Mawar Merah</p>
-                    </div>
-
-                    <div class="songs-card">
-                        <img src="" alt="">
-                        <p>Mawar Merah</p>
-                    </div>
-
-                    <div class="songs-card">
-                        <img src="" alt="">
-                        <p>Mawar Merah</p>
-                    </div>
-
-                    <div class="songs-card">
-                        <img src="" alt="">
-                        <p>Mawar Merah</p>
+                    <div th:if="${topSongs.isEmpty()}" style="color: white; padding: 1em;">
+                        Belum ada data minggu ini.
                     </div>
                 </div>
             </div>

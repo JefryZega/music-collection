@@ -1,15 +1,18 @@
 package com.example.tubesPBW.controller;
 
 import com.example.tubesPBW.model.RegisterForm;
+import com.example.tubesPBW.model.Song;
 import com.example.tubesPBW.model.User; 
 import com.example.tubesPBW.service.LoginService; 
 import com.example.tubesPBW.service.RegisterService;
+import com.example.tubesPBW.service.SongService;
 import com.example.tubesPBW.service.UserService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,9 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private SongService songService;
+
     @GetMapping("/")
     public String registerView(Model model) {
         model.addAttribute("registerForm", new RegisterForm());
@@ -40,6 +46,8 @@ public class AuthController {
 
     @GetMapping("/home")
     public String homepage(Model model) {
+        List<Song> topSongs = songService.getTop10WeeklySongs();
+        model.addAttribute("topSongs", topSongs);
         return "layout/homepage-all";
     }
 

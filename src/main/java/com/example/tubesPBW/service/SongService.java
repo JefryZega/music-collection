@@ -120,4 +120,7 @@ public class SongService {
         return songRepository.findSongsByAlbumId(albumId);
     }
 
+    public List<Song> getTop10WeeklySongs() {
+        return songRepository.findTop10Weekly();
+    }
 }
