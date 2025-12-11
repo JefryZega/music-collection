@@ -248,7 +248,6 @@ table {
     text-align: center;
 }
 
-<<<<<<< HEAD:src/main/resources/static/css/member/profile-member-favorite-song.css
 .actions img {
     width: 22px;
     margin-right: 0.5em;
@@ -286,7 +285,7 @@ table {
 .hidden {
     display: none;
 }
-=======
+
 table thead th {
     position: sticky;
     top: 0;
@@ -303,10 +302,6 @@ th {
     font-size: 1.5em;
     font-weight: 700;
 }
-<<<<<<< HEAD
->>>>>>> origin/main:src/main/resources/static/css/member/member-profile.css
-=======
-
 
 /* PAGINATION BUTTON */
 #paginationButtonGroup {
@@ -337,4 +332,4 @@ th {
     cursor: pointer;
     transition: 0.5s;
 }
->>>>>>> Jefry
+

@@ -259,7 +259,6 @@ main {
     font-size: 1.3em;
 }
 
-<<<<<<< HEAD:src/main/resources/static/css/member/profile-member-collection.css
 /* SEARCH*/
 #search-container {
     position: relative; 
@@ -288,16 +287,11 @@ main {
     background: #f4f4f4;
 }
 
-.hidden {
-    display: none;
-=======
+
 .song-card button {
     border: none;
     cursor: pointer;
     font-size: 2em;
-<<<<<<< HEAD
->>>>>>> origin/main:src/main/resources/static/css/layout/artist.css
-=======
 }
 
 .song-info {
@@ -309,5 +303,4 @@ main {
 /* ICON ADD TO FAVORITE */
 #add-to-favorite {
     width: 1em;
->>>>>>> Jefry
 }

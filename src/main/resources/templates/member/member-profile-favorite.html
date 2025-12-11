@@ -95,93 +95,85 @@
                     </table>
                 </div>
 
-                <!-- PAGINATION -->
                 <div id="paginationButtonGroup">
                     <!-- PREVIOUS -->
-                    <a href="">
-                        <button>Prev</button>
+                    <a th:href="@{/member/profile/favorite(page=${currentPage - 1})}">
+                        <button th:disabled="${currentPage == 1}">Prev</button>
                     </a>
 
-                    <!-- FIX: SELALU TAMPIL 1 - 9 -->
-                    <a href="">
-                        <button></button>
+                    <!-- NUMBERS 1–9 -->
+                    <a th:each="i : ${#numbers.sequence(1, 9)}"
+                    th:href="@{/member/profile/favorite(page=${i})}">
+                        <button th:text="${i}" 
+                                th:classappend="${i == currentPage} ? 'active-page' : ''"></button>
                     </a>
 
                     <!-- NEXT -->
-                    <a href="">
-                        <button>Next</button>
+                    <a th:href="@{/member/profile/favorite(page=${currentPage + 1})}">
+                        <button th:disabled="${currentPage == totalPages}">Next</button>
                     </a>
                 </div>
+            </div>
+        </section>
 
-                <div th:if="${favoriteSongs == null || favoriteSongs.isEmpty()}">
-                    <p style="text-align: center; padding: 40px; color: #666;">
-                        You haven't added any songs to favorites yet.
-                        <br>
-                        <a th:href="@{/member/profile}" style="color: #007bff; text-decoration: none;">
-                            Browse songs and add some favorites →
-                        </a>
-                    </p>
+        <!-- SECTION SONG RECOMMENDATION -->
+        <section id="song-list">
+            <h1>Recommendation</h1>
+            <div th:if="${recommendations != null && !recommendations.isEmpty()}">
+                <div id="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Artist</th>
+                                <th>Album</th>
+                                <th>Album Art</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="song : ${recommendations}">
+                                <td th:text="${song.title}"></td>
+                                <td th:text="${song.artistName}"></td>
+                                <td th:text="${song.albumTitle}"></td>
+                                <td></td>
+                                <td>
+                                    <div th:if="${song.favorite}">
+                                        <form th:action="@{/member/profile/favorite/remove}" method="post" style="display: inline;">
+                                            <input type="hidden" name="songId" th:value="${song.songID}">
+                                            <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                                <img th:src="@{/assets/icon/heartred.svg}" 
+                                                        alt="Remove from favorites"
+                                                        style="width: 24px; height: 24px;"
+                                                        title="Remove from favorites">
+                                            </button>
+                                        </form>
+                                    </div>
+                                    
+                                    <div th:unless="${song.favorite}">
+                                        <form th:action="@{/member/profile/favorite/add}" method="post" style="display: inline;">
+                                            <input type="hidden" name="songId" th:value="${song.songID}">
+                                            <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                                <img th:src="@{/assets/icon/heart.svg}" 
+                                                        alt="Add to favorites"
+                                                        style="width: 24px; height: 24px;"
+                                                        title="Add to favorites">
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </section>
-
-            <!-- SECTION SONG RECOMMENDATION -->
-            <section id="song-list">
-                <h1>Recommendation</h1>
-                <div th:if="${recommendations != null && !recommendations.isEmpty()}">
-                    <div id="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Artist</th>
-                                    <th>Album</th>
-                                    <th>Album Art</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="song : ${recommendations}">
-                                    <td th:text="${song.title}"></td>
-                                    <td th:text="${song.artistName}"></td>
-                                    <td th:text="${song.albumTitle}"></td>
-                                    <td></td>
-                                    <td>
-                                        <div th:if="${song.favorite}">
-                                            <form th:action="@{/member/profile/favorite/remove}" method="post" style="display: inline;">
-                                                <input type="hidden" name="songId" th:value="${song.songID}">
-                                                <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-                                                    <img th:src="@{/assets/icon/heartred.svg}" 
-                                                         alt="Remove from favorites"
-                                                         style="width: 24px; height: 24px;"
-                                                         title="Remove from favorites">
-                                                </button>
-                                            </form>
-                                        </div>
-                                        
-                                        <div th:unless="${song.favorite}">
-                                            <form th:action="@{/member/profile/favorite/add}" method="post" style="display: inline;">
-                                                <input type="hidden" name="songId" th:value="${song.songID}">
-                                                <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-                                                    <img th:src="@{/assets/icon/heart.svg}" 
-                                                         alt="Add to favorites"
-                                                         style="width: 24px; height: 24px;"
-                                                         title="Add to favorites">
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <div th:if="${recommendations == null || recommendations.isEmpty()}">
-                    <p style="text-align: center; padding: 20px; color: #666;">
-                        No recommendations available.
-                    </p>
-                </div>
-            </section>
+            </div>
+            
+            <div th:if="${recommendations == null || recommendations.isEmpty()}">
+                <p style="text-align: center; padding: 20px; color: #666;">
+                    No recommendations available.
+                </p>
+            </div>
+        </section>
     </main>
 </body>
 </html>

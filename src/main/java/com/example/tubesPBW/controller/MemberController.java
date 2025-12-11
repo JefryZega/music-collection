@@ -100,59 +100,86 @@ public class MemberController {
     // batas yg diubah
 
     @GetMapping("/profile/favorite")
-    public String memberProfileFavorite(@RequestParam(name = "search", required = false) String search, HttpSession session, Model model) {
-        Long userId = (Long) session.getAttribute("userId");
-        if (userId == null) {
-            return "redirect:/login";
-        }
+    public String memberProfileFavorite(
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size,
+            @RequestParam(name = "search", required = false) String search,
+            HttpSession session,
+            Model model) {
+
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
         }
+
+        // --- AMBIL FAVORITE USER ---
         List<Song> favoriteSongs = songService.getFavoriteSongs(user.getUserID());
-        
+
+        // --- FILTER SEARCH ---
         if (search != null && !search.trim().isEmpty()) {
-            String searchLower = search.trim().toLowerCase();
-            List<Song> filteredSongs = new ArrayList<>();
-            for (Song song : favoriteSongs) {
-                if (song.getTitle().toLowerCase().contains(searchLower) ||
-                    song.getArtistName().toLowerCase().contains(searchLower) ||
-                    song.getAlbumTitle().toLowerCase().contains(searchLower)) {
-                    filteredSongs.add(song);
+            String keyword = search.trim().toLowerCase();
+            List<Song> filtered = new ArrayList<>();
+
+            for (Song s : favoriteSongs) {
+                if (s.getTitle().toLowerCase().contains(keyword)
+                        || s.getArtistName().toLowerCase().contains(keyword)
+                        || s.getAlbumTitle().toLowerCase().contains(keyword)) {
+                    filtered.add(s);
                 }
             }
-            favoriteSongs = filteredSongs;
+
+            favoriteSongs = filtered;
         }
-        
-        for (Song song : favoriteSongs) {
-            song.setFavorite(true);
+
+        // TANDAI FAVORITE
+        for (Song s : favoriteSongs) {
+            s.setFavorite(true);
         }
-        
+
+        // --- PAGINATION ---
+        int totalFavorites = favoriteSongs.size();
+        int totalPages = (int) Math.ceil((double) totalFavorites / size);
+
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+
+        int start = (page - 1) * size;
+        int end = Math.min(start + size, totalFavorites);
+
+        List<Song> pageFavorites = favoriteSongs.subList(start, end);
+
+        // --- RECOMMENDATION ---
         List<Song> allSongs = songService.getAllSongs();
+        List<Long> favIds = favoriteSongs.stream().map(Song::getSongID).toList();
+
         List<Song> recommendations = new ArrayList<>();
-        
-        List<Long> favoriteSongIds = new ArrayList<>();
-        for (Song favSong : favoriteSongs) {
-            favoriteSongIds.add(favSong.getSongID());
-        }
-        
-        for (Song song : allSongs) {
-            if (!favoriteSongIds.contains(song.getSongID()) && recommendations.size() < 5) {
-                song.setFavorite(false);
-                recommendations.add(song);
+        for (Song s : allSongs) {
+            if (!favIds.contains(s.getSongID()) && recommendations.size() < 5) {
+                s.setFavorite(false);
+                recommendations.add(s);
             }
         }
-        
-        model.addAttribute("favoriteSongs", favoriteSongs);
-        model.addAttribute("totalFavorites", favoriteSongs.size());
-        model.addAttribute("recommendations", recommendations);
+
+        // --- KIRIM KE VIEW ---
+        model.addAttribute("favoriteSongs", pageFavorites);
+        model.addAttribute("totalFavorites", totalFavorites);
         model.addAttribute("searchQuery", search);
-        model.addAttribute("user", user); 
+
+        // PAGINATION DATA
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+
+        // USER
+        model.addAttribute("user", user);
         model.addAttribute("userName", user.getName());
         model.addAttribute("userRole", user.getRole());
-        
+
+        // Recommendation
+        model.addAttribute("recommendations", recommendations);
+
         return "/member/member-profile-favorite";
     }
+
 
     @PostMapping("/profile/favorite/add")
     public String addFavorite(@RequestParam Long songId, HttpSession session) {
