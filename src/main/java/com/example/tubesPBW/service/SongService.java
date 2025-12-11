@@ -43,6 +43,10 @@ public class SongService {
         }
     }
 
+    public List<Song> getSongsByArtistId(Long artistId) {
+        return songRepository.findSongsByArtistId(artistId);
+    }
+
     public List<Song> getFavoriteSongs(Long userId) {
         List<Long> favoriteSongIds = favoriteRepository.findFavoriteSongIdsByUserId(userId);
         return songRepository.findSongsByIds(favoriteSongIds);
@@ -87,5 +91,9 @@ public class SongService {
             }
         }
         return recommendations;
+    }
+
+    public List<Song> getSongsByAlbumId(Long albumId) {
+        return songRepository.findSongsByAlbumId(albumId);
     }
 }

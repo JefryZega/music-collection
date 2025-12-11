@@ -12,4 +12,6 @@ public interface SongRepository {
     List<Song> findByAlbumTitleContaining(String keyword);
     List<Song> searchByKeyword(String keyword);
     List<Song> findSongsByIds(List<Long> songIds);
+    List<Song> findSongsByArtistId(Long artistId);
+    List<Song> findSongsByAlbumId(Long albumId);
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Collection</title>
+    <title th:text="${artist.artistName} + ' - Albums'">Music Collection</title>
     <link rel="stylesheet" th:href="@{/css/layout/artist-album.css}">
 </head>
 <body>
@@ -38,61 +38,57 @@
     </header>
 
     <main>
-       <!-- SECTION PROFILE -->
+        <!-- SECTION PROFILE -->
         <section id="profile-card">
             <div id="avatar">
-                <img th:src="@{/assets/img/artist-profile/artist-acdc.jpeg}" alt="artist photo">
+                <img th:with="filename=${#strings.replace(#strings.toLowerCase(artist.artistName), '/', '')}" 
+                    th:src="@{'/assets/img/artist-profile/artist-' + ${filename} + '.jpeg'}" 
+                    th:onerror="this.src='/assets/img/artist-profile/default.jpg'"
+                    alt="artist photo">
             </div>
             <div id="profile-info">
-                <h2 id="artistName">AC/DC</h2>
+                <h2 id="artistName" th:text="${artist.artistName}">AC/DC</h2>
                 <p>Artist</p>
+                <p th:if="${artist.artistProfile}" 
+                style="margin-top: 10px; font-size: 14px; color: #666;"
+                th:text="${artist.artistProfile}">
+                    Artist description
+                </p>
             </div>
         </section>
 
         <!-- PROFLE TABS -->
         <section id="profile-tabs" class="tab-group">
-            <button class="tab active"><a th:href="@{/artist}">Song</a></button>
-            <button class="tab"><a th:href="@{/member/profile/favorite}">Album</a></button>
+            <button class="tab">
+                <a th:href="@{'/artist/' + ${artist.artistID}}">Song</a>
+            </button>
+            <button class="tab active">
+                <a th:href="@{'/artist/' + ${artist.artistID} + '/album'}">Album</a>
+            </button>
         </section>
 
         <section id="albumSongList">
-            <h1>Album List</h1>
-            <div id="album-list-container">
-                <div class="album-card">
-                    <a th:href="@{/album}">
-                        <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
-                        <p id="album-title">Mawar Merah</p>
-                    </a>
-                </div>
-                <div class="album-card">
-                    <a th:href="@{/album}">
-                        <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
-                        <p id="album-title">Mawar Merah</p>
-                    </a>
-                </div>
-                <div class="album-card">
-                    <a th:href="@{/album}">
-                        <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
-                        <p id="album-title">Mawar Merah</p>
-                    </a>
-                </div>
-                <div class="album-card">
-                    <a th:href="@{/album}">
-                        <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
-                        <p id="album-title">Mawar Merah</p>
-                    </a>
-                </div>
-                <div class="album-card">
-                    <a th:href="@{/album}">
-                        <img th:src="@{/assets/img/album-art/album-acdc.png}" alt="album art">
-                        <p id="album-title">Mawar Merah</p>
-                    </a>
+            <h1>Album List <span th:if="${artistAlbums}">(<span th:text="${artistAlbums.size()}"></span> albums)</span></h1>
+            
+            <div th:if="${artistAlbums != null && !artistAlbums.isEmpty()}">
+                <div id="album-list-container">
+                    <div class="album-card" th:each="album : ${artistAlbums}">
+                        <a th:href="@{'/album/' + ${album.albumID}}">
+                            <img th:src="@{'/assets/img/album-art/' + ${#strings.replace(#strings.toLowerCase(album.albumTitle), ' ', '-')} + '.png'}" 
+                                 th:onerror="this.src='/assets/img/album-art/default.png'"
+                                 th:alt="${album.albumTitle} + ' album art'">
+                            <p class="album-title" th:text="${album.albumTitle}">Album Title</p>
+                        </a>
+                    </div>
                 </div>
             </div>
             
+            <div th:if="${artistAlbums == null || artistAlbums.isEmpty()}">
+                <p style="text-align: center; padding: 40px; color: #666;">
+                    No albums found for this artist.
+                </p>
+            </div>
         </section>
-        
-        
     </main>
 </body>
 </html>

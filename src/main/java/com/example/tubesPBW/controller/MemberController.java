@@ -36,6 +36,8 @@ public class MemberController {
         if (user == null) {
             return "redirect:/login";
         }
+        Long artistId = (long) 6;
+        model.addAttribute("artistId", artistId);
         model.addAttribute("user", user);
         return "/member/member-home";
     }

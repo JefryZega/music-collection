@@ -15,6 +15,4 @@ public class AdminController {
     public String adminProfile() {
         return "admin/admin-profile";
     }
-
-
 }

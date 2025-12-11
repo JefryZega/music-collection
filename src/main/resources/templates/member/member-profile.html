@@ -74,7 +74,13 @@
                     <tbody>
                         <tr th:each="song : ${songs}">
                             <td th:text="${song.title}">Title</td>
-                            <td th:text="${song.artistName}">Artist</td>
+                            <td>
+                                <a th:href="@{'/artist/' + ${song.artistID}}" 
+                                   th:text="${song.artistName}"
+                                   style="color: #111111; text-decoration: none;">
+                                    Artist
+                                </a>
+                            </td>
                             <td th:text="${song.albumTitle}">Album</td>
                             <td>
                                 <div th:if="${song.favorite}">
