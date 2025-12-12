@@ -40,17 +40,19 @@
     <main>
         <section id="album-header">
             <h1>Album<br><span id="albumTitle" th:text="${album.albumTitle}">Back In Black</span></h1>
-            <img th:data-albumname="${#strings.replace(#strings.toLowerCase(album.albumTitle), ' ', '-')}"
+            <img th:src="${album.albumArt}"
                  class="album-header-image"
-                 alt="album art">
+                 alt="album art"
+                 th:onerror="this.src='/assets/img/album-art/default.jpg'">
         </section>
 
         <section id="album-container">
             <div id="artist-profile">
-                <img th:data-filename="${#strings.replace(#strings.toLowerCase(album.artistName), ' ', '-')}"
+                <img th:src="${album.artistProfile}"
                      class="artist-image"
-                     alt="artist photo">
-                <h2 id="artistName" th:text="${album.artistName}">Loading artist...</h2>
+                     alt="artist photo"
+                     th:onerror="this.src='/assets/img/artist-profile/default.jpg'">
+                <h2 id="artistName" th:text="${album.artistName}">Artist Name</h2>
                 <a th:href="@{'/artist/' + ${album.artistID}}" class="view-artist-btn">
                     View Artist
                 </a>
@@ -61,13 +63,15 @@
                 <div th:if="${albumSongs != null && !albumSongs.isEmpty()}">
                     <div class="music-card" th:each="song : ${albumSongs}">
                         <p class="music-title" th:text="${song.title}">Song Title</p>
-                        <img th:src="${song.favorite} ? @{/assets/icon/heartred.svg} : @{/assets/icon/heart.svg}" 
-                             alt="favorite icon" 
-                             class="favorite-icon"
-                             th:data-songid="${song.songID}"
-                             th:data-isfavorite="${song.favorite}"
-                             style="cursor: pointer; width: 24px; height: 24px;"
-                             onclick="toggleFavorite(this)">
+                        <form th:action="@{/member/profile/favorite/toggle}" method="post" style="display: inline;">
+                            <input type="hidden" name="songId" th:value="${song.songID}">
+                            <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                <img th:src="${song.favorite} ? @{/assets/icon/heartred.svg} : @{/assets/icon/heart.svg}" 
+                                     alt="favorite icon"
+                                     th:title="${song.favorite} ? 'Remove from favorites' : 'Add to favorites'"
+                                     style="width: 24px; height: 24px;">
+                            </button>
+                        </form>
                     </div>
                 </div>
                 
@@ -82,127 +86,34 @@
     <script>
         (function() {
             'use strict';
-            
-            async function checkImageExists(url) {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = () => resolve(true);
-                    img.onerror = () => resolve(false);
-                    img.src = url;
-                });
-            }
         
-            async function loadAlbumHeaderImage() {
-                const albumHeaderImg = document.querySelector('.album-header-image');
-                if (!albumHeaderImg) return;
-                
-                const albumName = albumHeaderImg.getAttribute('data-albumname');
-                if (!albumName) return;
-                
-                const cleanAlbumName = albumName.replace(/[^\w-]/g, '');
-                const defaultUrl = '/assets/img/album-art/default.jpg';
-                const extensions = ['', '.jpeg', '.jpg', '.png', '.svg'];
-                
-                albumHeaderImg.classList.add('loading');
-                
-                let found = false;
-                for (const ext of extensions) {
-                    const imageUrl = ext ? 
-                        `/assets/img/album-art/album-${cleanAlbumName}${ext}` :
-                        `/assets/img/album-art/album-${cleanAlbumName}`;
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.album-header-image, .artist-image');
+                images.forEach(img => {
+                    img.classList.add('loading');
                     
-                    const exists = await checkImageExists(imageUrl);
-                    if (exists) {
-                        albumHeaderImg.src = imageUrl;
-                        albumHeaderImg.classList.add('loaded');
-                        found = true;
-                        break;
-                    }
-                }
-                
-                if (!found) {
-                    albumHeaderImg.src = defaultUrl;
-                    albumHeaderImg.classList.add('default');
-                }
-                
-                albumHeaderImg.classList.remove('loading');
-            }
-            
-            async function loadArtistImage() {
-                const artistImg = document.querySelector('.artist-image');
-                if (!artistImg) return;
-                
-                const filename = artistImg.getAttribute('data-filename');
-                if (!filename) return;
-                
-                const cleanFilename = filename.replace(/[^\w-]/g, '');
-                const defaultUrl = '/assets/img/artist-profile/default.jpg';
-                const extensions = ['', '.jpeg', '.jpg', '.png', '.svg'];
-                
-                artistImg.classList.add('loading');
-                
-                let found = false;
-                for (const ext of extensions) {
-                    const imageUrl = ext ? 
-                        `/assets/img/artist-profile/artist-${cleanFilename}${ext}` :
-                        `/assets/img/artist-profile/artist-${cleanFilename}`;
-                    
-                    const exists = await checkImageExists(imageUrl);
-                    if (exists) {
-                        artistImg.src = imageUrl;
-                        artistImg.classList.add('loaded');
-                        found = true;
-                        break;
-                    }
-                }
-                
-                if (!found) {
-                    artistImg.src = defaultUrl;
-                    artistImg.classList.add('default');
-                }
-                
-                artistImg.classList.remove('loading');
-            }
-            
-            function toggleFavorite(iconElement) {
-                const songId = iconElement.getAttribute('data-songid');
-                const isFavorite = iconElement.getAttribute('data-isfavorite') === 'true';
-                const endpoint = isFavorite ? 
-                    `/member/profile/favorite/remove?songId=${songId}` :
-                    `/member/profile/favorite/add?songId=${songId}`;
-                
-                fetch(endpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        const newIsFavorite = !isFavorite;
-                        iconElement.setAttribute('data-isfavorite', newIsFavorite);
-                        
-                        if (newIsFavorite) {
-                            iconElement.src = '/assets/icon/heartred.svg';
-                        } else {
-                            iconElement.src = '/assets/icon/heart.svg';
+                    img.onerror = function() {
+                        if (this.classList.contains('album-header-image')) {
+                            this.src = '/assets/img/album-art/default.jpg';
+                        } else if (this.classList.contains('artist-image')) {
+                            this.src = '/assets/img/artist-profile/default.jpg';
                         }
-                        
-                        const message = newIsFavorite ? 
-                            'Song added to favorites!' : 
-                            'Song removed from favorites!';
-                        alert(message);
+                        this.classList.remove('loading');
+                        this.classList.add('loaded');
+                    };
+                    
+                    if (img.complete) {
+                        img.classList.remove('loading');
+                        img.classList.add('loaded');
                     } else {
-                        alert('Failed to update favorites');
+                        img.onload = function() {
+                            this.classList.remove('loading');
+                            this.classList.add('loaded');
+                        };
                     }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error updating favorites');
                 });
-            }
+            });
             
-            // STYLING
             const style = document.createElement('style');
             style.textContent = `
                 .album-header-image.loading,
@@ -212,37 +123,19 @@
                     background-size: 200% 100%;
                     animation: loading 1.5s infinite;
                 }
+                
                 @keyframes loading {
                     0% { background-position: 200% 0; }
                     100% { background-position: -200% 0; }
                 }
+                
                 .album-header-image.loaded,
                 .artist-image.loaded {
                     opacity: 1;
                     transition: opacity 0.3s ease;
                 }
-                .album-header-image.default,
-                .artist-image.default {
-                    filter: grayscale(20%);
-                }
-                .favorite-icon {
-                    transition: transform 0.2s ease;
-                }
-                .favorite-icon:hover {
-                    transform: scale(1.1);
-                }
             `;
             document.head.appendChild(style);
-            document.addEventListener('DOMContentLoaded', () => {
-                document.querySelectorAll('.album-header-image, .artist-image').forEach(img => {
-                    img.classList.add('loading');
-                });
-                Promise.all([
-                    loadAlbumHeaderImage(),
-                    loadArtistImage()
-                ]);
-            });
-            
         })();
     </script>
 </body>

@@ -24,8 +24,12 @@ public class JdbcAlbumRepository implements AlbumRepository {
             album.setAlbumTitle(rs.getString("albumtitle"));
             album.setAlbumArt(rs.getString("album_art"));
             album.setArtistID(rs.getLong("artistid"));
-            if (columnExists(rs, "artistname")) {
-                album.setArtistName(rs.getString("artistname"));
+            album.setArtistName(rs.getString("artistname"));
+
+            if (columnExists(rs, "artistprofile")) {
+                album.setArtistProfile(rs.getString("artistprofile"));
+            } else {
+                album.setArtistProfile("/assets/img/artist-profile/default.jpg");
             }
             
             return album;
@@ -43,7 +47,7 @@ public class JdbcAlbumRepository implements AlbumRepository {
     
     @Override
     public List<Album> findAll() {
-        String sql = "SELECT a.*, ar.artistname " +
+        String sql = "SELECT a.*, ar.artistname, ar.artistprofile " +
                     "FROM album a " +
                     "JOIN artist ar ON a.artistid = ar.artistid " +
                     "ORDER BY a.albumtitle";
@@ -52,7 +56,7 @@ public class JdbcAlbumRepository implements AlbumRepository {
     
     @Override
     public Optional<Album> findById(Long albumId) {
-        String sql = "SELECT a.*, ar.artistname " +
+        String sql = "SELECT a.*, ar.artistname, ar.artistprofile " + 
                     "FROM album a " +
                     "JOIN artist ar ON a.artistid = ar.artistid " +
                     "WHERE a.albumid = ?";
@@ -62,7 +66,7 @@ public class JdbcAlbumRepository implements AlbumRepository {
     
     @Override
     public List<Album> findByArtistId(Long artistId) {
-        String sql = "SELECT a.*, ar.artistname " +
+        String sql = "SELECT a.*, ar.artistname, ar.artistprofile " +
                     "FROM album a " +
                     "JOIN artist ar ON a.artistid = ar.artistid " +
                     "WHERE a.artistid = ? " +

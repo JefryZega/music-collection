@@ -16,4 +16,11 @@ public class Artist {
         this.artistName = artistName;
         this.artistProfile = artistProfile;
     }
+
+    public String getArtistProfileUrl() {
+        if (artistProfile == null || artistProfile.trim().isEmpty()) {
+            return "/assets/img/artist-profile/default.jpg";
+        }
+        return artistProfile.startsWith("/") ? artistProfile : "/" + artistProfile;
+    }
 }

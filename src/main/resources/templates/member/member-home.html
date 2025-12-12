@@ -88,9 +88,10 @@
             <div class="horizontal-scroll">
                 <div th:each="artist : ${artists}" class="item big">
                     <a th:href="@{'/artist/' + ${artist.artistID}}">
-                        <img th:data-filename="${#strings.replace(#strings.toLowerCase(artist.artistName), ' ', '-')}"
+                        <img th:src="${artist.artistProfile}"
                              class="artist-image"
-                             alt="artist photo">
+                             alt="artist photo"
+                             th:onerror="this.src='/assets/img/artist-profile/default.jpg'">
                         <p th:text="${artist.artistName}">Artist Name</p>
                     </a>
                 </div>
@@ -104,9 +105,10 @@
             <div class="horizontal-scroll">
                 <div th:each="album : ${albums}" class="item">
                     <a th:href="@{'/album/' + ${album.albumID}}">
-                        <img th:data-albumname="${#strings.replace(#strings.toLowerCase(album.albumTitle), ' ', '-')}"
+                        <img th:src="${album.albumArt}"
                              class="album-image"
-                             alt="album art">
+                             alt="album art"
+                             th:onerror="this.src='/assets/img/album-art/default.jpg'">
                         <div class="album-info">
                             <p class="album-title" th:text="${album.albumTitle}">Album Title</p>
                             <p class="album-artist" th:text="${album.artistName}">Artist Name</p>
@@ -119,84 +121,34 @@
     <script>
         (function() {
             'use strict';
-            async function checkImageExists(url) {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = () => resolve(true);
-                    img.onerror = () => resolve(false);
-                    img.src = url;
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    img.onerror = function() {
+                        if (this.classList.contains('artist-image')) {
+                            this.src = '/assets/img/artist-profile/default.jpg';
+                        } 
+                        else if (this.classList.contains('album-image')) {
+                            this.src = '/assets/img/album-art/default.jpg';
+                        }
+                        this.classList.remove('loading');
+                        this.classList.add('loaded');
+                    };
+                    
+                    img.classList.add('loading');
+                    
+                    if (img.complete) {
+                        img.classList.remove('loading');
+                        img.classList.add('loaded');
+                    } else {
+                        img.onload = function() {
+                            this.classList.remove('loading');
+                            this.classList.add('loaded');
+                        };
+                    }
                 });
-            }
-            
-            async function loadArtistImages() {
-                const artistImages = document.querySelectorAll('.artist-image');
-                
-                for (const img of artistImages) {
-                    const filename = img.getAttribute('data-filename');
-                    if (!filename) continue;
-                    
-                    const cleanFilename = filename.replace(/[^\w-]/g, '');
-                    const defaultUrl = '/assets/img/artist-profile/default.jpg';
-                    const extensions = ['', '.jpeg', '.jpg', '.png'];
-                    
-                    let found = false;
-                    for (const ext of extensions) {
-                        const imageUrl = ext ? 
-                            `/assets/img/artist-profile/artist-${cleanFilename}${ext}` :
-                            `/assets/img/artist-profile/artist-${cleanFilename}`;
-                        
-                        const exists = await checkImageExists(imageUrl);
-                        if (exists) {
-                            img.src = imageUrl;
-                            img.classList.add('loaded');
-                            found = true;
-                            break;
-                        }
-                    }
-                    
-                    if (!found) {
-                        img.src = defaultUrl;
-                        img.classList.add('default');
-                    }
-                    
-                    img.classList.remove('loading');
-                }
-            }
-            
-            async function loadAlbumImages() {
-                const albumImages = document.querySelectorAll('.album-image');
-                
-                for (const img of albumImages) {
-                    const albumName = img.getAttribute('data-albumname');
-                    if (!albumName) continue;
-                    
-                    const cleanAlbumName = albumName.replace(/[^\w-]/g, '');
-                    const defaultUrl = '/assets/img/album-art/default.jpg';
-                    const extensions = ['', '.jpeg', '.jpg', '.png'];
-                    
-                    let found = false;
-                    for (const ext of extensions) {
-                        const imageUrl = ext ? 
-                            `/assets/img/album-art/album-${cleanAlbumName}${ext}` :
-                            `/assets/img/album-art/album-${cleanAlbumName}`;
-                        
-                        const exists = await checkImageExists(imageUrl);
-                        if (exists) {
-                            img.src = imageUrl;
-                            img.classList.add('loaded');
-                            found = true;
-                            break;
-                        }
-                    }
-                    
-                    if (!found) {
-                        img.src = defaultUrl;
-                        img.classList.add('default');
-                    }
-                    
-                    img.classList.remove('loading');
-                }
-            }
+            });
             
             const style = document.createElement('style');
             style.textContent = `
@@ -219,11 +171,6 @@
                     transition: opacity 0.3s ease;
                 }
                 
-                .artist-image.default,
-                .album-image.default {
-                    filter: grayscale(20%);
-                }
-                
                 .album-info {
                     padding: 8px 0;
                 }
@@ -242,17 +189,6 @@
                 }
             `;
             document.head.appendChild(style);
-            
-            document.addEventListener('DOMContentLoaded', () => {
-                document.querySelectorAll('.artist-image, .album-image').forEach(img => {
-                    img.classList.add('loading');
-                });
-                
-                Promise.all([
-                    loadArtistImages(),
-                    loadAlbumImages()
-                ]);
-            });
         })();
     </script>
 </body>
