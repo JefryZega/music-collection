@@ -12,12 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import com.example.tubesPBW.service.AlbumService;
+import com.example.tubesPBW.service.ArtistService;
 import com.example.tubesPBW.service.SongService;
 import com.example.tubesPBW.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
+import com.example.tubesPBW.model.Album;
+import com.example.tubesPBW.model.Artist;
 import com.example.tubesPBW.model.Favorite;
 import com.example.tubesPBW.model.Song;
 import com.example.tubesPBW.model.User;
@@ -32,14 +38,33 @@ public class MemberController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ArtistService artistService;
+
+    @Autowired
+    private AlbumService albumService;
+
     @GetMapping("/home")
     public String memberHome(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
         }
-        Long artistId = (long) 6;
-        model.addAttribute("artistId", artistId);
+        List<Artist> artists = artistService.getAllArtists();
+        List<Album> albums = albumService.getAllAlbums();
+
+        System.out.println("=== DEBUG MEMBER HOME ===");
+        System.out.println("Jumlah artists: " + (artists != null ? artists.size() : "null"));
+        System.out.println("Jumlah albums: " + (albums != null ? albums.size() : "null"));
+        
+        if (artists != null) {
+            for (Artist a : artists) {
+                System.out.println("Artist: " + a.getArtistName() + " (ID: " + a.getArtistID() + ")");
+            }
+        }
+        
+        model.addAttribute("artists", artists);
+        model.addAttribute("albums", albums);
         model.addAttribute("user", user);
         return "/member/member-home";
     }
@@ -180,6 +205,16 @@ public class MemberController {
         return "/member/member-profile-favorite";
     }
 
+    @PostMapping("/profile/favorite/toggle")
+    public String toggleFavorite(@RequestParam Long songId, HttpSession session, HttpServletRequest request) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+        songService.toggleFavorite(user.getUserID(), songId);
+        String referer = request.getHeader("Referer");
+        return "redirect:" + (referer != null ? referer : "/member/profile");
+    }
 
     @PostMapping("/profile/favorite/add")
     public String addFavorite(@RequestParam Long songId, HttpSession session) {

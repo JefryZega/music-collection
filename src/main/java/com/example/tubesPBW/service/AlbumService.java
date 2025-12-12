@@ -1,4 +1,3 @@
-// AlbumService.java
 package com.example.tubesPBW.service;
 
 import com.example.tubesPBW.model.Album;
@@ -29,7 +28,9 @@ public class AlbumService {
         if (keyword == null || keyword.trim().isEmpty()) {
             return getAllAlbums();
         }
-        return albumRepository.findByAlbumTitleContaining(keyword.trim());
+        List<Album> results = albumRepository.findByAlbumTitleContaining(keyword.trim());
+        results.addAll(albumRepository.findByArtistNameContaining(keyword.trim()));
+        return results.stream().distinct().toList();
     }
     
     public String getAlbumArtFilename(String albumTitle) {

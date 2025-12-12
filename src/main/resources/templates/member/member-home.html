@@ -44,88 +44,15 @@
     <main>
         <!-- ARTIST -->
         <section class="section-block">
-            <h1>Artist</h1>
-
-            <div class="horizontal-scroll">
-                <div class="item big">
-                    <a th:href="@{/artist/{id}(id=${artistId})}">
-                        <img th:src="@{/assets/img/artist-profile/artist-acdc.jpeg}">
-                        <p>AC/DC</p>
-                    </a>
-                </div>
-
-                <div class="item big">
-                    <a href="">
-                        <img th:src="@{/assets/img/artist-profile/artist-bonjovi.jpg}">
-                        <p>Bon Jovi</p>
-                    </a>
-                </div>
-
-                <div class="item big">
-                    <a href="">
-                        <img th:src="@{/assets/img/artist-profile/artist-eagles.jpg}">
-                        <p>Eagles</p>
-                    </a>
-                </div>
-
-                <div class="item big">
-                    <a href="">
-                        <img th:src="@{/assets/img/artist-profile/artist-ed-sheeran.jpg}">
-                        <p>Ed Sheeran</p>
-                    </a>
-                </div>
-
-                <div class="item big">
-                    <a href="">
-                        <img th:src="@{/assets/img/artist-profile/artist-michael-jackson.jpg}">
-                        <p>Michael Jackson</p>
-                    </a>
-                </div>
-
-                <div class="item big">
-                    <a href="">
-                        <img th:src="@{/assets/img/artist-profile/artist-nirvana.jpeg}">
-                        <p>Nirvana</p>
-                    </a>
-                </div>
-
-                <div class="item big">
-                    <a href="">
-                        <img th:src="@{/assets/img/artist-profile/artist-pink-floyd.jpeg}">
-                        <p>Pink Floyd</p>
-                    </a>
-                </div>
-
-                <div class="item big">
-                    <a href="">
-                        <img th:src="@{/assets/img/artist-profile/artist-queen.jpg}">
-                        <p>Queen</p>
-                    </a>
-                </div>
-
-                <div class="item big">
-                    <a href="">
-                        <img th:src="@{/assets/img/artist-profile/artist-slank.jpeg}">
-                        <p>Slank</p>
-                    </a>
-                </div>
-
-                <div class="item big">
-                    <a href="">
-                        <img th:src="@{/assets/img/artist-profile/artist-the-beatles.jpg}">
-                        <p>The Beatles</p>
-                    </a>
-                </div>
+            <div class="section-header">
+                <h1>Top 10 Weekly</h1>
+                <a href="#" class="see-all">See All</a>
             </div>
-        </section>
 
-        <!-- ALBUM (Scrollable) -->
-        <section class="section-block">
-            <h1>Album</h1>
-
-            <div class="horizontal-scroll">
+            <div class="grid-four">
+                <!-- contoh item -->
                 <div class="item">
-                    <a th:href="@{/album}">
+                    <a href="">
                         <img th:src="@{/assets/img/album-art/album-acdc.png}">
                         <p>AC/DC</p>
                     </a>
@@ -151,51 +78,182 @@
                         <p>Ed Sheeran</p>
                     </a>
                 </div>
+            </div>
+        </section>
 
-                <div class="item">
-                    <a href="">
-                        <img th:src="@{/assets/img/album-art/album-the-beatles.jpeg}">
-                        <p>Let It Be</p>
+        <!-- TOP ARTIST -->
+        <section class="section-block">
+            <h1>Artist</h1>
+
+            <div class="horizontal-scroll">
+                <div th:each="artist : ${artists}" class="item big">
+                    <a th:href="@{'/artist/' + ${artist.artistID}}">
+                        <img th:data-filename="${#strings.replace(#strings.toLowerCase(artist.artistName), ' ', '-')}"
+                             class="artist-image"
+                             alt="artist photo">
+                        <p th:text="${artist.artistName}">Artist Name</p>
                     </a>
                 </div>
+            </div>
+        </section>
 
-                <div class="item">
-                    <a href="">
-                        <img th:src="@{/assets/img/album-art/album-michael-jackson.png}">
-                        <p>Michael Jackson</p>
-                    </a>
-                </div>
+        <!-- ALBUM (Scrollable) -->
+        <section class="section-block">
+            <h1>Album</h1>
 
-                <div class="item">
-                    <a href="">
-                        <img th:src="@{/assets/img/album-art/album-nirvana.jpg}">
-                        <p>Nirvana</p>
+            <div class="horizontal-scroll">
+                <div th:each="album : ${albums}" class="item">
+                    <a th:href="@{'/album/' + ${album.albumID}}">
+                        <img th:data-albumname="${#strings.replace(#strings.toLowerCase(album.albumTitle), ' ', '-')}"
+                             class="album-image"
+                             alt="album art">
+                        <div class="album-info">
+                            <p class="album-title" th:text="${album.albumTitle}">Album Title</p>
+                            <p class="album-artist" th:text="${album.artistName}">Artist Name</p>
+                        </div>
                     </a>
-                </div>
-
-                <div class="item">
-                    <a href="">
-                        <img th:src="@{/assets/img/album-art/album-pink-floyd.jpeg}">
-                        <p>Pink Floyd</p>
-                    </a>
-                </div>
-
-                <div class="item">
-                    <a href="">
-                        <img th:src="@{/assets/img/album-art/album-queen.jpg}">
-                        <p>Queen</p>
-                    </a>
-                </div>
-
-                <div class="item">
-                    <a href="">
-                        <img th:src="@{/assets/img/album-art/album-slank.jpeg}">
-                        <p>Slank</p>
-                    </a>
-                    
                 </div>
             </div>
         </section>
     </main>
+    <script>
+        (function() {
+            'use strict';
+            async function checkImageExists(url) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = url;
+                });
+            }
+            
+            async function loadArtistImages() {
+                const artistImages = document.querySelectorAll('.artist-image');
+                
+                for (const img of artistImages) {
+                    const filename = img.getAttribute('data-filename');
+                    if (!filename) continue;
+                    
+                    const cleanFilename = filename.replace(/[^\w-]/g, '');
+                    const defaultUrl = '/assets/img/artist-profile/default.jpg';
+                    const extensions = ['', '.jpeg', '.jpg', '.png'];
+                    
+                    let found = false;
+                    for (const ext of extensions) {
+                        const imageUrl = ext ? 
+                            `/assets/img/artist-profile/artist-${cleanFilename}${ext}` :
+                            `/assets/img/artist-profile/artist-${cleanFilename}`;
+                        
+                        const exists = await checkImageExists(imageUrl);
+                        if (exists) {
+                            img.src = imageUrl;
+                            img.classList.add('loaded');
+                            found = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!found) {
+                        img.src = defaultUrl;
+                        img.classList.add('default');
+                    }
+                    
+                    img.classList.remove('loading');
+                }
+            }
+            
+            async function loadAlbumImages() {
+                const albumImages = document.querySelectorAll('.album-image');
+                
+                for (const img of albumImages) {
+                    const albumName = img.getAttribute('data-albumname');
+                    if (!albumName) continue;
+                    
+                    const cleanAlbumName = albumName.replace(/[^\w-]/g, '');
+                    const defaultUrl = '/assets/img/album-art/default.jpg';
+                    const extensions = ['', '.jpeg', '.jpg', '.png'];
+                    
+                    let found = false;
+                    for (const ext of extensions) {
+                        const imageUrl = ext ? 
+                            `/assets/img/album-art/album-${cleanAlbumName}${ext}` :
+                            `/assets/img/album-art/album-${cleanAlbumName}`;
+                        
+                        const exists = await checkImageExists(imageUrl);
+                        if (exists) {
+                            img.src = imageUrl;
+                            img.classList.add('loaded');
+                            found = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!found) {
+                        img.src = defaultUrl;
+                        img.classList.add('default');
+                    }
+                    
+                    img.classList.remove('loading');
+                }
+            }
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                .artist-image.loading,
+                .album-image.loading {
+                    opacity: 0.5;
+                    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                    background-size: 200% 100%;
+                    animation: loading 1.5s infinite;
+                }
+                
+                @keyframes loading {
+                    0% { background-position: 200% 0; }
+                    100% { background-position: -200% 0; }
+                }
+                
+                .artist-image.loaded,
+                .album-image.loaded {
+                    opacity: 1;
+                    transition: opacity 0.3s ease;
+                }
+                
+                .artist-image.default,
+                .album-image.default {
+                    filter: grayscale(20%);
+                }
+                
+                .album-info {
+                    padding: 8px 0;
+                }
+                
+                .album-title {
+                    font-weight: bold;
+                    margin: 0;
+                    font-size: 14px;
+                    color: #333;
+                }
+                
+                .album-artist {
+                    margin: 0;
+                    font-size: 12px;
+                    color: #666;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.artist-image, .album-image').forEach(img => {
+                    img.classList.add('loading');
+                });
+                
+                Promise.all([
+                    loadArtistImages(),
+                    loadAlbumImages()
+                ]);
+            });
+        })();
+    </script>
 </body>
 </html>

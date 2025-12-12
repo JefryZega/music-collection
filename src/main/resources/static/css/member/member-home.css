@@ -35,6 +35,7 @@ header {
     position: sticky;
     top: 0;
     background-color: var(--secondary-color);
+    z-index: 3;
 }
 
 nav {

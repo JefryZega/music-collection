@@ -41,7 +41,12 @@ CREATE TABLE favourites(
     UNIQUE(userID, songID)
 );
 
--- INSERT
+-- NOTE : kata AI buat poster top 10 gausah disimpen di DB, bisa upload ke file projek spring nya lgs
+
+
+-- ============================================
+-- 3. INSERT USERS (SAMA)
+-- ============================================
 INSERT INTO users ("name", username, email, password_hash, "role") VALUES 
 ('Alexander Constantijn', 'alexcon', 'alexcon@gmail.com', 'hashedpass', 'member'),
 ('Alexander Stanislaus', 'alexstan', 'alexstan@gmail.com', 'hashedpass', 'member'),
@@ -52,133 +57,218 @@ INSERT INTO users ("name", username, email, password_hash, "role") VALUES
 ('Azriel Adrien', 'azriel', 'azriel@gmail.com', 'hashedpass', 'admin'),
 ('Jefry Krisman', 'jefry', 'jefry@gmail.com', 'hashedpass', 'admin');
 
+-- ============================================
+-- 4. INSERT ARTIST (15 ARTIST SEKALIGUS)
+-- ============================================
 INSERT INTO artist (artistName, artistProfile) VALUES
-('Travis Scott', '/assets/img/artist-profile/artist-travis.jpg'),      -- done
-('Billie Eilish', '/assets/img/artist-profile/artist-billie.png'),    -- done
-('Metallica', '/assets/img/artist-profile/artist-metallica.jpg'),     -- done
-('Shawn Mendes', '/assets/img/artist-profile/artist-shawn.png'),      -- done
-('Ed Sheeran', '/assets/img/artist-profile/artist-ed-sheeran.jpg'),   -- done
-('AC/DC', '/assets/img/artist-profile/artist-acdc.jpeg'),             -- done
-('Bon Jovi', '/assets/img/artist-profile/artist-bonjovi.jpg'),        -- done
-('Eagles', '/assets/img/artist-profile/artist-eagles.jpg'),           -- done
-('Michael Jackson', '/assets/img/artist-profile/artist-michael-jackson.jpg'), -- done
-('Nirvana', '/assets/img/artist-profile/artist-nirvana.jpeg'),        -- done
-('Pink Floyd', '/assets/img/artist-profile/artist-pink-floyd.jpeg'),  -- done
-('Queen', '/assets/img/artist-profile/artist-queen.jpg'),             -- done
-('Slank', '/assets/img/artist-profile/artist-slank.jpeg'),            -- done
-('The Beatles', '/assets/img/artist-profile/artist-the-beatles.jpg'); -- done
+('Travis Scott', 'American rapper and record producer'),
+('Billie Eilish', 'American singer-songwriter'),
+('Metallica', 'American heavy metal band'),
+('Shawn Mendes', 'Canadian singer-songwriter'),
+('Ed Sheeran', 'English singer-songwriter'),
+('AC/DC', 'Australian rock band formed in 1973'),
+('Bon Jovi', 'American rock band formed in 1983'),
+('Eagles', 'American rock band formed in 1971'),
+('Michael Jackson', 'American singer, songwriter, dancer'),
+('Nirvana', 'American rock band formed in 1987'),
+('Pink Floyd', 'English rock band formed in 1965'),
+('Queen', 'British rock band formed in 1970'),
+('Slank', 'Indonesian rock band formed in 1983'),
+('The Beatles', 'English rock band formed in 1960'),
+('Coldplay', 'British rock band formed in 1996');
 
-INSERT INTO album (albumTitle, album_art, artistID) VALUES
-('ASTROWORLD', '/assets/img/album-art/album-astroworld.jpeg', 1), 		-- done
-('Happier Than Ever', '/assets/img/album-art/album-happier.jpg', 2),   -- done
-('Master Of Puppets', '/assets/img/album-art/album-master.png', 3), 	-- done
-('Deluxe', '/assets/img/album-art/album-deluxe.png', 4),				-- done 
-('Back in Black', '/assets/img/album-art/album-acdc.png', 6), 			-- done
-('Highway to Hell', '/assets/img/album-art/album-acdc.png', 6), 		-- done
-('Slippery When Wet', '/assets/img/album-art/album-bonjovi-1.jpg', 7), -- done
-('Keep the Faith', '/assets/img/album-art/album-bonjovi-2.jpeg', 7), 	-- done
-('Hotel California', '/assets/img/album-art/album-eagles-1.jpg', 8), 	-- done
-('Their Greatest Hits', '/assets/img/album-art/album-eagles-2.png', 8), -- done
-('Thriller', '/assets/img/album-art/album-michael-jackson-1.png', 9),	-- done
-('Bad', '/assets/img/album-art/album-michael-jackson-2.png', 9),		-- done
-('Nevermind', '/assets/img/album-art/album-nirvana-1.jpg', 10),		-- done
-('In Utero', '/assets/img/album-art/album-nirvana-2.jpeg', 10),		-- done
-('The Dark Side of the Moon', '/assets/img/album-art/album-pink-floyd-1.jpeg', 11), -- done
-('The Wall', '/assets/img/album-art/album-pink-floyd-2.jpeg', 11),		-- done
-('A Night at the Opera', '/assets/img/album-art/album-queen-1.jpg', 12), -- done
-('Greatest Hits', '/assets/img/album-art/album-queen-2.jpg', 12),		-- done
-('Slank XII', '/assets/img/album-art/album-slank.jpeg', 13),			-- done
-('Generasi Biru', '/assets/img/album-art/album-slank.jpeg', 13),		-- done
-('Abbey Road', '/assets/img/album-art/album-the-beatles-1.png', 14),	-- done
-('The Beatles (White Album)', '/assets/img/album-art/album-the-beatles-2.png', 14);	-- done
+-- ============================================
+-- 5. INSERT ALBUM (DENGAN ARTISTID YANG BENAR)
+-- ============================================
+-- Travis Scott (artistID 1)
+INSERT INTO album (albumTitle, artistID) VALUES ('ASTROWORLD', 1);
 
+-- Billie Eilish (artistID 2)
+INSERT INTO album (albumTitle, artistID) VALUES ('Happier Then Ever', 2);
 
-INSERT INTO song (title, albumID) VALUES
--- Travis Scott
-('STARGAZING', 1), ('SICKO MODE', 1), ('NO BYSTANDERS', 1), ('SKELETONS', 1),
+-- Metallica (artistID 3)
+INSERT INTO album (albumTitle, artistID) VALUES ('Master Of Puppets', 3);
 
--- Billie Eilish
-('Getting Older', 2), ('my future', 2), ('Oxytocin', 2), ('GOLDWING', 2),
+-- Shawn Mendes (artistID 4)
+INSERT INTO album (albumTitle, artistID) VALUES ('Deluxe', 4);
 
--- (Metallica
-('Battery', 3), ('Welcome Home', 3), ('Lepper Messiah', 3), ('Orion', 3),
+-- Ed Sheeran (artistID 5) - tambah album baru
+INSERT INTO album (albumTitle, artistID) VALUES ('Divide', 5);
 
--- Shawn Mendes
-('Castle on the Hill', 4), ('Shape of You', 4), ('Perfect', 4), ('Happier', 4),
+-- AC/DC (artistID 6)
+INSERT INTO album (albumTitle, artistID) VALUES ('Back in Black', 6);
+INSERT INTO album (albumTitle, artistID) VALUES ('Highway to Hell', 6);
 
--- AC/DC
-('Back in Black', 5), ('Hells Bells', 5), ('Shoot to Thrill', 5), ('You Shook Me All Night Long', 5),
-('Highway to Hell', 6), ('Girls Got Rhythm', 6), ('Walk All Over You', 6), ('Touch Too Much', 6),
+-- Bon Jovi (artistID 7)
+INSERT INTO album (albumTitle, artistID) VALUES ('Slippery When Wet', 7);
+INSERT INTO album (albumTitle, artistID) VALUES ('Keep the Faith', 7);
 
--- Bon Jovi
-('Livin'' on a Prayer', 7), ('You Give Love a Bad Name', 7), ('Wanted Dead or Alive', 7), ('Never Say Goodbye', 7),
-('Keep the Faith', 8), ('Bed of Roses', 8), ('In These Arms', 8), ('I''ll Sleep When I''m Dead', 8),
+-- Eagles (artistID 8)
+INSERT INTO album (albumTitle, artistID) VALUES ('Hotel California', 8);
+INSERT INTO album (albumTitle, artistID) VALUES ('Their Greatest Hits (1971–1975)', 8);
 
--- Eagles
-('Hotel California', 9), ('New Kid in Town', 9), ('Life in the Fast Lane', 9), ('Wasted Time', 9),
-('Take It Easy', 10), ('Desperado', 10), ('Tequila Sunrise', 10), ('Best of My Love', 10),
+-- Michael Jackson (artistID 9)
+INSERT INTO album (albumTitle, artistID) VALUES ('Thriller', 9);
+INSERT INTO album (albumTitle, artistID) VALUES ('Bad', 9);
 
--- Michael Jackson
-('Billie Jean', 11), ('Beat It', 11), ('Thriller', 11), ('Human Nature', 11),
-('Bad', 12), ('The Way You Make Me Feel', 12), ('Man in the Mirror', 12), ('Smooth Criminal', 12),
+-- Nirvana (artistID 10)
+INSERT INTO album (albumTitle, artistID) VALUES ('Nevermind', 10);
+INSERT INTO album (albumTitle, artistID) VALUES ('In Utero', 10);
 
--- Nirvana 
-('Smells Like Teen Spirit', 13), ('Come as You Are', 13), ('Lithium', 13), ('In Bloom', 13),
-('Heart-Shaped Box', 14), ('Oh a Plain', 14), ('Dumb', 14), ('All Apologies', 14),
+-- Pink Floyd (artistID 11)
+INSERT INTO album (albumTitle, artistID) VALUES ('The Dark Side of the Moon', 11);
+INSERT INTO album (albumTitle, artistID) VALUES ('The Wall', 11);
 
--- Pink Floyd
-('Money', 15), ('Time', 15), ('Us and Them', 15), ('Brain Damage', 15),
-('Another Brick in the Wall, Pt. 2', 16), ('Comfortably Numb', 16), ('Hey You', 16), ('Mother', 16),
+-- Queen (artistID 12)
+INSERT INTO album (albumTitle, artistID) VALUES ('A Night at the Opera', 12);
+INSERT INTO album (albumTitle, artistID) VALUES ('Greatest Hits', 12);
 
--- Queen 
-('Bohemian Rhapsody', 17), ('You''re My Best Friend', 17), ('Love of My Life', 17), ('Another One Bites the Dust', 17),
-('We Will Rock You', 18), ('We Are the Champions', 18), ('Don''t Stop Me Now', 18), ('Somebody to Love', 18),
+-- Slank (artistID 13)
+INSERT INTO album (albumTitle, artistID) VALUES ('Slank XII', 13);
+INSERT INTO album (albumTitle, artistID) VALUES ('Generasi Biru', 13);
 
--- Slank
-('Kutunggu Kau di Pasar Minggu', 19), ('Terlalu Manis', 19), ('Mawar Merah', 19), ('Ibu', 19),
-('Generasi Biru', 20), ('Mawar Merah', 20), ('Balikin', 20), ('Ku Tak Bisa', 20),
+-- The Beatles (artistID 14)
+INSERT INTO album (albumTitle, artistID) VALUES ('Abbey Road', 14);
+INSERT INTO album (albumTitle, artistID) VALUES ('The Beatles (White Album)', 14);
 
--- Beatles
-('Come Together', 21), ('Something', 21), ('Here Comes the Sun', 21), ('Octopus''s Garden', 21),
-('While My Guitar Gently Weeps', 22), ('Blackbird', 22), ('Helter Skelter', 22), ('Dear Prudence', 22);
+-- Coldplay (artistID 15) - tambah 2 album
+INSERT INTO album (albumTitle, artistID) VALUES ('Parachutes', 15);
+INSERT INTO album (albumTitle, artistID) VALUES ('A Rush of Blood to the Head', 15);
 
+-- ============================================
+-- 6. INSERT SONG (DENGAN ALBUMID YANG BENAR)
+-- ============================================
+-- Album 1: ASTROWORLD (Travis Scott)
+INSERT INTO song (title, albumID) VALUES 
+('STARGAZING', 1), ('SICKO MODE', 1), ('NO BYSTANDERS', 1), ('SKELETONS', 1);
 
--- FAVOURITES (Buat top 10 weekly)
-INSERT INTO favourites (userID, songID, added_at) VALUES 
+-- Album 2: Happier Then Ever (Billie Eilish)
+INSERT INTO song (title, albumID) VALUES 
+('Getting Older', 2), ('my future', 2), ('Oxytocin', 2), ('GOLDWING', 2);
 
--- Bohemian Rhapsody (Queen)
-(1, 69, NOW() - INTERVAL '10 minutes'),
-(2, 69, NOW() - INTERVAL '2 hours'),
-(3, 69, NOW() - INTERVAL '1 day'),
-(4, 69, NOW() - INTERVAL '2 days'),
-(5, 69, NOW() - INTERVAL '3 days'),
+-- Album 3: Master Of Puppets (Metallica)
+INSERT INTO song (title, albumID) VALUES 
+('Battery', 3), ('Welcome Home', 3), ('Lepper Messiah', 3), ('Orion', 3);
 
--- Smells Like Teen Spirit (Nirvana)
-(1, 53, NOW() - INTERVAL '15 minutes'),
-(3, 53, NOW() - INTERVAL '5 hours'),
-(6, 53, NOW() - INTERVAL '1 day'),
-(7, 53, NOW() - INTERVAL '4 days'),
+-- Album 4: Deluxe (Shawn Mendes)
+INSERT INTO song (title, albumID) VALUES 
+('Castle on the Hill', 4), ('Shape of You', 4), ('Perfect', 4), ('Happier', 4);
 
--- Hotel California (Eagles)
-(2, 37, NOW() - INTERVAL '30 minutes'),
-(4, 37, NOW() - INTERVAL '6 hours'),
-(8, 37, NOW() - INTERVAL '5 days'),
+-- Album 5: Divide (Ed Sheeran)
+INSERT INTO song (title, albumID) VALUES 
+('Shape of You', 5), ('Castle on the Hill', 5), ('Perfect', 5), ('Galway Girl', 5);
 
--- Billie Jean (MJ)
-(5, 45, NOW() - INTERVAL '1 hour'),
-(6, 45, NOW() - INTERVAL '3 hours'),
+-- Album 6: Back in Black (AC/DC)
+INSERT INTO song (title, albumID) VALUES 
+('Back in Black', 6), ('Hells Bells', 6), ('Shoot to Thrill', 6), ('You Shook Me All Night Long', 6);
 
--- Lagu Lama (Gak masuk chart > 7 hari)
-(1, 1, NOW() - INTERVAL '1 month'), 
-(1, 2, NOW() - INTERVAL '25 days'), 
-(2, 4, NOW() - INTERVAL '1 month'), 
-(3, 5, NOW() - INTERVAL '2 months'),
+-- Album 7: Highway to Hell (AC/DC)
+INSERT INTO song (title, albumID) VALUES 
+('Highway to Hell', 7), ('Girls Got Rhythm', 7), ('Walk All Over You', 7), ('Touch Too Much', 7);
 
-(1, 25, NOW() - INTERVAL '1 day'),  
-(2, 26, NOW() - INTERVAL '2 days'), 
-(3, 80, NOW() - INTERVAL '3 days'), 
-(4, 81, NOW() - INTERVAL '12 hours'), 
-(5, 88, NOW() - INTERVAL '4 days'), 
-(6, 87, NOW() - INTERVAL '5 days'), 
-(7, 25, NOW() - INTERVAL '6 days'), 
-(8, 53, NOW() - INTERVAL '7 hours');
+-- Album 8: Slippery When Wet (Bon Jovi)
+INSERT INTO song (title, albumID) VALUES 
+('Livin'' on a Prayer', 8), ('You Give Love a Bad Name', 8), ('Wanted Dead or Alive', 8), ('Never Say Goodbye', 8);
+
+-- Album 9: Keep the Faith (Bon Jovi)
+INSERT INTO song (title, albumID) VALUES 
+('Keep the Faith', 9), ('Bed of Roses', 9), ('In These Arms', 9), ('I''ll Sleep When I''m Dead', 9);
+
+-- Album 10: Hotel California (Eagles)
+INSERT INTO song (title, albumID) VALUES 
+('Hotel California', 10), ('New Kid in Town', 10), ('Life in the Fast Lane', 10), ('Wasted Time', 10);
+
+-- Album 11: Their Greatest Hits (Eagles)
+INSERT INTO song (title, albumID) VALUES 
+('Take It Easy', 11), ('Desperado', 11), ('Tequila Sunrise', 11), ('Best of My Love', 11);
+
+-- Album 12: Thriller (Michael Jackson)
+INSERT INTO song (title, albumID) VALUES 
+('Billie Jean', 12), ('Beat It', 12), ('Thriller', 12), ('Human Nature', 12);
+
+-- Album 13: Bad (Michael Jackson)
+INSERT INTO song (title, albumID) VALUES 
+('Bad', 13), ('The Way You Make Me Feel', 13), ('Man in the Mirror', 13), ('Smooth Criminal', 13);
+
+-- Album 14: Nevermind (Nirvana)
+INSERT INTO song (title, albumID) VALUES 
+('Smells Like Teen Spirit', 14), ('Come as You Are', 14), ('Lithium', 14), ('In Bloom', 14);
+
+-- Album 15: In Utero (Nirvana)
+INSERT INTO song (title, albumID) VALUES 
+('Heart-Shaped Box', 15), ('Rape Me', 15), ('Dumb', 15), ('All Apologies', 15);
+
+-- Album 16: The Dark Side of the Moon (Pink Floyd)
+INSERT INTO song (title, albumID) VALUES 
+('Money', 16), ('Time', 16), ('Us and Them', 16), ('Brain Damage', 16);
+
+-- Album 17: The Wall (Pink Floyd)
+INSERT INTO song (title, albumID) VALUES 
+('Another Brick in the Wall, Pt. 2', 17), ('Comfortably Numb', 17), ('Hey You', 17), ('Mother', 17);
+
+-- Album 18: A Night at the Opera (Queen)
+INSERT INTO song (title, albumID) VALUES 
+('Bohemian Rhapsody', 18), ('You''re My Best Friend', 18), ('Love of My Life', 18), ('''39', 18);
+
+-- Album 19: Greatest Hits (Queen)
+INSERT INTO song (title, albumID) VALUES 
+('We Will Rock You', 19), ('We Are the Champions', 19), ('Don''t Stop Me Now', 19), ('Somebody to Love', 19);
+
+-- Album 20: Slank XII (Slank)
+INSERT INTO song (title, albumID) VALUES 
+('Kutunggu Kau di Pasar Minggu', 20), ('Terlalu Manis', 20), ('Mawar Merah', 20), ('Ibu', 20);
+
+-- Album 21: Generasi Biru (Slank)
+INSERT INTO song (title, albumID) VALUES 
+('Generasi Biru', 21), ('Mawar Merah', 21), ('Balikin', 21), ('Ku Tak Bisa', 21);
+
+-- Album 22: Abbey Road (The Beatles)
+INSERT INTO song (title, albumID) VALUES 
+('Come Together', 22), ('Something', 22), ('Here Comes the Sun', 22), ('Octopus''s Garden', 22);
+
+-- Album 23: White Album (The Beatles)
+INSERT INTO song (title, albumID) VALUES 
+('While My Guitar Gently Weeps', 23), ('Blackbird', 23), ('Helter Skelter', 23), ('Dear Prudence', 23);
+
+-- Album 24: Parachutes (Coldplay)
+INSERT INTO song (title, albumID) VALUES 
+('Yellow', 24), ('Trouble', 24), ('Shiver', 24), ('Don''t Panic', 24);
+
+-- Album 25: A Rush of Blood to the Head (Coldplay)
+INSERT INTO song (title, albumID) VALUES 
+('Clocks', 25), ('The Scientist', 25), ('In My Place', 25), ('Warning Sign', 25);
+
+-- ============================================
+-- 7. INSERT FAVOURITES (RANDOM UNTUK TESTING)
+-- ============================================
+-- User 1: 5 lagu random
+INSERT INTO favourites (userID, songID) VALUES 
+(1, 1), (1, 10), (1, 25), (1, 40), (1, 55);
+
+-- User 2: 5 lagu random  
+INSERT INTO favourites (userID, songID) VALUES 
+(2, 5), (2, 15), (2, 30), (2, 45), (2, 60);
+
+-- User 3: 5 lagu random
+INSERT INTO favourites (userID, songID) VALUES 
+(3, 8), (3, 20), (3, 35), (3, 50), (3, 65);
+
+-- User 4: 5 lagu random
+INSERT INTO favourites (userID, songID) VALUES 
+(4, 12), (4, 28), (4, 42), (4, 58), (4, 72);
+
+-- User 5 (admin): 5 lagu random
+INSERT INTO favourites (userID, songID) VALUES 
+(5, 3), (5, 18), (5, 33), (5, 48), (5, 75);
+
+-- User 6 (admin): 5 lagu random
+INSERT INTO favourites (userID, songID) VALUES 
+(6, 7), (6, 22), (6, 37), (6, 52), (6, 80);
+
+-- User 7 (admin): 5 lagu random
+INSERT INTO favourites (userID, songID) VALUES 
+(7, 14), (7, 26), (7, 41), (7, 56), (7, 85);
+
+-- User 8 (admin): 5 lagu random
+INSERT INTO favourites (userID, songID) VALUES 
+(8, 9), (8, 24), (8, 39), (8, 54), (8, 90);

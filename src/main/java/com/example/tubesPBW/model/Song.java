@@ -6,9 +6,10 @@ import lombok.Data;
 public class Song {
     private Long songID;
     private String title;
-    private String artistName;    
+    private Long albumID;
+    private String albumTitle;
     private Long artistID;
-    private String albumTitle;    
+    private String artistName;    
     private boolean favorite;
 
     // tambahan

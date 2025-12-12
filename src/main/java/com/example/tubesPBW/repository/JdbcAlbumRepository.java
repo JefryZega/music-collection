@@ -1,4 +1,3 @@
-// JdbcAlbumRepository.java
 package com.example.tubesPBW.repository;
 
 import com.example.tubesPBW.model.Album;
