@@ -1,5 +1,6 @@
 package com.example.tubesPBW.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import com.example.tubesPBW.model.Song;
 import com.example.tubesPBW.service.AlbumService;
 import com.example.tubesPBW.service.ArtistService;
 import com.example.tubesPBW.service.SongService;
+import com.example.tubesPBW.model.User;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -29,12 +33,24 @@ public class UserController {
 
     // TAMPILAN PROFILE ARTIST
     @GetMapping("/artist/{artistId}")
-    public String artistProfile(@PathVariable Long artistId, Model model) {
+    public String artistProfile(@PathVariable Long artistId, HttpSession session, Model model) {
         Artist artist = artistService.getArtistById(artistId);
         if (artist == null) {
             return "redirect:/home";
         }
+        
         List<Song> artistSongs = songService.getSongsByArtistId(artistId);
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            List<Song> userFavorites = songService.getFavoriteSongs(user.getUserID());
+            List<Long> favoriteSongIds = new ArrayList<>();
+            for (Song favSong : userFavorites) {
+                favoriteSongIds.add(favSong.getSongID());
+            }
+            for (Song song : artistSongs) {
+                song.setFavorite(favoriteSongIds.contains(song.getSongID()));
+            }
+        }
         
         model.addAttribute("artist", artist);
         model.addAttribute("artistSongs", artistSongs);
@@ -58,17 +74,29 @@ public class UserController {
     }
 
     @GetMapping("/album/{albumId}")
-    public String albumDetail(@PathVariable Long albumId, Model model) {
+    public String albumDetail(@PathVariable Long albumId, HttpSession session, Model model) {
         Album album = albumService.getAlbumById(albumId);
         if (album == null) {
             return "redirect:/artist";
         }
+
         List<Song> albumSongs = songService.getSongsByAlbumId(albumId);
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            List<Song> userFavorites = songService.getFavoriteSongs(user.getUserID());
+            List<Long> favoriteSongIds = new ArrayList<>();
+            for (Song favSong : userFavorites) {
+                favoriteSongIds.add(favSong.getSongID());
+            }
+            for (Song song : albumSongs) {
+                song.setFavorite(favoriteSongIds.contains(song.getSongID()));
+            }
+        }
         
         model.addAttribute("album", album);
         model.addAttribute("albumSongs", albumSongs);
         
-        return "layout/album-detail";
+        return "layout/album";
     }
 
     // TAMPILAN DAFTAR ALBUM YANG DIMILIK ARTIST TERTENTU
@@ -81,6 +109,4 @@ public class UserController {
     public String homeAlbum() {
         return "layout/album";
     }
-
-
 }

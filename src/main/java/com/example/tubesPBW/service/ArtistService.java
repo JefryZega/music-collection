@@ -29,4 +29,10 @@ public class ArtistService {
         }
         return artistRepository.findByArtistNameContaining(keyword.trim());
     }
+
+    public void validateArtist(Artist artist){
+        if (artist.getArtistName() == null || artist.getArtistName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Artist name is required");
+        }
+    }
 }

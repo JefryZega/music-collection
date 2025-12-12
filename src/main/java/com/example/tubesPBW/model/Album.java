@@ -12,10 +12,11 @@ public class Album {
     
     public Album() {}
     
-    public Album(Long albumID, String albumTitle, String albumArt, Long artistID) {
+    public Album(Long albumID, String albumTitle, String albumArt, Long artistID, String artistName) {
         this.albumID = albumID;
         this.albumTitle = albumTitle;
         this.albumArt = albumArt;
         this.artistID = artistID;
+        this.artistName = artistName;
     }
 }

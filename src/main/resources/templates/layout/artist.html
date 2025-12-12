@@ -41,9 +41,8 @@
        <!-- SECTION PROFILE -->
         <section id="profile-card">
             <div id="avatar">
-                <img th:with="filename=${#strings.replace(#strings.toLowerCase(artist.artistName), '/', '')}" 
-                     th:src="@{'/assets/img/artist-profile/artist-' + ${filename} + '.jpeg'}" 
-                     th:onerror="this.src='/assets/img/artist-profile/default.jpg'"
+                <img th:data-filename="${#strings.replace(#strings.toLowerCase(artist.artistName), ' ', '-')}" 
+                     class="artist-image"
                      alt="artist photo">
             </div>
             <div id="profile-info">
@@ -75,7 +74,13 @@
                     <p class="song-title" th:text="${song.title}">Mawar Merah</p>
                     <div class="song-info">
                         <span th:text="${song.albumTitle}">Album Name</span>
-                        <button>+</button>
+                        <img th:src="${song.favorite} ? @{/assets/icon/heartred.svg} : @{/assets/icon/heart.svg}" 
+                             alt="favorite icon" 
+                             class="favorite-icon"
+                             th:data-songid="${song.songID}"
+                             th:data-isfavorite="${song.favorite}"
+                             style="cursor: pointer; width: 20px; height: 20px; background: none; border: none;"
+                             onclick="toggleFavorite(this)">
                     </div>
                 </div>
             </div>
@@ -87,5 +92,126 @@
             </div>
         </section>
     </main>
+    <script>
+        (function() {
+            'use strict';
+            
+            async function checkImageExists(url) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = url;
+                });
+            }
+    
+            async function loadArtistImages() {
+                const artistImages = document.querySelectorAll('.artist-image');
+                
+                for (const img of artistImages) {
+                    const filename = img.getAttribute('data-filename');
+                    if (!filename) continue;
+                    
+                    const cleanFilename = filename.replace(/[^\w-]/g, '');
+                    const defaultUrl = '/assets/img/artist-profile/default.jpg';
+                    const extensions = ['', '.jpeg', '.jpg', '.png', '.svg'];
+                    
+                    let found = false;
+                    for (const ext of extensions) {
+                        const imageUrl = ext ? 
+                            `/assets/img/artist-profile/artist-${cleanFilename}${ext}` :
+                            `/assets/img/artist-profile/artist-${cleanFilename}`;
+                        
+                        const exists = await checkImageExists(imageUrl);
+                        if (exists) {
+                            img.src = imageUrl;
+                            img.classList.add('loaded');
+                            found = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!found) {
+                        img.src = defaultUrl;
+                        img.classList.add('default');
+                    }
+                    
+                    img.classList.remove('loading');
+                }
+            }
+            function toggleFavorite(iconElement) {
+                const songId = iconElement.getAttribute('data-songid');
+                const isFavorite = iconElement.getAttribute('data-isfavorite') === 'true';
+                
+                const endpoint = isFavorite ? 
+                    `/member/profile/favorite/remove?songId=${songId}` :
+                    `/member/profile/favorite/add?songId=${songId}`;
+                
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        const newIsFavorite = !isFavorite;
+                        iconElement.setAttribute('data-isfavorite', newIsFavorite);
+                        
+                        if (newIsFavorite) {
+                            iconElement.src = '/assets/icon/heartred.svg';
+                        } else {
+                            iconElement.src = '/assets/icon/heart.svg';
+                        }
+                        
+                        const message = newIsFavorite ? 
+                            'Song added to favorites!' : 
+                            'Song removed from favorites!';
+                        alert(message);
+                    } else {
+                        alert('Failed to update favorites');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error updating favorites');
+                });
+            }
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                .artist-image.loading {
+                    opacity: 0.5;
+                    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                    background-size: 200% 100%;
+                    animation: loading 1.5s infinite;
+                }
+                @keyframes loading {
+                    0% { background-position: 200% 0; }
+                    100% { background-position: -200% 0; }
+                }
+                .artist-image.loaded {
+                    opacity: 1;
+                    transition: opacity 0.3s ease;
+                }
+                .artist-image.default {
+                    filter: grayscale(20%);
+                }
+                .favorite-icon {
+                    transition: transform 0.2s ease;
+                }
+                .favorite-icon:hover {
+                    transform: scale(1.1);
+                }
+            `;
+            document.head.appendChild(style);
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.artist-image').forEach(img => {
+                    img.classList.add('loading');
+                });
+                loadArtistImages();
+            });
+        })();
+    </script>
 </body>
 </html>
