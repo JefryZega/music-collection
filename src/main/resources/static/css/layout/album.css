@@ -235,7 +235,7 @@ main {
     height: 3em;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     background-color: var(--primary-color);
     gap: 1em;
 }
@@ -244,14 +244,12 @@ main {
     border: 1px solid var(--secondary-color);
 }
 
-.music-card img {
+.music-card button {
     cursor: pointer;
     width: 2em;
+    border: none;
 }
 
-.music-card img:last-of-type {
-    margin-left: auto;
-}
 
 .music-card p {
     font-size: 1.3em;

@@ -63,13 +63,13 @@
                 <div th:if="${albumSongs != null && !albumSongs.isEmpty()}">
                     <div class="music-card" th:each="song : ${albumSongs}">
                         <p class="music-title" th:text="${song.title}">Song Title</p>
-                        <form th:action="@{/member/profile/favorite/toggle}" method="post" style="display: inline;">
+                        <form th:action="@{/member/profile/favorite/toggle}" method="post">
                             <input type="hidden" name="songId" th:value="${song.songID}">
-                            <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                            <button type="submit">
                                 <img th:src="${song.favorite} ? @{/assets/icon/heartred.svg} : @{/assets/icon/heart.svg}" 
                                      alt="favorite icon"
                                      th:title="${song.favorite} ? 'Remove from favorites' : 'Add to favorites'"
-                                     style="width: 24px; height: 24px;">
+                                     >
                             </button>
                         </form>
                     </div>
