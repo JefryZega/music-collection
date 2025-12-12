@@ -20,13 +20,14 @@ public class SongService {
     @Autowired
     private FavoriteRepository favoriteRepository;
     
-    // ============================
-    // PAGINATION MANUAL
-    // ============================
     public List<Song> paginate(List<Song> list, int page, int size) {
-        int start = page * size;
-        int end = Math.min(start + size, list.size());
+        if (list == null || list.isEmpty()) {
+            return new ArrayList<>();
+        }
+        int start = (page - 1) * size;
+        if (start < 0) start = 0;
         if (start >= list.size()) return new ArrayList<>();
+        int end = Math.min(start + size, list.size());
         return list.subList(start, end);
     }
 
@@ -39,9 +40,6 @@ public class SongService {
         List<Song> result = searchSongs(searchType, keyword);
         return paginate(result, page, size);
     }
-
-    // batas
-
 
     public List<Song> getAllSongs() {
         return songRepository.findAll();
@@ -72,6 +70,21 @@ public class SongService {
 
     public List<Song> getFavoriteSongs(Long userId) {
         List<Long> favoriteSongIds = favoriteRepository.findFavoriteSongIdsByUserId(userId);
+        
+        System.out.println("=== DEBUG SONG SERVICE ===");
+        System.out.println("User ID: " + userId);
+        System.out.println("Favorite Song IDs: " + favoriteSongIds);
+        System.out.println("Jumlah favorite songs: " + (favoriteSongIds != null ? favoriteSongIds.size() : "null"));
+        if (favoriteSongIds == null || favoriteSongIds.isEmpty()) {
+            System.out.println("DEBUG: Tidak ada favorite songs, return empty list");
+            return new ArrayList<>();
+        }
+        if (favoriteSongIds.size() == 1) {
+            System.out.println("DEBUG: Hanya 1 favorite song, query spesifik");
+            Long singleSongId = favoriteSongIds.get(0);
+            Optional<Song> song = songRepository.findById(singleSongId);
+            return song.map(List::of).orElse(new ArrayList<>());
+        }
         return songRepository.findSongsByIds(favoriteSongIds);
     }
     

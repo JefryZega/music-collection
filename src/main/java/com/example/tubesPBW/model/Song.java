@@ -15,4 +15,11 @@ public class Song {
     // tambahan
     private String albumArt; 
     private Long weeklyLikes; 
+
+    public String getAlbumArtUrl() {
+        if (albumArt == null || albumArt.trim().isEmpty()) {
+            return "/assets/img/album-art/default.jpg";
+        }
+        return albumArt.startsWith("/") ? albumArt : "/" + albumArt;
+    }
 }
