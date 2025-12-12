@@ -28,14 +28,30 @@ public class JdbcSongRepository implements SongRepository {
             song.setArtistName(rs.getString("artistName"));
             song.setAlbumTitle(rs.getString("albumTitle"));
             song.setArtistID(rs.getLong("artistID"));
+            song.setAlbumID(rs.getLong("albumID")); // Pastikan ada
+            if (columnExists(rs, "album_art")) {
+                song.setAlbumArt(rs.getString("album_art"));
+            } else {
+                song.setAlbumArt("/assets/img/album-art/default.jpg");
+            }
             return song;
+        }
+        
+        private boolean columnExists(ResultSet rs, String columnName) {
+            try {
+                rs.findColumn(columnName);
+                return true;
+            } catch (SQLException e) {
+                return false;
+            }
         }
     };
     
     @Override
     public List<Song> findAll() {
         String sql = "SELECT s.songID, s.title, " +
-                    "a.artistName, al.albumTitle, a.artistID " +
+                    "a.artistName, al.albumTitle, a.artistID, " +
+                    "s.albumID, al.album_art " +
                     "FROM song s " +
                     "JOIN album al ON s.albumID = al.albumID " +
                     "JOIN artist a ON al.artistID = a.artistID " +
@@ -46,7 +62,8 @@ public class JdbcSongRepository implements SongRepository {
     @Override
     public Optional<Song> findById(Long id) {
         String sql = "SELECT s.songID, s.title, " +
-                    "a.artistName, al.albumTitle, a.artistID " +
+                    "a.artistName, al.albumTitle, a.artistID, " +
+                    "s.albumID, al.album_art " + 
                     "FROM song s " +
                     "JOIN album al ON s.albumID = al.albumID " +
                     "JOIN artist a ON al.artistID = a.artistID " +
@@ -58,7 +75,7 @@ public class JdbcSongRepository implements SongRepository {
     @Override
     public List<Song> findByTitleContaining(String keyword) {
         String sql = "SELECT s.songID, s.title, " +
-                    "a.artistName, al.albumTitle, a.artistID " +
+                    "a.artistName, al.albumTitle, a.artistID, s.albumID, al.album_art " +
                     "FROM song s " +
                     "JOIN album al ON s.albumID = al.albumID " +
                     "JOIN artist a ON al.artistID = a.artistID " +
@@ -70,7 +87,7 @@ public class JdbcSongRepository implements SongRepository {
     @Override
     public List<Song> findByArtistNameContaining(String keyword) {
         String sql = "SELECT s.songID, s.title, " +
-                    "a.artistName, al.albumTitle, a.artistID " +
+                    "a.artistName, al.albumTitle, a.artistID, s.albumID, al.album_art " +
                     "FROM song s " +
                     "JOIN album al ON s.albumID = al.albumID " +
                     "JOIN artist a ON al.artistID = a.artistID " +
@@ -82,7 +99,7 @@ public class JdbcSongRepository implements SongRepository {
     @Override
     public List<Song> findByAlbumTitleContaining(String keyword) {
         String sql = "SELECT s.songID, s.title, " +
-                    "a.artistName, al.albumTitle, a.artistID " +
+                    "a.artistName, al.albumTitle, a.artistID, s.albumID, al.album_art " +
                     "FROM song s " +
                     "JOIN album al ON s.albumID = al.albumID " +
                     "JOIN artist a ON al.artistID = a.artistID " +
@@ -94,7 +111,7 @@ public class JdbcSongRepository implements SongRepository {
     @Override
     public List<Song> searchByKeyword(String keyword) {
         String sql = "SELECT s.songID, s.title, " +
-                    "a.artistName, al.albumTitle, a.artistID " +
+                    "a.artistName, al.albumTitle, a.artistID, s.albumID, al.album_art " +
                     "FROM song s " +
                     "JOIN album al ON s.albumID = al.albumID " +
                     "JOIN artist a ON al.artistID = a.artistID " +
@@ -115,7 +132,7 @@ public class JdbcSongRepository implements SongRepository {
         
         String placeholders = String.join(",", Collections.nCopies(songIds.size(), "?"));
         String sql = "SELECT s.songID, s.title, " +
-                    "a.artistName, al.albumTitle, a.artistID " +
+                    "a.artistName, al.albumTitle, a.artistID, s.albumID, al.album_art " +
                     "FROM song s " +
                     "JOIN album al ON s.albumID = al.albumID " +
                     "JOIN artist a ON al.artistID = a.artistID " +
@@ -127,7 +144,7 @@ public class JdbcSongRepository implements SongRepository {
     @Override
     public List<Song> findSongsByArtistId(Long artistId) {
         String sql = "SELECT s.songID, s.title, " +
-                    "a.artistName, al.albumTitle, a.artistID " +
+                    "a.artistName, al.albumTitle, a.artistID, s.albumID, al.album_art " +
                     "FROM song s " +
                     "JOIN album al ON s.albumID = al.albumID " +
                     "JOIN artist a ON al.artistID = a.artistID " +
@@ -140,7 +157,7 @@ public class JdbcSongRepository implements SongRepository {
     @Override
     public List<Song> findSongsByAlbumId(Long albumId) {
         String sql = "SELECT s.songid, s.title, " +
-                    "a.artistname, al.albumtitle, a.artistid " +
+                    "a.artistname, al.albumtitle, a.artistid, s.albumID, al.album_art " +
                     "FROM song s " +
                     "JOIN album al ON s.albumid = al.albumid " +
                     "JOIN artist a ON al.artistid = a.artistid " +
@@ -158,7 +175,7 @@ public class JdbcSongRepository implements SongRepository {
                      "JOIN song s ON f.songID = s.songID " +
                      "JOIN album al ON s.albumID = al.albumID " +
                      "JOIN artist a ON al.artistID = a.artistID " +
-                     "WHERE f.added_at >= NOW() - INTERVAL '7 days' " + // Filter 7 hari terakhir
+                     "WHERE f.added_at >= NOW() - INTERVAL '7 days' " + 
                      "GROUP BY s.songID, s.title, a.artistName, al.albumTitle, al.album_art " +
                      "ORDER BY total_likes DESC " +
                      "LIMIT 10";
