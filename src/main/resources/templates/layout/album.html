@@ -48,7 +48,11 @@
 
         <section id="album-container">
             <div id="artist-profile">
+<<<<<<< HEAD
                 <img th:src="${album.artistProfile}"
+=======
+                <img th:data-filename=" ${#strings.replace(#strings.toLowerCase(album.artistName), ' ', '-')}"
+>>>>>>> Jefry
                      class="artist-image"
                      alt="artist photo"
                      th:onerror="this.src='/assets/img/artist-profile/default.jpg'">
