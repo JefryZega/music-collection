@@ -105,7 +105,7 @@ public class AuthController {
         session.setAttribute("userId", user.getUserID());
         session.setAttribute("userRole", user.getRole());
         if ("admin".equals(user.getRole())) {
-            response.sendRedirect("/admin/dashboard");
+            response.sendRedirect("/admin/home");
             return null;
         } else {
             response.sendRedirect("/member/home");

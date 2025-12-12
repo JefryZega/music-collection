@@ -13,7 +13,7 @@
             <ul>
                 <div id="nav-left">
                     <li id="logo">Music <br>Collection</li>
-                    <li><a th:href="@{/member/home}">Home</a></li>
+                    <li><a th:href="@{/admin/home}">Home</a></li>
                     <li>Library</li>
                 </div>
 
@@ -24,7 +24,7 @@
 
                 <div id="nav-right">
                     <li>
-                        <a th:href="@{/member/profile}">
+                        <a th:href="@{/admin/profile}">
                             <img th:src="@{/assets/icon/user.svg}" alt="profile icon">
                         </a>
                     </li>
@@ -43,8 +43,8 @@
         <section id="profile-card">
             <div id="avatar"></div>
             <div id="profile-info">
-                <h2>Admin Name</h2>
-                <p>Admin</p>
+                <h2 th:text="${username}">Admin Name</h2>
+                <p th:text="${role}">Admin</p>
             </div>
         </section>
 
@@ -57,7 +57,13 @@
         <!-- SECTION SONG LIST -->
         <section id="song-list">
             <h1>Song List</h1>
-            <div id="table-container">
+
+            <div th:if="${searchQuery}">
+                <p>Search results for "<span th:text="${searchQuery}"></span>" 
+                   (<span th:text="${totalSongs}"></span> songs found)</p>
+            </div>
+
+            <div id="table-container" th:if="${songs != null && !songs.isEmpty()}">
                 <table>
                     <thead>
                         <tr>
@@ -65,70 +71,21 @@
                             <th>Artist</th>
                             <th>Album</th>
                             <th>Album Art</th>
-                            <th></th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img class="album-art" th:src="@{/assets/img/album-art/album-acdc.png}" alt="add to favorite"></td>
+                        <tr th:each="song : ${songs}">
+                            <td th:text="${song.title}">Title</td>
                             <td>
-                                <button class="trash-button">
-                                    <img th:src="@{/assets/icon/trash.svg}" alt="delete icon">
-                                </button>
+                                <a th:href="@{'/artist/' + ${song.artistID}}" 
+                                   th:text="${song.artistName}"
+                                   style="color: #111111; text-decoration: none;">
+                                    Artist
+                                </a>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img class="album-art" th:src="@{/assets/img/album-art/album-acdc.png}" alt="add to favorite"></td>
-                            <td>
-                                <button class="trash-button">
-                                    <img th:src="@{/assets/icon/trash.svg}" alt="delete icon">
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img class="album-art" th:src="@{/assets/img/album-art/album-acdc.png}" alt="add to favorite"></td>
-                            <td>
-                                <button class="trash-button">
-                                    <img th:src="@{/assets/icon/trash.svg}" alt="delete icon">
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img class="album-art" th:src="@{/assets/img/album-art/album-acdc.png}" alt="add to favorite"></td>
-                            <td>
-                                <button class="trash-button">
-                                    <img th:src="@{/assets/icon/trash.svg}" alt="delete icon">
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img class="album-art" th:src="@{/assets/img/album-art/album-acdc.png}" alt="add to favorite"></td>
-                            <td>
-                                <button class="trash-button">
-                                    <img th:src="@{/assets/icon/trash.svg}" alt="delete icon">
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Back In Black</td>
-                            <td>AC/DC</td>
-                            <td>Back In Black</td>
-                            <td><img class="album-art" th:src="@{/assets/img/album-art/album-acdc.png}" alt="add to favorite"></td>
+                            <td th:text="${song.albumTitle}">Album</td>
+                            <td></td>
                             <td>
                                 <button class="trash-button">
                                     <img th:src="@{/assets/icon/trash.svg}" alt="delete icon">
@@ -138,8 +95,30 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- PAGINATION -->
+            <div id="paginationButtonGroup">
+                <!-- PREVIOUS -->
+                <a th:href="@{/admin/profile(page=${currentPage - 1})}">
+                    <button th:disabled="${currentPage == 0}">Prev</button>
+                </a>
+
+                <!-- FIX: SELALU TAMPIL 1 - 9 -->
+                <a th:each="i : ${#numbers.sequence(1, 9)}"
+                th:href="@{/admin/profile(page=${i})}">
+                    <button th:text="${i}"
+                            th:classappend="${i == currentPage} ? 'active-page' : ''"></button>
+                </a>
+
+                <!-- NEXT -->
+                <a th:href="@{/admin/profile(page=${currentPage + 1})}">
+                    <button th:disabled="${currentPage == totalPages}">Next</button>
+                </a>
+            </div>
         </section>
 
+
+        
         <!-- POP UP ADD SONG -->
         <section id="popup-add-song">
             <form id="add-song-form" action="">
@@ -153,7 +132,6 @@
                     <button id="cancel-button">Cancel</button>
                     <input type="submit" name="" id="" value="Save">
                 </div>
-                
             </form>
         </section>
     </main>

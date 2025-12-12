@@ -14,17 +14,22 @@
 
 body {
     display: grid;
+    width: 100vw;
     height: 100vh;
     grid-template-areas: 
         "header"
         "main";
     grid-template-rows: auto 1fr;
     background-color: var(--primary-color);
-
 }
 
 body::-webkit-scrollbar {
     display: none;
+}
+
+a {
+    color: unset;
+    text-decoration: none;
 }
 
 /* HEADER */
@@ -92,6 +97,11 @@ nav ul li {
     background-color: var(--secondary-color);
 }
 
+#search-container form {
+    display: flex;
+    width: 100%;
+}
+
 #search-container input {
     padding: 0.5em;
     width: 100%;
@@ -101,9 +111,14 @@ nav ul li {
     background-color: var(--primary-color);
 }
 
+#search-container button {
+    border: none;
+}
+
 #search-container img {
     background-color: var(--primary-color);
 }
+
 
 #nav-right {
     margin-right: 2em;
@@ -121,21 +136,25 @@ nav ul li {
 
 /* MAIN */
 main {
-    padding: 1em;
+    padding: 2em;
     grid-area: main;
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    color: #000;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    gap: 2em;
 }
 
+
+/* SECTION POSTER */
 #weekly-card {
-    width: 50%;
-    margin: 2em auto;
-    background-color: #D9D9D9;
-    padding: 1.8em 2.5em;
-    border-radius: 10px;
+    width: 45rem;
+    background-color: var(--secondary-color);
+    padding: 2em 2em;
+    padding-bottom: 3em;
+    border-radius: 0.5em;
 }
 
 #weekly-card h2 {
@@ -145,21 +164,27 @@ main {
     text-align: center;
 }
 
+/* CONTAINER SONG LIST */
 .weekly-grid {
+    width: 100%;
     display: grid;
+    align-items: center;
     grid-template-columns: 1fr 1fr;
 }
 
+/* COLUMN GRID LEFT-RIGHT */
 .weekly-column {
     display: flex;
+    align-items: center;
     flex-direction: column;
-    gap: 0.9em;
+    gap: 2em;
 }
 
 .song-item {
+    width: 100%;
     display: flex;
-    align-items: center;
-    gap: 0.7em;
+    justify-content: left;
+    gap: 1em;
 }
 
 .rank {
@@ -172,6 +197,7 @@ main {
 .song-cover {
     width: 100px;
     height: 100px;
+    object-fit: cover;
 }
 
 .song-info h3 {
@@ -181,6 +207,57 @@ main {
 
 .song-info p {
     margin: 0.15em 0 0 0;
-    color: #333;
     line-height: 1.1;
+}
+
+
+/* SECTION PRINT SONG */
+#print-songs {
+    width: 45rem;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 3em;
+}
+
+#print-songs button {
+    width: 25%;
+    font-size: 1em;
+    padding: 1em;
+    color: var(--text-color);
+    border: none;
+    border-radius: 0.5em;
+    background-color: var(--button-color);
+}
+
+#print-songs button:hover {
+    cursor: pointer;
+    transition: 0.5s;
+    border: 1px solid var(--secondary-color);
+}
+
+
+
+/* STYLE SAAT POSTER DI PRINT */
+@media print {
+    /* IZIN WARNA SAAT PRINT */
+    * {
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    /* HIDE SEMUA DI BODY */
+    body * {
+        visibility: none;
+    }
+
+    header, #print-songs {
+        visibility: hidden;
+    }
+
+    #weekly-card, #weekly-card * {
+        visibility: visible;
+    }
+
+    #weekly-card {
+        
+    }
 }
