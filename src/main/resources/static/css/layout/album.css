@@ -27,6 +27,11 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+a {
+    color: unset;
+    text-decoration: none;
+}
+
 /* HEADER */
 header {
     grid-area: header;
@@ -34,6 +39,7 @@ header {
     flex-direction: column;
     position: sticky;
     top: 0;
+    z-index: 999;
     background-color: var(--secondary-color);
 }
 
@@ -178,7 +184,6 @@ main {
     gap: 3em;
     border-radius: 0.5em;
     background-color: var(--text-color);
-    box-shadow: 3px 3px 7px var(--secondary-color);
     margin-bottom: 2em;
 }
 
@@ -212,6 +217,12 @@ main {
 /* ALBUM SONGS CONTAINER */
 #album-songs {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#album-songs>div {
     display: flex;
     flex-direction: column;
     gap: 1em;

@@ -47,7 +47,7 @@
 
         <section id="album-container">
             <div id="artist-profile">
-                <img th:data-filename="${#strings.replace(#strings.toLowerCase(album.artistName), ' ', '-')}"
+                <img th:data-filename=" ${#strings.replace(#strings.toLowerCase(album.artistName), ' ', '-')}"
                      class="artist-image"
                      alt="artist photo">
                 <h2 id="artistName" th:text="${album.artistName}">Loading artist...</h2>
