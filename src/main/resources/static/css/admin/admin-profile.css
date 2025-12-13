@@ -20,12 +20,8 @@ body {
         "main";
     grid-template-rows: auto 1fr;
     background-color: var(--primary-color);
-
 }
 
-body::-webkit-scrollbar {
-    display: none;
-}
 
 /* HEADER */
 header {
@@ -98,6 +94,11 @@ nav ul li {
     background-color: var(--secondary-color);
 }
 
+#search-container form {
+    display: flex;
+    width: 100%;
+}
+
 #search-container input {
     padding: 0.5em;
     width: 100%;
@@ -107,9 +108,14 @@ nav ul li {
     background-color: var(--primary-color);
 }
 
+#search-container button {
+    border: none;
+}
+
 #search-container img {
     background-color: var(--primary-color);
 }
+
 
 #nav-right {
     margin-right: 2em;
@@ -129,21 +135,25 @@ nav ul li {
 main {
     padding: 1em;
     grid-area: main;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 2em;
     color: #000;
+    overflow-y: auto;
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 
 /* SECTION PERTAMA PROFILE */
 #profile-card {
     width: 90%;
-    height: 20rem;
+    min-height: 18rem;
     padding: 2em;
     margin-top: 1em;
     background-color: var(--secondary-color);
@@ -257,10 +267,7 @@ table {
 }
 
 table thead th {
-    position: sticky;
-    top: 0;
     background: white;
-    z-index: 0;
 }
 
 table th, table td {
