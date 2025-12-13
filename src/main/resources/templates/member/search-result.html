@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Result</title>
+    <link rel="stylesheet" th:href="@{/css/member/search-result.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <div id="nav-left">
+                    <li id="logo">Music <br>Collection</li>
+                    <li><a th:href="@{/member/home}">Home</a></li>
+                    <li>Library</li>
+                </div>
+
+                <div id="search-container" style="position: relative;">
+                    <input type="text" name="search" id="search" placeholder="Search" autocomplete="off">
+                    <img th:src="@{/assets/icon/search.svg}" alt="search button">
+
+                    <div id="searchResults" class="search-dropdown"></div>
+                </div>
+
+                <div id="nav-right">
+                    <li>
+                        <a th:href="@{/member/profile}">
+                            <img th:src="@{/assets/icon/user.svg}" alt="profile icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/login}">
+                            <img th:src="@{/assets/icon/logout.svg}" alt="logout icon">
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="search-result-page">
+            <section class="result-block">
+                
+                <div class="track-item">
+                    <img th:src="" class="track-cover">
+                    
+                    <div class="track-main">
+                        <h2 class="result-title">Tracks</h2>
+                        <h4>Ed Sheeran</h4>
+                        <h3>Castle on the Hill</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section class="result-block">
+                
+                <div class="artist-item">
+                    <img th:src="" class="artist-avatar">
+                    
+                    <div class="artist-info">
+                        <h2 class="result-title">Artist</h2>
+                        <h3>Ed Sheeran</h3>
+                    </div>
+                    
+                    <button class="follow-btn">Follow</button>
+                </div>
+            </section>
+            
+            <section class="result-block">
+                
+                <div class="album item">
+                    <img th:src="" class="album-cover">
+                    
+                    <div class="album-info">
+                        <h2 class="result-title">Album</h2>
+                        <h3>÷</h3>
+                        <p>Ed Sheeran</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+</html>
