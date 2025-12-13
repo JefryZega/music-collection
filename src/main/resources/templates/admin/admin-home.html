@@ -46,82 +46,40 @@
             </div>
 
             <div class="grid-four">
-                <!-- contoh item -->
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-acdc.png}">
-                    <p>AC/DC</p>
-                </div>
+                <div class="songs-card item"
+                    th:each="song, iterStat : ${topSongs}"
+                    th:if="${iterStat.index < 4}">
 
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-bon-jovi.jpg}">
-                    <p>Bon Jovi</p>
-                </div>
+                    <div class="song-text-wrapper">
+                        <!-- GAMBARNYA MASIH BELUM BISA -->
+                        <img class="artist-image" alt="artist photo" th:onerror="this.src='/assets/img/artist-profile/default.jpg'">
 
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-eagles.jpg}">
-                    <p>Eagles</p>
-                </div>
+                        <p class="song-title-data" th:text="${song.title}">Judul Lagu</p>
 
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-ed-sheeran.jpeg}">
-                    <p>Ed Sheeran</p>
+                        <div class="total-add-favorite">
+                            <img th:src="@{/assets/icon/heartred.svg}"
+                                style="width:1.5em;height:1.5em;">
+                            <p th:text="${song.weeklyLikes}"></p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ARTIST -->
+        <!-- TOP ARTIST -->
         <section class="section-block">
             <h1>Artist</h1>
 
             <div class="horizontal-scroll">
-                <div class="item big">
-                    <img th:src="@{/assets/img/artist-profile/artist-acdc.jpeg}">
-                    <p>AC/DC</p>
-                </div>
-
-                <div class="item big">
-                    <img th:src="@{/assets/img/artist-profile/artist-bonjovi.jpg}">
-                    <p>Bon Jovi</p>
-                </div>
-
-                <div class="item big">
-                    <img th:src="@{/assets/img/artist-profile/artist-eagles.jpg}">
-                    <p>Eagles</p>
-                </div>
-
-                <div class="item big">
-                    <img th:src="@{/assets/img/artist-profile/artist-ed-sheeran.jpg}">
-                    <p>Ed Sheeran</p>
-                </div>
-
-                <div class="item big">
-                    <img th:src="@{/assets/img/artist-profile/artist-michael-jackson.jpg}">
-                    <p>Michael Jackson</p>
-                </div>
-
-                <div class="item big">
-                    <img th:src="@{/assets/img/artist-profile/artist-nirvana.jpeg}">
-                    <p>Nirvana</p>
-                </div>
-
-                <div class="item big">
-                    <img th:src="@{/assets/img/artist-profile/artist-pink-floyd.jpeg}">
-                    <p>Pink Floyd</p>
-                </div>
-
-                <div class="item big">
-                    <img th:src="@{/assets/img/artist-profile/artist-queen.jpg}">
-                    <p>Queen</p>
-                </div>
-
-                <div class="item big">
-                    <img th:src="@{/assets/img/artist-profile/artist-slank.jpeg}">
-                    <p>Slank</p>
-                </div>
-
-                <div class="item big">
-                    <img th:src="@{/assets/img/artist-profile/artist-the-beatles.jpg}">
-                    <p>The Beatles</p>
+                <div th:each="artist : ${artists}" class="item big">
+                    <a th:href="@{'/artist/' + ${artist.artistID}}">
+                        <img th:src="${artist.artistProfile}"
+                             class="artist-image"
+                             alt="artist photo"
+                             th:onerror="this.src='/assets/img/artist-profile/default.jpg'">
+                        <p th:text="${artist.artistName}">Artist Name</p>
+                    </a>
                 </div>
             </div>
         </section>
@@ -131,54 +89,17 @@
             <h1>Album</h1>
 
             <div class="horizontal-scroll">
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-acdc.png}">
-                    <p>AC/DC</p>
-                </div>
-
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-bon-jovi.jpg}">
-                    <p>Bon Jovi</p>
-                </div>
-
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-eagles.jpg}">
-                    <p>Eagles</p>
-                </div>
-
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-ed-sheeran.jpeg}">
-                    <p>Ed Sheeran</p>
-                </div>
-
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-the-beatles.jpeg}">
-                    <p>Let It Be</p>
-                </div>
-
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-michael-jackson.png}">
-                    <p>Michael Jackson</p>
-                </div>
-
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-nirvana.jpg}">
-                    <p>Nirvana</p>
-                </div>
-
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-pink-floyd.jpeg}">
-                    <p>Pink Floyd</p>
-                </div>
-
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-queen.jpg}">
-                    <p>Queen</p>
-                </div>
-
-                <div class="item">
-                    <img th:src="@{/assets/img/album-art/album-slank.jpeg}">
-                    <p>Slank</p>
+                <div th:each="album : ${albums}" class="item">
+                    <a th:href="@{'/album/' + ${album.albumID}}">
+                        <img th:src="${album.albumArt}"
+                             class="album-image"
+                             alt="album art"
+                             th:onerror="this.src='/assets/img/album-art/default.jpg'">
+                        <div class="album-info">
+                            <p class="album-title" th:text="${album.albumTitle}">Album Title</p>
+                            <p class="album-artist" th:text="${album.artistName}">Artist Name</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>

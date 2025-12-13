@@ -161,6 +161,21 @@ main {
 }
 
 
+.song-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.total-add-favorite {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+
 /* ================= HORIZONTAL SCROLL ================= */
 .horizontal-scroll {
     display: flex;
@@ -222,3 +237,5 @@ main {
 .hidden {
     display: none;
 }
+
+
