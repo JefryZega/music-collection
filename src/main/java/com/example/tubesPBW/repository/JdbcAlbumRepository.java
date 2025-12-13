@@ -4,9 +4,14 @@ import com.example.tubesPBW.model.Album;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,5 +97,30 @@ public class JdbcAlbumRepository implements AlbumRepository {
                     "WHERE LOWER(ar.artistname) LIKE LOWER(?) " +
                     "ORDER BY a.albumtitle";
         return jdbcTemplate.query(sql, albumRowMapper, "%" + keyword + "%");
+    }
+
+    @Override
+    public Optional<Album> findByTitleAndArtistId(String title, Long artistId) {
+        String sql = "SELECT * FROM album WHERE LOWER(albumTitle) = LOWER(?) AND artistID = ?";
+        List<Album> results = jdbcTemplate.query(sql, albumRowMapper, title, artistId);
+        return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
+    }
+
+    @Override
+    public Long save(Album album) {
+        String sql = "INSERT INTO album (albumTitle, artistID, album_art) VALUES (?, ?, ?)";
+        
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"albumid"});
+
+            ps.setString(1, album.getAlbumTitle());
+            ps.setLong(2, album.getArtistID());
+            ps.setString(3, album.getAlbumArt());
+            return ps;
+        }, keyHolder);
+
+        return keyHolder.getKey().longValue();
     }
 }

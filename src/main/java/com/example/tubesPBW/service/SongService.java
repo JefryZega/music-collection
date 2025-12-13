@@ -1,8 +1,12 @@
 package com.example.tubesPBW.service;
 
+import com.example.tubesPBW.model.Album;
+import com.example.tubesPBW.model.Artist;
 import com.example.tubesPBW.model.Favorite;
 import com.example.tubesPBW.model.Song;
 import com.example.tubesPBW.repository.SongRepository;
+import com.example.tubesPBW.repository.AlbumRepository;
+import com.example.tubesPBW.repository.ArtistRepository;
 import com.example.tubesPBW.repository.FavoriteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,12 @@ public class SongService {
 
     @Autowired
     private FavoriteRepository favoriteRepository;
+
+    @Autowired
+    private ArtistRepository artistRepository;
+
+    @Autowired
+    private AlbumRepository albumRepository;
     
     public List<Song> paginate(List<Song> list, int page, int size) {
         if (list == null || list.isEmpty()) {
@@ -135,5 +145,45 @@ public class SongService {
 
     public List<Song> getTop10WeeklySongs() {
         return songRepository.findTop10Weekly();
+    }
+
+    public void addSong(Song song) {
+        songRepository.save(song); 
+    }
+
+    public void addNewSongComplex(String title, String artistName, String albumTitle, String albumArtPath) {
+        Optional<Artist> artistOpt = artistRepository.findByName(artistName);
+        Long artistId;
+        
+        if (artistOpt.isPresent()) {
+            artistId = artistOpt.get().getArtistID();
+        } else {
+            Artist newArtist = new Artist();
+            newArtist.setArtistName(artistName);
+            newArtist.setArtistProfile("/assets/img/artist-profile/default.jpg"); 
+            artistId = artistRepository.save(newArtist); 
+        }
+
+        Optional<Album> albumOpt = albumRepository.findByTitleAndArtistId(albumTitle, artistId);
+        Long albumId;
+        
+        if (albumOpt.isPresent()) {
+            albumId = albumOpt.get().getAlbumID();
+        } else {
+            Album newAlbum = new Album();
+            newAlbum.setAlbumTitle(albumTitle);
+            newAlbum.setArtistID(artistId);
+            newAlbum.setAlbumArt(albumArtPath); 
+            albumId = albumRepository.save(newAlbum); 
+        }
+
+        Song newSong = new Song();
+        newSong.setTitle(title);
+        newSong.setAlbumID(albumId);
+        songRepository.save(newSong);
+    }
+
+    public void deleteSong(Long songId) {
+        songRepository.deleteById(songId);
     }
 }

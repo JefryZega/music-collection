@@ -92,9 +92,15 @@
                                      th:onerror="this.src='/assets/img/album-art/default.jpg'">
                             </td>
                             <td>
-                                <button class="trash-button">
-                                    <img th:src="@{/assets/icon/trash.svg}" alt="delete icon">
-                                </button>
+                                <form th:action="@{/admin/song/delete}" method="POST" style="display:inline;">
+                                    
+                                    <input type="hidden" name="songId" th:value="${song.songID}" />
+                                    
+                                    <button type="submit" class="trash-button" 
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus lagu ini?')">
+                                        <img th:src="@{/assets/icon/trash.svg}" alt="delete icon">
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     </tbody>
@@ -126,16 +132,18 @@
         
         <!-- POP UP ADD SONG -->
         <section id="popup-add-song">
-            <form id="add-song-form" action="">
+            <form id="add-song-form" th:action="@{/admin/song/add}" method="POST" enctype="multipart/form-data">
                 <h1>Add Song Form</h1>
+                
                 <input type="text" name="song-title" placeholder="Song Title" required>
                 <input type="text" name="artist-name" placeholder="Artist Name" required>
                 <input type="text" name="album-name" placeholder="Album Name" required>
+                
                 <label for="album-art">Upload Album Art</label>
-                <input type="file" name="album-art" placeholder="Album Art">
+                <input type="file" name="album-art" accept="image/png, image/jpeg" required>
+                
                 <div id="form-button">
-                    <button id="cancel-button">Cancel</button>
-                    <input type="submit" name="" id="" value="Save">
+                    <button type="button" id="cancel-button">Cancel</button> <input type="submit" value="Save">
                 </div>
             </form>
         </section>

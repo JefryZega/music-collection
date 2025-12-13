@@ -1,21 +1,27 @@
 package com.example.tubesPBW.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
 
 import com.example.tubesPBW.service.AlbumService;
 import com.example.tubesPBW.service.ArtistService;
 import com.example.tubesPBW.service.SongService;
 import com.example.tubesPBW.service.UserService;
+import com.example.tubesPBW.util.FileUploadUtil;
+import com.example.tubesPBW.annotation.RequiresAdmin;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
@@ -27,6 +33,7 @@ import com.example.tubesPBW.model.Song;
 import com.example.tubesPBW.model.User;
 
 
+@RequiresAdmin
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -119,6 +126,32 @@ public class AdminController {
         return "/admin/admin-profile";
     }
 
+    @Value("${file.upload-dir}")
+    private String uploadDir; // Mengambil path D:/TubesPBW-sebelumnya/images/
+
+    @PostMapping("/song/add")
+    public String addSong(
+            @RequestParam("song-title") String title,
+            @RequestParam("artist-name") String artistName,
+            @RequestParam("album-name") String albumTitle,
+            @RequestParam("album-art") MultipartFile multipartFile
+    ) throws IOException {
+        
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        String dbPath = "/assets/img/album-art/" + fileName;
+
+        songService.addNewSongComplex(title, artistName, albumTitle, dbPath);
+        
+        return "redirect:/admin/profile";
+    }
+
+    @PostMapping("/song/delete")
+    public String deleteSong(@RequestParam("songId") Long songId) {
+        songService.deleteSong(songId);
+        return "redirect:/admin/profile";
+    }
 
     @GetMapping("/poster")
     public String adminPoster(Model model) {
