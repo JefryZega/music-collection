@@ -121,7 +121,10 @@ public class AdminController {
 
 
     @GetMapping("/poster")
-    public String adminPoster() {
+    public String adminPoster(Model model) {
+        List<Song> topSongs = songService.getTop10WeeklySongs();
+        model.addAttribute("topSongs", topSongs);
         return "/admin/poster";
     }
+
 }

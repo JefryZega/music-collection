@@ -13,7 +13,6 @@
                 <div id="nav-left">
                     <li id="logo">Music <br>Collection</li>
                     <li><a th:href="@{/admin/home}">Home</a></li>
-                    <li>Library</li>
                 </div>
 
                 <div id="search-container">
@@ -51,10 +50,12 @@
                     th:if="${iterStat.index < 4}">
 
                     <div class="song-text-wrapper">
-                        <!-- GAMBARNYA MASIH BELUM BISA -->
-                        <img class="artist-image" alt="artist photo" th:onerror="this.src='/assets/img/artist-profile/default.jpg'">
-
-                        <p class="song-title-data" th:text="${song.title}">Judul Lagu</p>
+                        <!-- GAMBAR ALBUM -->
+                        <img class="artist-image"
+                            th:src="${song.albumArtUrl}"
+                            alt="album art"
+                            onerror="this.src='/assets/img/album-art/default.jpg'">
+                        <p class="song-title-data" th:text="${song.title}"> Judul Lagu</p>
 
                         <div class="total-add-favorite">
                             <img th:src="@{/assets/icon/heartred.svg}"
@@ -64,6 +65,7 @@
 
                     </div>
                 </div>
+
             </div>
         </section>
 

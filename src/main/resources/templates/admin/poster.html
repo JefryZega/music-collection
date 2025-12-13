@@ -14,7 +14,6 @@
                 <div id="nav-left">
                     <li id="logo">Music <br>Collection</li>
                     <li><a th:href="@{/admin/home}">Home</a></li>
-                    <li>Library</li>
                 </div>
 
                 <div id="search-container">
@@ -43,116 +42,51 @@
     </header>
 
     <main>
-        <!-- SECTION POSTER -->
         <section id="weekly-card">
             <h2>Top 10 Songs Weekly</h2>
 
-            <!-- CONTAINER POSTER -->
             <div class="weekly-grid">
-                <!-- LEFT C0LUMN -->
+
+                <!-- KOLOM KIRI (1 - 5) -->
                 <div class="weekly-column">
-                    <div class="song-item">
-                        <span class="rank">1</span>
-                        <img th:src="@{/}" class="song-cover">
-                        <div class="song-info">
-                            <h3>Mawar Merah</h3>
-                            <p>Kampungan</p>
-                            <p>Slank</p>
-                        </div>
-                    </div>
+                    <div class="song-item"
+                        th:each="song, stat : ${topSongs}"
+                        th:if="${stat.index < 5}">
 
-                    <div class="song-item">
-                        <span class="rank">2</span>
-                        <img th:src="@{/}" class="song-cover">
-                        <div class="song-info">
-                            <h3>Never Say Goodbye</h3>
-                            <p>Slippery When Wet</p>
-                            <p>Bon Jovi</p>
-                        </div>
-                    </div>
+                        <span class="rank" th:text="${stat.index + 1}">1</span>
 
-                    <div class="song-item">
-                        <span class="rank">3</span>
-                        <img th:src="@{/}" class="song-cover">
-                        <div class="song-info">
-                            <h3>Let It Be</h3>
-                            <p>Let It Be</p>
-                            <p>The Beatles</p>
-                        </div>
-                    </div>
+                        <img class="song-cover"
+                            th:src="${song.albumArtUrl}"
+                            onerror="this.src='/assets/img/album-art/default.jpg'">
 
-                    <div class="song-item">
-                        <span class="rank">4</span>
-                        <img th:src="@{/}" class="song-cover">
                         <div class="song-info">
-                            <h3>Bohemian Rhapsody</h3>
-                            <p>Bohemian Rhapsody</p>
-                            <p>Queen</p>
-                        </div>
-                    </div>
-
-                    <div class="song-item">
-                        <span class="rank">5</span>
-                        <img th:src="@{/}" class="song-cover">
-                        <div class="song-info">
-                            <h3>Mawar Merah</h3>
-                            <p>Kampungan</p>
-                            <p>Slank</p>
+                            <h3 th:text="${song.title}">Judul Lagu</h3>
+                            <p th:text="${song.albumTitle}">Album</p>
+                            <p th:text="${song.artistName}">Artist</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- KOLOM KANAN (6 - 10) -->
                 <div class="weekly-column">
-                    <div class="song-item">
-                        <span class="rank">6</span>
-                        <img th:src="@{/}" class="song-cover">
-                        <div class="song-info">
-                            <h3>Mawar Merah</h3>
-                            <p>Kampungan</p>
-                            <p>Slank</p>
-                        </div>
-                    </div>
+                    <div class="song-item"
+                        th:each="song, stat : ${topSongs}"
+                        th:if="${stat.index >= 5 && stat.index < 10}">
 
-                    <div class="song-item">
-                        <span class="rank">7</span>
-                        <img th:src="@{/}" class="song-cover">
-                        <div class="song-info">
-                            <h3>Mawar Merah</h3>
-                            <p>Kampungan</p>
-                            <p>Slank</p>
-                        </div>
-                    </div>
+                        <span class="rank" th:text="${stat.index + 1}">6</span>
 
-                    <div class="song-item">
-                        <span class="rank">8</span>
-                        <img th:src="@{/}" class="song-cover">
-                        <div class="song-info">
-                            <h3>Mawar Merah</h3>
-                            <p>Kampungan</p>
-                            <p>Slank</p>
-                        </div>
-                    </div>
+                        <img class="song-cover"
+                            th:src="${song.albumArtUrl}"
+                            onerror="this.src='/assets/img/album-art/default.jpg'">
 
-                    <div class="song-item">
-                        <span class="rank">9</span>
-                        <img th:src="@{/}" class="song-cover">
                         <div class="song-info">
-                            <h3>Mawar Merah</h3>
-                            <p>Kampungan</p>
-                            <p>Slank</p>
-                        </div>
-                    </div>
-
-                    <div class="song-item">
-                        <span class="rank">10</span>
-                        <img th:src="@{/}" class="song-cover">
-                        <div class="song-info">
-                            <h3>Mawar Merah</h3>
-                            <p>Kampungan</p>
-                            <p>Slank</p>
+                            <h3 th:text="${song.title}">Judul Lagu</h3>
+                            <p th:text="${song.albumTitle}">Album</p>
+                            <p th:text="${song.artistName}">Artist</p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
