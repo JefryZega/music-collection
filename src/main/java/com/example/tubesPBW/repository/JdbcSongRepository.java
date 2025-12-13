@@ -194,4 +194,16 @@ public class JdbcSongRepository implements SongRepository {
             return song;
         });
     }
+
+    @Override
+    public void save(Song song) {
+        String sql = "INSERT INTO song (title, albumID) VALUES (?, ?)";
+        jdbcTemplate.update(sql, song.getTitle(), song.getAlbumID());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        String sql = "DELETE FROM song WHERE songID = ?";
+        jdbcTemplate.update(sql, id);
+    }
 }

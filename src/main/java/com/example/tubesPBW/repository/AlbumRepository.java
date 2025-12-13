@@ -10,4 +10,7 @@ public interface AlbumRepository {
     List<Album> findByArtistId(Long artistId);
     List<Album> findByAlbumTitleContaining(String keyword);
     List<Album> findByArtistNameContaining(String keyword);
+
+    Optional<Album> findByTitleAndArtistId(String title, Long artistId);
+    Long save(Album album);
 }
