@@ -22,6 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
+import com.example.tubesPBW.annotation.RequiresMember;
 import com.example.tubesPBW.model.Album;
 import com.example.tubesPBW.model.Artist;
 import com.example.tubesPBW.model.Favorite;
@@ -45,18 +46,12 @@ public class MemberController {
     private AlbumService albumService;
 
     @GetMapping("/home")
+    @RequiresMember
     public String memberHome(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        }
         List<Artist> artists = artistService.getAllArtists();
         List<Album> albums = albumService.getAllAlbums();
 
-        System.out.println("=== DEBUG MEMBER HOME ===");
-        System.out.println("Jumlah artists: " + (artists != null ? artists.size() : "null"));
-        System.out.println("Jumlah albums: " + (albums != null ? albums.size() : "null"));
-        
         if (artists != null) {
             for (Artist a : artists) {
                 System.out.println("Artist: " + a.getArtistName() + " (ID: " + a.getArtistID() + ")");
@@ -70,11 +65,9 @@ public class MemberController {
     }
 
     @GetMapping("/profile")
+    @RequiresMember
     public String memberProfile(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(name = "search", required = false) String search, @RequestParam(name = "searchType", defaultValue = "all") String searchType, HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        }
 
         List<Song> allSongs;
         if (search != null && !search.trim().isEmpty()) {
@@ -117,12 +110,9 @@ public class MemberController {
     }
 
     @GetMapping("/profile/favorite")
+    @RequiresMember
     public String memberProfileFavorite(@RequestParam(name = "page", defaultValue = "1") int page, @RequestParam(name = "size", defaultValue = "10") int size, @RequestParam(name = "search", required = false) String search, HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        }
-
         List<Song> favoriteSongs = songService.getFavoriteSongs(user.getUserID());
         if (search != null && !search.trim().isEmpty()) {
             String keyword = search.trim().toLowerCase();
@@ -178,62 +168,51 @@ public class MemberController {
     }
 
     @PostMapping("/profile/favorite/toggle")
+    @RequiresMember
     public String toggleFavorite(@RequestParam Long songId, HttpSession session, HttpServletRequest request) {
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        }
         songService.toggleFavorite(user.getUserID(), songId);
         String referer = request.getHeader("Referer");
         return "redirect:" + (referer != null ? referer : "/member/profile");
     }
 
     @PostMapping("/profile/favorite/add")
+    @RequiresMember
     public String addFavorite(@RequestParam Long songId, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        }
         songService.toggleFavorite(user.getUserID(), songId);
         return "redirect:/member/profile/favorite";
     }
 
     @PostMapping("/profile/favorite/remove")
+    @RequiresMember
     public String removeFavorite(@RequestParam Long songId, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        }
         songService.toggleFavorite(user.getUserID(), songId);
         
         return "redirect:/member/profile/favorite";
     }
 
     @GetMapping("/profile/favorite/song")
+    @RequiresMember
     public String memberProfileFavoriteSong(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        }
+
         model.addAttribute("user", user);
         return "/member/profile-member-favorite-song";
     }
 
     @GetMapping("/profile/upload")
+    @RequiresMember
     public String memberUpload(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        }
         model.addAttribute("user", user);
         return "/member/uploadMember";
     }
 
-    // BARU, buat search bar
     @GetMapping("/api/search") 
-    @ResponseBody // biar outputnya JSON, bukan HTML
+    @ResponseBody
     public List<Song> searchSongsApi(@RequestParam("q") String query) {
         return songService.searchSongs("general", query);
     }
-
 }
