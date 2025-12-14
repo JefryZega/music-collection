@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById('search'); 
+
     const searchResults = document.getElementById('searchResults');
     const searchContainer = document.getElementById('search-container');
 
@@ -15,8 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        // ✅ GANTI ENDPOINT: pakai endpoint yang return albumID juga
-        fetch(`/member/api/search-with-album?q=${query}`)
+        fetch(`/member/api/search?q=${query}`)
             .then(response => {
                 if (!response.ok) throw new Error("Gagal mengambil data");
                 return response.json();
@@ -29,29 +29,17 @@ document.addEventListener("DOMContentLoaded", function() {
                         const div = document.createElement('div');
                         div.classList.add('search-item');
                         
-                        // ✅ TAMPILKAN JUGA INFO ALBUM
                         div.innerHTML = `
-                            <div class="song-main-info">
-                                <span class="song-title">${song.title}</span>
-                                <span class="artist-name">${song.artistName}</span>
-                            </div>
-                            <div class="song-album-info">
-                                <small>Album: ${song.albumTitle || 'N/A'}</small>
-                            </div>
+                            <span class="song-title">${song.title}</span>
+                            <span class="artist-name">${song.artistName}</span>
                         `;
                         
                         div.onclick = () => {
                             searchInput.value = song.title;
                             searchResults.style.display = 'none';
                             
-                            // ✅ REDIRECT KE ALBUM PAGE JIKA ADA albumID
-                            if (song.albumID) {
-                                window.location.href = `/album/${song.albumID}`;
-                            } else {
-                                console.warn("Song tidak punya albumID:", song);
-                                // Alternatif: redirect ke song detail page
-                                // window.location.href = `/song/${song.songID}`;
-                            }
+                            // Redirect ke halaman detail lagu (belum)
+                            window.location.href = `/artist/${song.artistID}`;
                         };
                         
                         searchResults.appendChild(div);

@@ -27,7 +27,7 @@
 
                 <div id="nav-right">
                     <li>
-                        <a th:href="@{/member/profile}">
+                        <a th:href="@{${session.userRole == 'admin' ? '/admin/profile' : '/member/profile'}}">
                             <img th:src="@{/assets/icon/user.svg}" alt="profile icon">
                         </a>
                     </li>
