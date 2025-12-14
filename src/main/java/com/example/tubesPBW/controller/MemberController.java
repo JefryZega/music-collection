@@ -1,7 +1,9 @@
 package com.example.tubesPBW.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -192,4 +194,24 @@ public class MemberController {
         return songService.searchSongs("general", query);
     }
 
+    @GetMapping("/api/search-with-album") 
+    @ResponseBody
+    @RequiresMember
+    public List<Map<String, Object>> searchSongsWithAlbum(@RequestParam("q") String query) {
+        List<Song> songs = songService.searchSongs("general", query);
+        List<Map<String, Object>> result = new ArrayList<>();
+        
+        for (Song song : songs) {
+            Map<String, Object> songData = new HashMap<>();
+            songData.put("songID", song.getSongID());
+            songData.put("title", song.getTitle());
+            songData.put("artistName", song.getArtistName());
+            songData.put("albumTitle", song.getAlbumTitle());
+            songData.put("albumID", song.getAlbumID()); 
+            
+            result.add(songData);
+        }
+        
+        return result;
+    }
 }
