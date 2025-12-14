@@ -17,4 +17,5 @@ public interface SongRepository {
     List<Song> findTop10Weekly();
     void save(Song song);
     void deleteById(Long id);
+    boolean isSongExist(String title, Long albumId);
 }
