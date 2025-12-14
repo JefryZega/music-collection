@@ -51,12 +51,6 @@ public class MemberController {
         User user = (User) session.getAttribute("user");
         List<Artist> artists = artistService.getAllArtists();
         List<Album> albums = albumService.getAllAlbums();
-
-        if (artists != null) {
-            for (Artist a : artists) {
-                System.out.println("Artist: " + a.getArtistName() + " (ID: " + a.getArtistID() + ")");
-            }
-        }
         
         model.addAttribute("artists", artists);
         model.addAttribute("albums", albums);

@@ -81,16 +81,10 @@ public class SongService {
     public List<Song> getFavoriteSongs(Long userId) {
         List<Long> favoriteSongIds = favoriteRepository.findFavoriteSongIdsByUserId(userId);
         
-        System.out.println("=== DEBUG SONG SERVICE ===");
-        System.out.println("User ID: " + userId);
-        System.out.println("Favorite Song IDs: " + favoriteSongIds);
-        System.out.println("Jumlah favorite songs: " + (favoriteSongIds != null ? favoriteSongIds.size() : "null"));
         if (favoriteSongIds == null || favoriteSongIds.isEmpty()) {
-            System.out.println("DEBUG: Tidak ada favorite songs, return empty list");
             return new ArrayList<>();
         }
         if (favoriteSongIds.size() == 1) {
-            System.out.println("DEBUG: Hanya 1 favorite song, query spesifik");
             Long singleSongId = favoriteSongIds.get(0);
             Optional<Song> song = songRepository.findById(singleSongId);
             return song.map(List::of).orElse(new ArrayList<>());
