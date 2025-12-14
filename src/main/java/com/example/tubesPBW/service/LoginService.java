@@ -25,13 +25,9 @@ public class LoginService {
         }
 
         User user = userOptional.get();
-
-        // match password yang udah di BCrypt, kalo bener return user
         if (passwordEncoder.matches(rawPassword, user.getPassword())) {
             return user;
         }
-
-        // kalo ga match, return null
         return null;
     }
 }
