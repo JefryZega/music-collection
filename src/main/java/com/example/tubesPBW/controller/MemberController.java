@@ -189,25 +189,7 @@ public class MemberController {
     public String removeFavorite(@RequestParam Long songId, HttpSession session) {
         User user = (User) session.getAttribute("user");
         songService.toggleFavorite(user.getUserID(), songId);
-        
         return "redirect:/member/profile/favorite";
-    }
-
-    @GetMapping("/profile/favorite/song")
-    @RequiresMember
-    public String memberProfileFavoriteSong(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("user");
-
-        model.addAttribute("user", user);
-        return "/member/profile-member-favorite-song";
-    }
-
-    @GetMapping("/profile/upload")
-    @RequiresMember
-    public String memberUpload(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("user");
-        model.addAttribute("user", user);
-        return "/member/uploadMember";
     }
 
     @GetMapping("/api/search") 
@@ -215,4 +197,5 @@ public class MemberController {
     public List<Song> searchSongsApi(@RequestParam("q") String query) {
         return songService.searchSongs("general", query);
     }
+
 }
