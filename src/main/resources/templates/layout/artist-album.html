@@ -12,7 +12,9 @@
             <ul>
                 <div id="nav-left">
                     <li id="logo">Music <br>Collection</li>
-                    <li><a th:href="@{/member/home}">Home</a></li>
+                    <a th:href="@{${session.userRole == 'admin' ? '/admin/home' : '/member/home'}}">
+                        Home
+                    </a>
                 </div>
 
                 <div id="search-container">
