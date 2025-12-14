@@ -171,6 +171,10 @@ public class SongService {
             albumId = albumRepository.save(newAlbum); 
         }
 
+        if (songRepository.isSongExist(title, albumId)) {
+            throw new RuntimeException("Lagu '" + title + "' sudah ada di album ini!");
+        }
+
         Song newSong = new Song();
         newSong.setTitle(title);
         newSong.setAlbumID(albumId);

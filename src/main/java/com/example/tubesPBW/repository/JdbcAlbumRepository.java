@@ -101,7 +101,7 @@ public class JdbcAlbumRepository implements AlbumRepository {
 
     @Override
     public Optional<Album> findByTitleAndArtistId(String title, Long artistId) {
-        String sql = "SELECT * FROM album WHERE LOWER(albumTitle) = LOWER(?) AND artistID = ?";
+        String sql = "SELECT * FROM album WHERE LOWER(albumtitle) = LOWER(?) AND artistid = ?";
         List<Album> results = jdbcTemplate.query(sql, albumRowMapper, title, artistId);
         return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
     }

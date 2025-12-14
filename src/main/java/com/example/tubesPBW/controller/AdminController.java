@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.util.StringUtils;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.dao.DataAccessException;
 
 import com.example.tubesPBW.service.AlbumService;
 import com.example.tubesPBW.service.ArtistService;
@@ -128,16 +130,22 @@ public class AdminController {
             @RequestParam("song-title") String title,
             @RequestParam("artist-name") String artistName,
             @RequestParam("album-name") String albumTitle,
-            @RequestParam("album-art") MultipartFile multipartFile
+            @RequestParam("album-art") MultipartFile multipartFile,
+            RedirectAttributes redirectAttributes
     ) throws IOException {
-        
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        String dbPath = "/assets/img/album-art/" + fileName;
+        try {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            String dbPath = "/assets/img/album-art/" + fileName;
 
-        songService.addNewSongComplex(title, artistName, albumTitle, dbPath);
-        
+            songService.addNewSongComplex(title, artistName, albumTitle, dbPath);
+            redirectAttributes.addFlashAttribute("successMessage", "Berhasil menambah lagu!");
+            
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("errorMessage", "Database Error: Gagal menyimpan data. lagu sudah ada.");
+        }
+
         return "redirect:/admin/profile";
     }
 

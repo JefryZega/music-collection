@@ -206,4 +206,12 @@ public class JdbcSongRepository implements SongRepository {
         String sql = "DELETE FROM song WHERE songID = ?";
         jdbcTemplate.update(sql, id);
     }
+
+    @Override
+    public boolean isSongExist(String title, Long albumId) {
+        String sql = "SELECT COUNT(*) FROM song WHERE LOWER(title) = LOWER(?) AND albumid = ?";
+        
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, title, albumId);
+        return count != null && count > 0;
+    }
 }
