@@ -16,11 +16,13 @@
                     <li><a th:href="@{/admin/home}">Home</a></li>
                 </div>
 
-                <div id="search-container" style="position: relative;">
-                    <input type="text" name="search" id="search" placeholder="Search" autocomplete="off">
-                    <img th:src="@{/assets/icon/search.svg}" alt="search button">
-
-                    <div id="searchResults" class="search-dropdown"></div>
+                <div id="search-container">
+                    <form th:action="@{/admin/profile}" method="get">
+                        <input type="text" name="search" id="search" placeholder="Search" th:value="${searchQuery}">
+                        <button type="submit">
+                            <img th:src="@{/assets/icon/search.svg}" alt="search button">
+                        </button>
+                    </form>
                 </div>
 
                 <div id="nav-right">

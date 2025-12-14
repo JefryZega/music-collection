@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             searchResults.style.display = 'none';
                             
                             // Redirect ke halaman detail lagu (belum)
-                            // window.location.href = '/song/detail/' + song.songID;
+                            window.location.href = `/artist/${song.artistID}`;
                         };
                         
                         searchResults.appendChild(div);

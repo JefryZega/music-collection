@@ -61,12 +61,6 @@ public class AdminController {
         List<Artist> artists = artistService.getAllArtists();
         List<Album> albums = albumService.getAllAlbums();
         List<Song> topSongs = songService.getTop10WeeklySongs();
-
-        if (artists != null) {
-            for (Artist a : artists) {
-                System.out.println("Artist: " + a.getArtistName() + " (ID: " + a.getArtistID() + ")");
-            }
-        }
         
         model.addAttribute("artists", artists);
         model.addAttribute("albums", albums);
@@ -166,6 +160,12 @@ public class AdminController {
         List<Song> topSongs = songService.getTop10WeeklySongs();
         model.addAttribute("topSongs", topSongs);
         return "/admin/poster";
+    }
+
+    @GetMapping("/api/search") 
+    @ResponseBody
+    public List<Song> searchSongsApi(@RequestParam("q") String query) {
+        return songService.searchSongs("general", query);
     }
 
 }
