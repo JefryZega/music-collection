@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${artist.artistName} + ' - Music Collection'">Music Collection</title>
     <link rel="stylesheet" th:href="@{/css/layout/artist.css}">
+    <script th:src="@{/js/search-bar.js}" defer></script>
 </head>
 <body>
     <header>
@@ -19,9 +20,11 @@
                     </li>
                 </div>
 
-                <div id="search-container">
-                    <input type="text" name="search" id="search" placeholder="Search">
+                <div id="search-container" style="position: relative;">
+                    <input type="text" name="search" id="search" placeholder="Search" autocomplete="off">
                     <img th:src="@{/assets/icon/search.svg}" alt="search button">
+
+                    <div id="searchResults" class="search-dropdown"></div>
                 </div>
 
                 <div id="nav-right">
