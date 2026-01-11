@@ -19,9 +19,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-jar {
+tasks.jar {
     enabled = false
 }
+
 
 
 configurations {
