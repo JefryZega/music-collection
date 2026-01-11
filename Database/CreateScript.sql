@@ -53,7 +53,9 @@ INSERT INTO users ("name", username, email, password_hash, "role") VALUES
 ('Michael Audric', 'mike', 'mike@gmail.com', 'hashedpass', 'admin'),
 ('Arnold Ronan', 'arnold', 'arnold@gmail.com', 'hashedpass', 'admin'),
 ('Azriel Adrien', 'azriel', 'azriel@gmail.com', 'hashedpass', 'admin'),
-('Jefry Krisman', 'jefry', 'jefry@gmail.com', 'hashedpass', 'admin');
+('Jefry Krisman', 'jefry', 'jefry@gmail.com', 'hashedpass', 'admin'),
+('member', 'member', 'member@email.com', '$2a$12$TAt1YO.mOp8daPEXcy7zNewH3a8p.Yto3jb31VmWrCBQJ/osIuWmC', 'member'),
+('admin', 'admin', 'admin@email.com', '$2a$12$qJpj8w45ooMc0XbM2CXgHuYNrlpxzvfMRs2G4iJeiq5ErYOHllaTS', 'admin');
 
 INSERT INTO artist (artistName, artistProfile) VALUES
 ('Travis Scott', '/assets/img/artist-profile/artist-travis.jpg'),      -- done
