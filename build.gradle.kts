@@ -19,6 +19,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+jar {
+    enabled = false
+}
+
 
 configurations {
 	compileOnly {
