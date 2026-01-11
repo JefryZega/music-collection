@@ -19,8 +19,12 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-tasks.jar {
+tasks.named<Jar>("jar") {
     enabled = false
+}
+
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    enabled = true
 }
 
 
