@@ -64,10 +64,11 @@
             <div class="horizontal-scroll">
                 <div th:each="album : ${albums}" class="item">
                     <a th:href="@{'/album/' + ${album.albumID}}">
-                        <img th:src="${album.albumArt}"
-                             class="album-image"
-                             alt="album art"
-                             th:onerror="this.src='/assets/img/album-art/default.jpg'">
+                        <img th:src="@{${album.albumArtUrl}}"
+                            class="album-image"
+                            alt="album art"
+                            onerror="this.src='/assets/img/album-art/default.jpg'">
+
                         <div class="album-info">
                             <p class="album-title" th:text="${album.albumTitle}">Album Title</p>
                             <p class="album-artist" th:text="${album.artistName}">Artist Name</p>
