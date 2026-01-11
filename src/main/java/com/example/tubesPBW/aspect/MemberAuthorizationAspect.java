@@ -16,35 +16,22 @@ import com.example.tubesPBW.annotation.RequiresMember;
 public class MemberAuthorizationAspect {
 
     @Around("@annotation(requiresMember)")
-    public Object checkMemberAuthorization(
-            ProceedingJoinPoint joinPoint,
-            RequiresMember requiresMember
-    ) throws Throwable {
-
-        ServletRequestAttributes attributes =
-                (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
+    public Object checkMemberAuthorization(ProceedingJoinPoint joinPoint, RequiresMember requiresMember) throws Throwable {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        HttpSession session = request.getSession(false);
-
+        HttpSession session = request.getSession(false); 
         if (session == null) {
-            attributes.getResponse().sendRedirect("/login?error=session_expired");
-            return null; // ⬅ STOP chain
+            return "redirect:/login?error=session_expired";
         }
-
+        
         String userRole = (String) session.getAttribute("userRole");
-
         if (userRole == null) {
             session.invalidate();
-            attributes.getResponse().sendRedirect("/login?error=invalid_session");
-            return null;
+            return "redirect:/login?error=invalid_session";
         }
-
-        if (!"member".equalsIgnoreCase(userRole)) {
-            attributes.getResponse().sendRedirect("/access-denied");
-            return null;
+        if (!"member".equals(userRole)) {
+            return "redirect:/access-denied";
         }
-
         return joinPoint.proceed();
     }
 }
