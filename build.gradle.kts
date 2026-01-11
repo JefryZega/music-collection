@@ -8,11 +8,17 @@ group = "com.example"
 version = "0.0.1-SNAPSHOT"
 description = "Spring Boot for Project PBW"
 
+// java {
+// 	toolchain {
+// 		languageVersion = JavaLanguageVersion.of(17)
+// 	}
+// }
+
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
+
 
 configurations {
 	compileOnly {
