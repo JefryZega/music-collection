@@ -56,7 +56,7 @@
                         <span class="rank" th:text="${stat.index + 1}">1</span>
 
                         <img class="song-cover"
-                            th:src="@{${song.albumArtUrl}}"
+                            th:src="${song.albumArtUrl}"
                             onerror="this.src='/assets/img/album-art/default.jpg'">
 
                         <div class="song-info">
@@ -76,7 +76,7 @@
                         <span class="rank" th:text="${stat.index + 1}">6</span>
 
                         <img class="song-cover"
-                            th:src="@{${song.albumArtUrl}}"
+                            th:src="${song.albumArtUrl}"
                             onerror="this.src='/assets/img/album-art/default.jpg'">
 
                         <div class="song-info">
